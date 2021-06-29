@@ -34,6 +34,9 @@
                                         <state key="normal" image="appleid_button">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <segue destination="Ndo-zI-euk" kind="show" id="94I-9A-9cY"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="09A-qO-Smc">
                                         <rect key="frame" x="0.0" y="53" width="300" height="43"/>
@@ -41,6 +44,9 @@
                                         <state key="normal" image="kakao_login_medium_wide">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <segue destination="Ndo-zI-euk" kind="show" id="BTz-vX-ngG"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -72,12 +78,97 @@
             </objects>
             <point key="canvasLocation" x="34.782608695652179" y="93.75"/>
         </scene>
+        <!--Main View Controller-->
+        <scene sceneID="duu-OA-e9D">
+            <objects>
+                <viewController modalPresentationStyle="fullScreen" id="IMX-BK-r76" customClass="MainViewController" customModule="iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cj0-KE-Gkl">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="Neg-ds-y9O"/>
+                        <color key="backgroundColor" systemColor="systemGreenColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="" image="magnifyingglass" catalog="system" id="bYE-6M-izB"/>
+                    <navigationItem key="navigationItem" id="Otu-2P-NGt"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZEm-DZ-AsN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="793" y="871"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="aid-qk-uYs">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="Ndo-zI-euk" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="7Lz-zO-osN"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="tra-Pa-6eq">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="YEC-Bo-3o9" kind="relationship" relationship="viewControllers" id="qI6-hW-hQY"/>
+                        <segue destination="IMX-BK-r76" kind="relationship" relationship="viewControllers" id="7Ye-v2-iuY"/>
+                        <segue destination="yXU-0X-rve" kind="relationship" relationship="viewControllers" id="VLT-k2-VqR"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vQm-84-nzl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="792.75362318840587" y="93.75"/>
+        </scene>
+        <!--Main View Controller-->
+        <scene sceneID="BhQ-3d-aYf">
+            <objects>
+                <viewController modalPresentationStyle="fullScreen" id="YEC-Bo-3o9" customClass="MainViewController" customModule="iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="z5l-zK-SLR">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="ReZ-vT-xkm"/>
+                        <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="" image="star.fill" catalog="system" id="bIH-cz-f8v">
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
+                    </tabBarItem>
+                    <navigationItem key="navigationItem" id="5Ja-7g-ZD8"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="b01-kH-TDF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="35" y="871"/>
+        </scene>
+        <!--Main View Controller-->
+        <scene sceneID="dwh-7U-SqA">
+            <objects>
+                <viewController modalPresentationStyle="fullScreen" id="yXU-0X-rve" customClass="MainViewController" customModule="iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="yde-vA-Bj6">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="aHI-Tn-wY7"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="" image="person.circle.fill" catalog="system" id="OTa-Qs-rZE"/>
+                    <navigationItem key="navigationItem" id="VxE-vq-Zs0"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cI9-YU-DHl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1558" y="871"/>
+        </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="BTz-vX-ngG"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="appleid_button" width="300" height="45"/>
         <image name="kakao_login_medium_wide" width="300" height="45"/>
+        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
+        <image name="person.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="star.fill" catalog="system" width="128" height="116"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemOrangeColor">
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
