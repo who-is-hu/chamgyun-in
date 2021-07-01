@@ -27,6 +27,7 @@ public class Post {
     @Column(name="body")
     private String body;
 
+    @Transient
     private User owner;
 
     @Column(name="created_at")
