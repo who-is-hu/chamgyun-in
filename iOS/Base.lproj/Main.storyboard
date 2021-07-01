@@ -133,7 +133,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="crH-i0-Ovg" userLabel="UserSimpleInfoView">
                                                 <rect key="frame" x="10" y="10" width="394" height="86"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="4f7-U8-BEZ">
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="4f7-U8-BEZ">
                                                         <rect key="frame" x="8" y="10.5" width="66" height="65"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="66" id="WXk-i2-PCJ"/>
@@ -406,6 +406,9 @@
                     <connections>
                         <outlet property="pointView" destination="s67-k0-7Qg" id="d9z-Fu-P5z"/>
                         <outlet property="tagListView" destination="Kac-Zl-0Z6" id="whv-tN-Fee"/>
+                        <outlet property="userEmailView" destination="M1A-i0-f3W" id="Bv3-9z-xJQ"/>
+                        <outlet property="userNameView" destination="1RL-H6-Zxb" id="0iY-kz-HFB"/>
+                        <outlet property="userProfileImageView" destination="4f7-U8-BEZ" id="ffG-nA-7d6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cI9-YU-DHl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
