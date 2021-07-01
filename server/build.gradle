@@ -9,6 +9,9 @@ group = 'com.jh'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '13'
 
+test {
+    useJUnitPlatform()
+}
 configurations {
     compileOnly {
         extendsFrom annotationProcessor
