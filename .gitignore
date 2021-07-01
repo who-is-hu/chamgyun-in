@@ -10,3 +10,11 @@
 
 ./.DS_Store
 .DS_Store
+
+iOS.xcodeproj/
+
+Podfile.lock
+
+iOS.xcworkspace/
+
+Pods/
