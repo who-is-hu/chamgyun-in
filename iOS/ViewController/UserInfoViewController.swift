@@ -7,6 +7,9 @@
 
 import UIKit
 import TagListView
+import KakaoSDKAuth
+import KakaoSDKUser
+import KakaoSDKCommon
 
 class UserInfoViewController: UIViewController, TagListViewDelegate {
 
@@ -24,6 +27,30 @@ class UserInfoViewController: UIViewController, TagListViewDelegate {
         setUpPrepareTags()
     }
 
+    // MARK: - IBAction
+    @IBAction func logoutButtonTouchInside(_ sender: UIButton) {
+        let alertController = UIAlertController(title: "로그아웃", message: "정말 로그아웃 하시겠습니까?", preferredStyle: .alert)
+        
+        let actionDefault = UIAlertAction(title: "확인", style: .default, handler: { _ in
+            UserApi.shared.logout() { (error) in
+                if let error = error {
+                    print("\(error.localizedDescription)")
+                } else {
+                    self.dismiss(animated: true, completion: nil)
+                }
+            }
+        })
+        
+        let actionCancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        
+        alertController.addAction(actionDefault)
+        alertController.addAction(actionCancel)
+        
+        self.present(alertController, animated: true, completion: nil)
+        
+        
+    }
+    
     // MARK: - View setup method
     /// setup prepare tags
     func setUpPrepareTags() {
@@ -52,6 +79,7 @@ class UserInfoViewController: UIViewController, TagListViewDelegate {
         sender.removeTagView(tagView)
     }
 
+    
     
     
     /*
