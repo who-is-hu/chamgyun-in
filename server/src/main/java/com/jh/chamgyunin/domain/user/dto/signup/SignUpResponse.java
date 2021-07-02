@@ -11,4 +11,5 @@ public class SignUpResponse {
 
     private String email;
     private String nickname;
+    private String provider;
 }
