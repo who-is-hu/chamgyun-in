@@ -26,7 +26,7 @@ public class RestTemplateHttpInterceptor implements ClientHttpRequestInterceptor
         log.info("Uri    : {}",request.getURI());
         log.info("Method : {}", request.getMethod());
         log.info("Headers: {}",request.getHeaders());
-        log.info("Body   : {}", new String(body, Charset.defaultCharset());
+        log.info("Body   : {}", new String(body, Charset.defaultCharset()));
         log.info("=====request end========");
     }
 
@@ -36,7 +36,7 @@ public class RestTemplateHttpInterceptor implements ClientHttpRequestInterceptor
         log.info("Status Text  : {}", response.getStatusText());
         log.info("Headers      : {}", response.getHeaders());
         log.info("Response body: {}",
-                StreamUtils.copyToString(response.getBody(), Charset.defaultCharset());
+                StreamUtils.copyToString(response.getBody(), Charset.defaultCharset()));
         log.info("=====response end========");
     }
 }
