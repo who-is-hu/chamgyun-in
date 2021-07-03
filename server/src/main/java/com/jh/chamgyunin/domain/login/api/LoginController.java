@@ -2,8 +2,11 @@ package com.jh.chamgyunin.domain.login.api;
 
 import com.jh.chamgyunin.domain.login.dto.LoginResponse;
 import com.jh.chamgyunin.domain.login.dto.SocialLoginRequest;
+import com.jh.chamgyunin.domain.login.dto.userinfo.SocialUserInfo;
 import com.jh.chamgyunin.domain.login.service.SocialLoginService;
-import com.jh.chamgyunin.domain.login.service.SocialLoginServiceFactory;
+import com.jh.chamgyunin.domain.login.service.SocialUserInfoService;
+import com.jh.chamgyunin.domain.login.service.SocialUserInfoServiceFactory;
+import com.jh.chamgyunin.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,13 +22,16 @@ import javax.validation.Valid;
 @RequestMapping("/auth")
 public class LoginController {
 
-    private SocialLoginService socialLoginService;
-    private final SocialLoginServiceFactory socialLoginServiceFactory;
+    private SocialUserInfoService socialUserInfoService;
+    private final SocialUserInfoServiceFactory socialUserInfoServiceFactory;
+    private final UserService userService;
+    private final SocialLoginService socialLoginService;
 
     @PostMapping("/social/login")
     public ResponseEntity<LoginResponse> login(@Valid @RequestBody SocialLoginRequest dto){
-        socialLoginService = socialLoginServiceFactory.createSocialLoginService(dto.getProvider());
-        final LoginResponse loginResponse = socialLoginService.login(dto.getSocialAccessToken());
+        socialUserInfoService = socialUserInfoServiceFactory.createSocialLoginService(dto.getProvider());
+        final SocialUserInfo socialUserInfo = socialUserInfoService.getUserInfo(dto.getSocialAccessToken());
+        LoginResponse loginResponse = socialLoginService.login(socialUserInfo);
         return new ResponseEntity<>(loginResponse, HttpStatus.OK);
     }
 }

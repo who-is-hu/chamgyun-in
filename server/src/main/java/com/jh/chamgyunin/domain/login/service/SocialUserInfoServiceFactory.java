@@ -7,11 +7,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class SocialLoginServiceFactory {
+public class SocialUserInfoServiceFactory {
 
-    private final KakaoLoginServiceImpl kakaoLoginService;
+    private final KakaoUserInfoServiceImpl kakaoLoginService;
 
-    public SocialLoginService createSocialLoginService(final UserProvider provider){
+    public SocialUserInfoService createSocialLoginService(final UserProvider provider){
         switch (provider){
             case KAKAO:
                 return kakaoLoginService;
