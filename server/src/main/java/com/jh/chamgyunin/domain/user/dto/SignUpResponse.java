@@ -1,4 +1,4 @@
-package com.jh.chamgyunin.domain.user.dto.signup;
+package com.jh.chamgyunin.domain.user.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

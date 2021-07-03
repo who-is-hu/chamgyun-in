@@ -1,8 +1,7 @@
 package com.jh.chamgyunin.domain.user.api;
 
-import com.jh.chamgyunin.domain.user.dto.signup.SignUpRequest;
-import com.jh.chamgyunin.domain.user.dto.signup.SignUpResponse;
-import com.jh.chamgyunin.domain.user.model.User;
+import com.jh.chamgyunin.domain.user.dto.SignUpRequest;
+import com.jh.chamgyunin.domain.user.dto.SignUpResponse;
 import com.jh.chamgyunin.domain.user.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

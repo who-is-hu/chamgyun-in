@@ -1,4 +1,4 @@
-package com.jh.chamgyunin.domain.user.dto.signup;
+package com.jh.chamgyunin.domain.user.dto;
 
 import com.jh.chamgyunin.domain.user.model.User;
 import io.swagger.annotations.ApiModelProperty;

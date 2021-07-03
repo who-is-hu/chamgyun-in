@@ -2,7 +2,7 @@ package com.jh.chamgyunin.domain.user.api;
 
 import com.jh.chamgyunin.IntergrationTest;
 import com.jh.chamgyunin.domain.user.dao.UserRepository;
-import com.jh.chamgyunin.domain.user.dto.signup.SignUpRequest;
+import com.jh.chamgyunin.domain.user.dto.SignUpRequest;
 import com.jh.chamgyunin.domain.user.model.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

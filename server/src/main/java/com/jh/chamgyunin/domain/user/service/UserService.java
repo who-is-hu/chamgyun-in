@@ -1,8 +1,8 @@
 package com.jh.chamgyunin.domain.user.service;
 
 import com.jh.chamgyunin.domain.user.dao.UserRepository;
-import com.jh.chamgyunin.domain.user.dto.signup.SignUpRequest;
-import com.jh.chamgyunin.domain.user.dto.signup.SignUpResponse;
+import com.jh.chamgyunin.domain.user.dto.SignUpRequest;
+import com.jh.chamgyunin.domain.user.dto.SignUpResponse;
 import com.jh.chamgyunin.domain.user.exception.UserAlreadyExistException;
 import com.jh.chamgyunin.domain.user.model.User;
 import lombok.RequiredArgsConstructor;
