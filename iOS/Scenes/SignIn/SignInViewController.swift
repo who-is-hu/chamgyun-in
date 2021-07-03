@@ -25,9 +25,15 @@ class SignInViewController: UIViewController {
                 if let _ = error {
                     // do nothing
                 } else {
+                    if let accessToken = TokenManager.manager.getToken()?.accessToken {
+                        print("access token \(accessToken)")
+                    }
+                                        
                     let customTabBarViewController = self.storyboard?.instantiateViewController(identifier: "CustomTabBarViewController")
                     customTabBarViewController?.modalTransitionStyle = .coverVertical
                     self.present(customTabBarViewController!, animated: false, completion: nil)
+                    
+                    
                 }
             }
         }
