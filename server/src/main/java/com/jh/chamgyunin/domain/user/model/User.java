@@ -1,5 +1,6 @@
 package com.jh.chamgyunin.domain.user.model;
 
+import com.jh.chamgyunin.domain.login.dto.UserProvider;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -24,14 +25,14 @@ public class User {
     private String nickname;
 
     @Column(name = "provider")
-    private String provider;
+    private UserProvider provider;
 
     @Column(name = "created_at")
     @CreationTimestamp
     private LocalDateTime created_at;
 
     @Builder
-    public User(String email, String nickname, String provider) {
+    public User(String email, String nickname, UserProvider provider) {
         this.email = email;
         this.nickname = nickname;
         this.provider = provider;

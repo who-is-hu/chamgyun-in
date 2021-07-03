@@ -11,6 +11,8 @@ public enum ErrorCode {
 
     USER_ALREADY_EXIST(400,"이미 존재하는 이메일이에요"),
 
+    INVALID_USER_PROVIDER(400, "잘못된 소셜 접근입니다."),
+
     INTERNAL_SERVER_ERROR(500, "관리자에게 문의해주세요"),
     ;
 

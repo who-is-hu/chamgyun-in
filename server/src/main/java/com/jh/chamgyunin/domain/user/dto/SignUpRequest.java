@@ -1,5 +1,6 @@
 package com.jh.chamgyunin.domain.user.dto;
 
+import com.jh.chamgyunin.domain.login.dto.UserProvider;
 import com.jh.chamgyunin.domain.user.model.User;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -33,7 +34,7 @@ public class SignUpRequest {
 
     @ApiModelProperty(example = "{KAKAO | LOCAL}", required = true)
     @NotEmpty
-    private String provider;
+    private UserProvider provider;
 
     public User toEntity(){
         User user = User.builder()

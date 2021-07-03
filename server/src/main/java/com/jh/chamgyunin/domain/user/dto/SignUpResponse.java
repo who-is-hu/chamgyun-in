@@ -1,5 +1,6 @@
 package com.jh.chamgyunin.domain.user.dto;
 
+import com.jh.chamgyunin.domain.login.dto.UserProvider;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -11,5 +12,5 @@ public class SignUpResponse {
 
     private String email;
     private String nickname;
-    private String provider;
+    private UserProvider provider;
 }

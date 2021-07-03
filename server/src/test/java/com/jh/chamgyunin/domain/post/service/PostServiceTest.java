@@ -1,6 +1,7 @@
 package com.jh.chamgyunin.domain.post.service;
 
 import com.jh.chamgyunin.MockTest;
+import com.jh.chamgyunin.domain.login.dto.UserProvider;
 import com.jh.chamgyunin.domain.post.dao.PostRepository;
 import com.jh.chamgyunin.domain.post.dto.PostCreateRequest;
 import com.jh.chamgyunin.domain.post.model.Post;
@@ -25,7 +26,7 @@ class PostServiceTest extends MockTest {
 
     @BeforeEach
     void setUp() throws Exception {
-        user = new User("test@test.com","testname","1234");
+        user = new User("test@test.com","testname", UserProvider.KAKAO);
     }
 
     @Test
