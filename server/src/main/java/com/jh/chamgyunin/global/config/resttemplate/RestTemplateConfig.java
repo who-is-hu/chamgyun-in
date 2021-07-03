@@ -16,6 +16,7 @@ public class RestTemplateConfig {
     public RestTemplate kakaoRestTemplate() {
         return restTemplateBuilder.rootUri("https:/kapi.kakao.com")
                 .additionalInterceptors(new RestTemplateHttpInterceptor())
+                .errorHandler(new RestTemplateResponseErrorHandler())
                 .build();
     }
 }
