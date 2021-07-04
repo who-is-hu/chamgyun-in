@@ -2,6 +2,7 @@ package com.jh.chamgyunin.global.error;
 
 
 import com.jh.chamgyunin.global.error.exception.ErrorCode;
+import lombok.Getter;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Getter
 public class ErrorResponse {
 
     private String message;
