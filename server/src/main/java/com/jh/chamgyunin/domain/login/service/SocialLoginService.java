@@ -27,9 +27,9 @@ public class SocialLoginService {
         final String nickname = socialUserInfo.getNickname();
         final UserProvider userProvider = socialUserInfo.getProvider();
 
-        Optional<User> userOptional = userRepository.findByEmail(email);
+
         // 자동 회원 가입
-        if(userOptional.isEmpty()) {
+        if(!userService.isExistUser(email)) {
             final SignUpRequest signUpRequest = SignUpRequest.builder()
                     .email(email)
                     .nickname(nickname)
@@ -38,6 +38,8 @@ public class SocialLoginService {
                     .build();
             userService.insertUser(signUpRequest);
         }
+
+        Optional<User> userOptional = userRepository.findByEmail(email);
         User user = userOptional.get();
         session.setAttribute("loginId", user.getId());
 

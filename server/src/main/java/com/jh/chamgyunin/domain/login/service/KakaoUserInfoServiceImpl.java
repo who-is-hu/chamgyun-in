@@ -26,6 +26,7 @@ public class KakaoUserInfoServiceImpl implements SocialUserInfoService {
                 HttpMethod.GET,
                 new HttpEntity(headers),
                 KakaoUserInfo.class);
+
         KakaoUserInfo userInfo = response.getBody();
 
         return SocialUserInfo.builder()

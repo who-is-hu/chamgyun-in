@@ -18,7 +18,7 @@ public class RestTemplateHttpInterceptor implements ClientHttpRequestInterceptor
         logRequest(request, body);
         final ClientHttpResponse response = execution.execute(request, body);
         logResponse(response);
-        return response;
+        return execution.execute(request,body);
     }
 
     private void logRequest(HttpRequest request, byte[] body) throws IOException {
