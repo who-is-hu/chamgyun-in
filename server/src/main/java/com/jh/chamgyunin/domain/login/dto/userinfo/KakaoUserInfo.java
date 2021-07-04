@@ -2,8 +2,11 @@ package com.jh.chamgyunin.domain.login.dto.userinfo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
+import lombok.ToString;
+import org.springframework.stereotype.Component;
 
 @Getter
+@ToString
 public class KakaoUserInfo {
 
     @JsonProperty("kakao_account")
