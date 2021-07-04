@@ -1,6 +1,7 @@
 package com.jh.chamgyunin.domain.user.api;
 
 import com.jh.chamgyunin.IntergrationTest;
+import com.jh.chamgyunin.domain.login.dto.UserProvider;
 import com.jh.chamgyunin.domain.user.dao.UserRepository;
 import com.jh.chamgyunin.domain.user.dto.SignUpRequest;
 import com.jh.chamgyunin.domain.user.model.User;
@@ -32,8 +33,9 @@ class UserControllerTest extends IntergrationTest {
     public void 회원가입_성공() throws Exception {
         //given
         final User user = User.builder()
+                .id(1L)
                 .email("test@test.com")
-                .provider("kakao")
+                .provider(UserProvider.KAKAO)
                 .nickname("testnick")
                 .build();
 
@@ -64,7 +66,7 @@ class UserControllerTest extends IntergrationTest {
         User user = User.builder()
                 .email("dup@test.com")
                 .nickname("test")
-                .provider("test")
+                .provider(UserProvider.KAKAO)
                 .build();
         User existUser = userSetUp.saveUser(user);
 

@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Entity
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "users")
 @ToString
 public class User {
@@ -32,7 +32,8 @@ public class User {
     private LocalDateTime created_at;
 
     @Builder
-    public User(String email, String nickname, UserProvider provider) {
+    public User(Long id, String email, String nickname, UserProvider provider) {
+        this.id = id;
         this.email = email;
         this.nickname = nickname;
         this.provider = provider;

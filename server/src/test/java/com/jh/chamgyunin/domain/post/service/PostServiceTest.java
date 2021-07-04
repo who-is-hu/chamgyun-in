@@ -26,7 +26,7 @@ class PostServiceTest extends MockTest {
 
     @BeforeEach
     void setUp() throws Exception {
-        user = new User("test@test.com","testname", UserProvider.KAKAO);
+        user = new User(1L,"test@test.com","testname", UserProvider.KAKAO);
     }
 
     @Test
