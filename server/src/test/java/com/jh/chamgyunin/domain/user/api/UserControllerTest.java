@@ -56,7 +56,7 @@ class UserControllerTest extends IntergrationTest {
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(jsonPath("$.email").value(user.getEmail()))
                 .andExpect(jsonPath("$.nickname").value(user.getNickname()))
-                .andExpect(jsonPath("$.provider").value(user.getProvider()))
+                .andExpect(jsonPath("$.provider").value(user.getProvider().name()))
         ;
     }
 

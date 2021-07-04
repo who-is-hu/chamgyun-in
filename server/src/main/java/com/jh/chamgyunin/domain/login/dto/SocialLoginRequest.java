@@ -1,6 +1,7 @@
 package com.jh.chamgyunin.domain.login.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.jh.chamgyunin.global.validation.SupportedUserProvider;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,7 +16,7 @@ import javax.validation.constraints.NotNull;
 @Builder
 public class SocialLoginRequest {
 
-    @NotNull
+    @SupportedUserProvider
     private UserProvider provider;
 
     @NotEmpty
