@@ -125,11 +125,12 @@
                     <navigationItem key="navigationItem" title="인기" id="5Ja-7g-ZD8"/>
                     <connections>
                         <outlet property="tableView" destination="gta-cG-wFG" id="nUj-bh-Fxg"/>
+                        <segue destination="BE8-Jd-gvF" kind="show" id="iba-Si-9SY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b01-kH-TDF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4213.04347826087" y="-633.48214285714278"/>
+            <point key="canvasLocation" x="4212" y="-633"/>
         </scene>
         <!--더보기-->
         <scene sceneID="dwh-7U-SqA">
@@ -508,6 +509,22 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JUb-SI-XwJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3396" y="775"/>
+        </scene>
+        <!--Worry Detail View Controller-->
+        <scene sceneID="uuI-hi-dgs">
+            <objects>
+                <viewController modalPresentationStyle="fullScreen" id="BE8-Jd-gvF" customClass="WorryDetailViewController" customModule="iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="p8o-wY-jKB">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="lOw-fR-cSY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="CG2-7C-9AE"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="se1-6R-JfB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5004" y="-633"/>
         </scene>
     </scenes>
     <designables>
