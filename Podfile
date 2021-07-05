@@ -9,6 +9,9 @@ target 'iOS' do
 
 pod 'TagListView', '~> 1.0'
 
+# Checkbox
+pod 'M13Checkbox'
+
 # Kakao SDK
 pod 'KakaoSDKCommon'  # 필수 요소를 담은 공통 모듈
 pod 'KakaoSDKAuth'  # 사용자 인증
