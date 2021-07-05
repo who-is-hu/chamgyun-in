@@ -88,7 +88,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="Neg-ds-y9O"/>
-                        <color key="backgroundColor" systemColor="systemGreenColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="검색" image="magnifyingglass" catalog="system" id="bYE-6M-izB"/>
                     <navigationItem key="navigationItem" title="검색" id="Otu-2P-NGt"/>
@@ -100,21 +100,36 @@
         <!--인기-->
         <scene sceneID="BhQ-3d-aYf">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="YEC-Bo-3o9" customClass="MainViewController" customModule="iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="YEC-Bo-3o9" customClass="PopularityViewController" customModule="iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="z5l-zK-SLR">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="white" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gta-cG-wFG">
+                                <rect key="frame" x="0.0" y="56" width="414" height="703"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="ReZ-vT-xkm"/>
-                        <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="gta-cG-wFG" firstAttribute="trailing" secondItem="ReZ-vT-xkm" secondAttribute="trailing" id="8ht-yR-7ou"/>
+                            <constraint firstItem="gta-cG-wFG" firstAttribute="bottom" secondItem="ReZ-vT-xkm" secondAttribute="bottom" id="BRU-yS-Teh"/>
+                            <constraint firstItem="gta-cG-wFG" firstAttribute="top" secondItem="ReZ-vT-xkm" secondAttribute="top" id="Pom-XG-jnI"/>
+                            <constraint firstItem="gta-cG-wFG" firstAttribute="leading" secondItem="ReZ-vT-xkm" secondAttribute="leading" id="QS3-NG-YMB"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="인기" image="star.fill" catalog="system" id="bIH-cz-f8v">
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
                     </tabBarItem>
                     <navigationItem key="navigationItem" title="인기" id="5Ja-7g-ZD8"/>
+                    <connections>
+                        <outlet property="tableView" destination="gta-cG-wFG" id="nUj-bh-Fxg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b01-kH-TDF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4214" y="-633"/>
+            <point key="canvasLocation" x="4213.04347826087" y="-633.48214285714278"/>
         </scene>
         <!--더보기-->
         <scene sceneID="dwh-7U-SqA">
@@ -515,12 +530,6 @@
         </systemColor>
         <systemColor name="systemGray6Color">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemGreenColor">
-            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemOrangeColor">
-            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
