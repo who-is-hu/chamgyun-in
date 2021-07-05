@@ -13,9 +13,11 @@ import KakaoSDKUser
 
 class SignInViewController: UIViewController {
 
+    // MARK: - IBOutlet
     @IBOutlet var buttonStack: UIStackView!
     @IBOutlet var appleLoginButton: UIButton!
     
+    // MARK: - LifeCycle Method
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -26,13 +28,10 @@ class SignInViewController: UIViewController {
                     // do nothing
                 } else {
                     if let accessToken = TokenManager.manager.getToken()?.accessToken {
-                        print("access token \(accessToken)")
+    //                        print("access token \(accessToken)")
+                        
+                        self.connectWithServer(accessToken: accessToken)
                     }
-                                        
-                    let customTabBarViewController = self.storyboard?.instantiateViewController(identifier: "CustomTabBarViewController")
-                    customTabBarViewController?.modalTransitionStyle = .coverVertical
-                    self.present(customTabBarViewController!, animated: false, completion: nil)
-                    
                     
                 }
             }
@@ -42,7 +41,7 @@ class SignInViewController: UIViewController {
         appleLoginButton.layer.cornerRadius = 5.0
     }
 
-    
+    // MARK: - IBAction
     @IBAction func kakaoLoginTouchInside(_ sender: UIButton) {
         if UserApi.isKakaoTalkLoginAvailable() {
             UserApi.shared.loginWithKakaoTalk() {(oauthToken, error) in
@@ -52,26 +51,35 @@ class SignInViewController: UIViewController {
                     print("kakao login success with token(Access : \(oauthToken.accessToken), Refresh : \(oauthToken.refreshToken)")
                     
                     // Save token to server
-                    
-                    
-                    // Present MainView
-                    let customTabBarViewController = self.storyboard?.instantiateViewController(identifier: "CustomTabBarViewController")
-                    customTabBarViewController?.modalTransitionStyle = .coverVertical
-                    self.present(customTabBarViewController!, animated: true, completion: nil)
+                    self.connectWithServer(accessToken: oauthToken.accessToken)
                 }
             }
         }
     }
-
-//    func setUpProviderLoginView() {
-//        let button = ASAuthorizationAppleIDButton()
-//        button.addTarget(self, action: #selector(donothing), for: .touchUpInside)
-//        buttonStack.addSubview(button)
-//    }
     
-    @objc func donothing() {
-        print("donothing")
+    
+    // MARK: - functions
+    
+    /// Connect Server with access token. if it works success then segue main view
+    /// - Parameter accessToken: access token like kakao access token
+    func connectWithServer(accessToken: String) {
+        let param: [String: Any] = ["provider": SocialProvider.kakao.rawValue, "social_access_token": accessToken]
+        
+//                        print(param)
+        
+        APIRequest().request(url: APIRequest.authSignInUrl, method: "POST", voType: SignInVo.self, param: param) { success, data in
+            if success {
+//                                print("\(data)")
+                
+                DispatchQueue.main.async {
+                    let customTabBarViewController = self.storyboard?.instantiateViewController(identifier: "CustomTabBarViewController")
+                    customTabBarViewController?.modalTransitionStyle = .coverVertical
+                    self.present(customTabBarViewController!, animated: false, completion: nil)
+                    
+                    AuthManager.shared.userInfo = data as? SignInVo
+                }
+            }
+        }
     }
-    
 }
 
