@@ -125,7 +125,6 @@
                     <navigationItem key="navigationItem" title="인기" id="5Ja-7g-ZD8"/>
                     <connections>
                         <outlet property="tableView" destination="gta-cG-wFG" id="nUj-bh-Fxg"/>
-                        <segue destination="BE8-Jd-gvF" kind="show" id="iba-Si-9SY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b01-kH-TDF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -513,18 +512,30 @@
         <!--Worry Detail View Controller-->
         <scene sceneID="uuI-hi-dgs">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="BE8-Jd-gvF" customClass="WorryDetailViewController" customModule="iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WorryDetailStoryboard" modalPresentationStyle="fullScreen" id="BE8-Jd-gvF" customClass="WorryDetailViewController" customModule="iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="p8o-wY-jKB">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="HOT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kLq-IE-qyZ">
+                                <rect key="frame" x="186" y="438" width="35" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="lOw-fR-cSY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="kLq-IE-qyZ" firstAttribute="centerY" secondItem="lOw-fR-cSY" secondAttribute="centerY" id="SW8-Up-2S5"/>
+                            <constraint firstItem="kLq-IE-qyZ" firstAttribute="centerX" secondItem="lOw-fR-cSY" secondAttribute="centerX" id="btc-rD-35e"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="CG2-7C-9AE"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="se1-6R-JfB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5004" y="-633"/>
+            <point key="canvasLocation" x="5103" y="-633"/>
         </scene>
     </scenes>
     <designables>

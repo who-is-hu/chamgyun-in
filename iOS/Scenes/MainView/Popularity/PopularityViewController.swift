@@ -65,6 +65,11 @@ extension PopularityViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         print("\(indexPath.row)")
+        
+        if let worryViewController = storyboard?.instantiateViewController(identifier: "WorryDetailStoryboard") as? WorryDetailViewController {
+            self.navigationController?.pushViewController(worryViewController, animated: true)
+        }
+        
     }
 }
 
