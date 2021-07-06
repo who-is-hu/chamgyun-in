@@ -1,6 +1,5 @@
-package com.jh.chamgyunin.domain.login.exception;
+package com.jh.chamgyunin.domain.auth.exception;
 
-import com.jh.chamgyunin.domain.login.dto.UserProvider;
 import com.jh.chamgyunin.global.error.exception.BusinessException;
 import com.jh.chamgyunin.global.error.exception.ErrorCode;
 

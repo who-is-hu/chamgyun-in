@@ -1,4 +1,4 @@
-package com.jh.chamgyunin.domain.login.dto;
+package com.jh.chamgyunin.domain.auth.dto;
 
 public enum UserProvider {
     KAKAO("kakao"),

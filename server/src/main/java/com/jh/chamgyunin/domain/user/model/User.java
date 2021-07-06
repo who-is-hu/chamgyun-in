@@ -1,6 +1,6 @@
 package com.jh.chamgyunin.domain.user.model;
 
-import com.jh.chamgyunin.domain.login.dto.UserProvider;
+import com.jh.chamgyunin.domain.auth.dto.UserProvider;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 

@@ -1,6 +1,6 @@
 package com.jh.chamgyunin.domain.user.dto;
 
-import com.jh.chamgyunin.domain.login.dto.UserProvider;
+import com.jh.chamgyunin.domain.auth.dto.UserProvider;
 import com.jh.chamgyunin.domain.user.model.User;
 import com.jh.chamgyunin.global.validation.SupportedUserProvider;
 import io.swagger.annotations.ApiModelProperty;

@@ -1,12 +1,10 @@
-package com.jh.chamgyunin.domain.login.service;
+package com.jh.chamgyunin.domain.auth.service;
 
 import com.jh.chamgyunin.MockTest;
-import com.jh.chamgyunin.domain.login.dto.LoginResponse;
-import com.jh.chamgyunin.domain.login.dto.UserProvider;
-import com.jh.chamgyunin.domain.login.dto.userinfo.SocialUserInfo;
+import com.jh.chamgyunin.domain.auth.dto.LoginResponse;
+import com.jh.chamgyunin.domain.auth.dto.UserProvider;
+import com.jh.chamgyunin.domain.auth.dto.userinfo.SocialUserInfo;
 import com.jh.chamgyunin.domain.user.dao.UserRepository;
-import com.jh.chamgyunin.domain.user.dto.SignUpResponse;
-import com.jh.chamgyunin.domain.user.exception.UserAlreadyExistException;
 import com.jh.chamgyunin.domain.user.model.User;
 import com.jh.chamgyunin.domain.user.service.UserService;
 import org.assertj.core.api.Assertions;
@@ -18,7 +16,6 @@ import org.mockito.Mock;
 import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 

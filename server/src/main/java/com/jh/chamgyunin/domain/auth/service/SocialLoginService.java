@@ -1,8 +1,8 @@
-package com.jh.chamgyunin.domain.login.service;
+package com.jh.chamgyunin.domain.auth.service;
 
-import com.jh.chamgyunin.domain.login.dto.LoginResponse;
-import com.jh.chamgyunin.domain.login.dto.UserProvider;
-import com.jh.chamgyunin.domain.login.dto.userinfo.SocialUserInfo;
+import com.jh.chamgyunin.domain.auth.dto.LoginResponse;
+import com.jh.chamgyunin.domain.auth.dto.UserProvider;
+import com.jh.chamgyunin.domain.auth.dto.userinfo.SocialUserInfo;
 import com.jh.chamgyunin.domain.user.dao.UserRepository;
 import com.jh.chamgyunin.domain.user.dto.SignUpRequest;
 import com.jh.chamgyunin.domain.user.model.User;
@@ -41,7 +41,7 @@ public class SocialLoginService {
 
         Optional<User> userOptional = userRepository.findByEmail(email);
         User user = userOptional.get();
-        session.setAttribute("loginId", user.getId());
+        session.setAttribute(SessionKey.LOGIN_USER_ID, user.getId());
 
         return LoginResponse.builder()
                 .id(user.getId())
