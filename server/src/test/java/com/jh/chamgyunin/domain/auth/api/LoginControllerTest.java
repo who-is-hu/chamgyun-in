@@ -1,8 +1,8 @@
-package com.jh.chamgyunin.domain.login.api;
+package com.jh.chamgyunin.domain.auth.api;
 
 import com.jh.chamgyunin.IntergrationTest;
-import com.jh.chamgyunin.domain.login.dto.SocialLoginRequest;
-import com.jh.chamgyunin.domain.login.dto.UserProvider;
+import com.jh.chamgyunin.domain.auth.dto.SocialLoginRequest;
+import com.jh.chamgyunin.domain.auth.dto.UserProvider;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;

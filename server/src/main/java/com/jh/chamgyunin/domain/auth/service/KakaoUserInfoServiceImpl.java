@@ -1,7 +1,7 @@
-package com.jh.chamgyunin.domain.login.service;
+package com.jh.chamgyunin.domain.auth.service;
 
-import com.jh.chamgyunin.domain.login.dto.userinfo.KakaoUserInfo;
-import com.jh.chamgyunin.domain.login.dto.userinfo.SocialUserInfo;
+import com.jh.chamgyunin.domain.auth.dto.userinfo.KakaoUserInfo;
+import com.jh.chamgyunin.domain.auth.dto.userinfo.SocialUserInfo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;

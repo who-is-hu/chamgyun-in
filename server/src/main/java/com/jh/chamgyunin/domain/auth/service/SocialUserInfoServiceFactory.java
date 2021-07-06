@@ -1,7 +1,7 @@
-package com.jh.chamgyunin.domain.login.service;
+package com.jh.chamgyunin.domain.auth.service;
 
-import com.jh.chamgyunin.domain.login.dto.UserProvider;
-import com.jh.chamgyunin.domain.login.exception.InvalidUserProviderException;
+import com.jh.chamgyunin.domain.auth.dto.UserProvider;
+import com.jh.chamgyunin.domain.auth.exception.InvalidUserProviderException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

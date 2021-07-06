@@ -1,6 +1,6 @@
 package com.jh.chamgyunin.global.config.resttemplate;
 
-import com.jh.chamgyunin.domain.login.exception.SocialNotRegisteredUserException;
+import com.jh.chamgyunin.domain.auth.exception.SocialNotRegisteredUserException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.web.client.ResponseErrorHandler;

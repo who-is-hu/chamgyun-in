@@ -1,7 +1,7 @@
 package com.jh.chamgyunin.domain.post.service;
 
 import com.jh.chamgyunin.MockTest;
-import com.jh.chamgyunin.domain.login.dto.UserProvider;
+import com.jh.chamgyunin.domain.auth.dto.UserProvider;
 import com.jh.chamgyunin.domain.post.dao.PostRepository;
 import com.jh.chamgyunin.domain.post.dto.PostCreateRequest;
 import com.jh.chamgyunin.domain.post.model.Post;

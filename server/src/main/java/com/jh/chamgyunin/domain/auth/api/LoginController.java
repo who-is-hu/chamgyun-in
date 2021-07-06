@@ -1,11 +1,11 @@
-package com.jh.chamgyunin.domain.login.api;
+package com.jh.chamgyunin.domain.auth.api;
 
-import com.jh.chamgyunin.domain.login.dto.LoginResponse;
-import com.jh.chamgyunin.domain.login.dto.SocialLoginRequest;
-import com.jh.chamgyunin.domain.login.dto.userinfo.SocialUserInfo;
-import com.jh.chamgyunin.domain.login.service.SocialLoginService;
-import com.jh.chamgyunin.domain.login.service.SocialUserInfoService;
-import com.jh.chamgyunin.domain.login.service.SocialUserInfoServiceFactory;
+import com.jh.chamgyunin.domain.auth.dto.LoginResponse;
+import com.jh.chamgyunin.domain.auth.dto.SocialLoginRequest;
+import com.jh.chamgyunin.domain.auth.dto.userinfo.SocialUserInfo;
+import com.jh.chamgyunin.domain.auth.service.SocialLoginService;
+import com.jh.chamgyunin.domain.auth.service.SocialUserInfoService;
+import com.jh.chamgyunin.domain.auth.service.SocialUserInfoServiceFactory;
 import com.jh.chamgyunin.domain.user.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

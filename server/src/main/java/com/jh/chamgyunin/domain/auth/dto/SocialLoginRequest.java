@@ -1,4 +1,4 @@
-package com.jh.chamgyunin.domain.login.dto;
+package com.jh.chamgyunin.domain.auth.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.jh.chamgyunin.global.validation.SupportedUserProvider;
