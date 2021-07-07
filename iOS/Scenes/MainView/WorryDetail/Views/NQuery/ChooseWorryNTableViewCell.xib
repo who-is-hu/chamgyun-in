@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="65" id="d4K-9n-4dC" customClass="ChooseWorryNTableViewCell" customModule="iOS" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="374" height="65"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="d4K-9n-4dC" id="cfG-tL-o6C">
+                <rect key="frame" x="0.0" y="0.0" width="374" height="65"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yeq-mQ-HbD" customClass="M13Checkbox" customModule="M13Checkbox">
+                        <rect key="frame" x="0.0" y="3" width="40" height="40"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="fDd-Kd-Eb7"/>
+                            <constraint firstAttribute="width" constant="40" id="m2N-0i-ABZ"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YC4-8W-cSW">
+                        <rect key="frame" x="50" y="12.5" width="304" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailingMargin" secondItem="YC4-8W-cSW" secondAttribute="trailing" id="2oI-hx-HWv"/>
+                    <constraint firstItem="YC4-8W-cSW" firstAttribute="centerY" secondItem="Yeq-mQ-HbD" secondAttribute="centerY" id="8Hi-TS-Qib"/>
+                    <constraint firstItem="Yeq-mQ-HbD" firstAttribute="top" secondItem="cfG-tL-o6C" secondAttribute="top" constant="3" id="A6G-v8-k2T"/>
+                    <constraint firstAttribute="bottom" secondItem="Yeq-mQ-HbD" secondAttribute="bottom" constant="3" id="DEU-Je-F56"/>
+                    <constraint firstItem="YC4-8W-cSW" firstAttribute="centerY" secondItem="cfG-tL-o6C" secondAttribute="centerY" id="RaR-ml-FNd"/>
+                    <constraint firstItem="YC4-8W-cSW" firstAttribute="leading" secondItem="Yeq-mQ-HbD" secondAttribute="trailing" constant="10" id="fSi-FD-l1i"/>
+                    <constraint firstItem="Yeq-mQ-HbD" firstAttribute="leading" secondItem="cfG-tL-o6C" secondAttribute="leading" id="oJz-oN-VhJ"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="mCheckBox" destination="Yeq-mQ-HbD" id="fJY-jX-T6f"/>
+                <outlet property="queryLable" destination="YC4-8W-cSW" id="6Xl-tH-lcr"/>
+            </connections>
+            <point key="canvasLocation" x="93" y="112"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
