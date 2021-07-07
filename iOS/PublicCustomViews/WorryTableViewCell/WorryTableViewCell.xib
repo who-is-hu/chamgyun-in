@@ -23,16 +23,16 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Body" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0OA-io-PBa">
-                        <rect key="frame" x="20" y="44" width="384" height="18"/>
+                        <rect key="frame" x="20" y="44" width="374" height="18"/>
                         <constraints>
-                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="18" id="nqW-B7-lq1"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="18" id="Qqz-MD-OOr"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c5S-rL-BY1" userLabel="TagListView" customClass="TagListView" customModule="TagListView">
-                        <rect key="frame" x="20" y="72" width="384" height="34"/>
+                        <rect key="frame" x="20" y="72" width="374" height="34"/>
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="34" id="iql-Ve-mXY"/>
                         </constraints>
@@ -100,19 +100,20 @@
                     </stackView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="0OA-io-PBa" firstAttribute="leading" secondItem="ZyR-3M-qnJ" secondAttribute="leading" id="2GS-Se-OLj"/>
                     <constraint firstAttribute="bottom" secondItem="O7V-9K-1TQ" secondAttribute="bottom" constant="20" symbolic="YES" id="7go-Zc-qxI"/>
+                    <constraint firstItem="0OA-io-PBa" firstAttribute="top" secondItem="ZyR-3M-qnJ" secondAttribute="bottom" constant="8" symbolic="YES" id="8p2-lx-vYc"/>
                     <constraint firstItem="ZyR-3M-qnJ" firstAttribute="leading" secondItem="K2X-fv-4Es" secondAttribute="leading" constant="20" symbolic="YES" id="AFj-8X-w3I"/>
                     <constraint firstItem="O7V-9K-1TQ" firstAttribute="top" secondItem="c5S-rL-BY1" secondAttribute="bottom" constant="8" id="ASp-do-Nkp"/>
-                    <constraint firstItem="c5S-rL-BY1" firstAttribute="trailing" secondItem="0OA-io-PBa" secondAttribute="trailing" id="J1n-DE-Oc8"/>
+                    <constraint firstItem="0OA-io-PBa" firstAttribute="leading" secondItem="ZyR-3M-qnJ" secondAttribute="leading" id="FV3-6m-HNH"/>
                     <constraint firstItem="O7V-9K-1TQ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="K2X-fv-4Es" secondAttribute="leading" constant="10" id="PU1-Fw-mx6"/>
-                    <constraint firstItem="0OA-io-PBa" firstAttribute="top" secondItem="ZyR-3M-qnJ" secondAttribute="bottom" constant="8" id="ZTw-Gd-fki"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="c5S-rL-BY1" secondAttribute="trailing" id="RXE-88-Gi2"/>
                     <constraint firstAttribute="trailing" secondItem="O7V-9K-1TQ" secondAttribute="trailing" constant="20" symbolic="YES" id="ZVB-Ha-1Qh"/>
-                    <constraint firstItem="c5S-rL-BY1" firstAttribute="top" secondItem="0OA-io-PBa" secondAttribute="bottom" constant="10" id="eYr-Fr-m65"/>
+                    <constraint firstItem="0OA-io-PBa" firstAttribute="top" secondItem="K2X-fv-4Es" secondAttribute="top" constant="44" id="Zm2-MK-ZQ9"/>
+                    <constraint firstItem="c5S-rL-BY1" firstAttribute="leading" secondItem="0OA-io-PBa" secondAttribute="leading" id="dPm-C9-hfc"/>
                     <constraint firstAttribute="trailing" secondItem="ZyR-3M-qnJ" secondAttribute="trailing" constant="20" symbolic="YES" id="hyD-oS-EDW"/>
-                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="0OA-io-PBa" secondAttribute="trailing" priority="999" constant="10" id="nOK-0u-svs"/>
+                    <constraint firstItem="c5S-rL-BY1" firstAttribute="top" secondItem="0OA-io-PBa" secondAttribute="bottom" constant="10" id="jMp-XM-hx9"/>
                     <constraint firstItem="ZyR-3M-qnJ" firstAttribute="top" secondItem="K2X-fv-4Es" secondAttribute="top" constant="20" symbolic="YES" id="sCm-b5-S3u"/>
-                    <constraint firstItem="c5S-rL-BY1" firstAttribute="leading" secondItem="0OA-io-PBa" secondAttribute="leading" id="wFn-vG-U0x"/>
+                    <constraint firstItem="0OA-io-PBa" firstAttribute="trailing" secondItem="ZyR-3M-qnJ" secondAttribute="trailing" id="uJ3-CZ-mre"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
@@ -126,7 +127,7 @@
     </objects>
     <designables>
         <designable name="c5S-rL-BY1">
-            <size key="intrinsicContentSize" width="384" height="32"/>
+            <size key="intrinsicContentSize" width="374" height="32"/>
         </designable>
     </designables>
     <resources>

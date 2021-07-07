@@ -9,6 +9,7 @@ import UIKit
 import TagListView
 
 struct WorryDataVO {
+    let id: Int
     let title: String
     let body: String
     let viewCount: Int
@@ -19,7 +20,7 @@ class PopularityViewController: UIViewController {
     
     var dataSource: [WorryDataVO] = []
     
-    // MARK: IBOutlet
+    // MARK: - IBOutlet
     @IBOutlet weak var tableView: UITableView!
     
     // MARK: - Lifecycle Method
@@ -43,17 +44,17 @@ class PopularityViewController: UIViewController {
     
     func loadWorryData() {
         dataSource.removeAll()
-        dataSource.append(WorryDataVO(title: "worry1", body: "t has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum co(The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular duomes from a line in section 1.10.32.", viewCount: 3, tags: ["#AA", "#BB", "#CC"]))
+        dataSource.append(WorryDataVO(id: 0,title: "worry1", body: "t has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum co(The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular duomes from a line in section 1.10.32.", viewCount: 3, tags: ["#AA", "#BB", "#CC"]))
         
-        dataSource.append(WorryDataVO(title: "worry2", body: "t has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum co(The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular duomes from a line in section 1.10.32.", viewCount:5, tags: ["#AA", "#BB", "#CC"]))
+        dataSource.append(WorryDataVO(id: 1,title: "worry2", body: "t has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum co(The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular duomes from a line in section 1.10.32.", viewCount:5, tags: ["#AA", "#DD", "#CC"]))
         
-        dataSource.append(WorryDataVO(title: "worry3", body: "t has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum co(The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular duomes from a line in section 1.10.32.", viewCount: 4, tags: ["#AA", "#BB", "#CC"]))
+        dataSource.append(WorryDataVO(id: 2,title: "worry3", body: "t has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum co(The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular duomes from a line in section 1.10.32.", viewCount: 4, tags: ["#AA", "#BB", "#CC"]))
         
-        dataSource.append(WorryDataVO(title: "worry4", body: "t has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum co(The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular duomes from a line in section 1.10.32.", viewCount: 3, tags: ["#AA", "#BB", "#CC"]))
+        dataSource.append(WorryDataVO(id: 3,title: "worry4", body: "t has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum co(The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular duomes from a line in section 1.10.32.", viewCount: 3, tags: ["#AA", "#BB", "#CC"]))
         
-        dataSource.append(WorryDataVO(title: "worry5", body: "t has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum co(The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular duomes from a line in section 1.10.32.", viewCount:5, tags: ["#AA", "#BB", "#CC"]))
+        dataSource.append(WorryDataVO(id: 4,title: "worry5", body: "t has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum co(The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular duomes from a line in section 1.10.32.", viewCount:5, tags: ["#AA", "#BB", "#CC"]))
         
-        dataSource.append(WorryDataVO(title: "worry6", body: "t has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum co(The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular duomes from a line in section 1.10.32.", viewCount: 4, tags: ["#AA", "#BB", "#CC"]))
+        dataSource.append(WorryDataVO(id: 5,title: "worry6", body: "t has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum co(The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular duomes from a line in section 1.10.32.", viewCount: 4, tags: ["#AA", "#BB", "#CC"]))
         
         
     }
@@ -67,6 +68,7 @@ extension PopularityViewController: UITableViewDelegate {
         print("\(indexPath.row)")
         
         if let worryViewController = storyboard?.instantiateViewController(identifier: "WorryDetailStoryboard") as? WorryDetailViewController {
+            worryViewController.data = dataSource[indexPath.row]
             self.navigationController?.pushViewController(worryViewController, animated: true)
         }
         
