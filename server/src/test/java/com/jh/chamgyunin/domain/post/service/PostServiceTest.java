@@ -41,7 +41,7 @@ class PostServiceTest extends MockTest {
         given(postRepository.save(any())).willReturn(post);
 
         //when
-        Post result = postService.create(dto,user);
+        Post result = postService.create(user.getId(), dto);
 
         //then
         Assertions.assertThat(result.getTitle()).isEqualTo(post.getTitle());
