@@ -1,22 +1,18 @@
 package com.jh.chamgyunin.domain.post.api;
 
 import com.jh.chamgyunin.IntergrationTest;
-import com.jh.chamgyunin.domain.auth.dto.UserProvider;
 import com.jh.chamgyunin.domain.auth.service.SessionKey;
 import com.jh.chamgyunin.domain.post.dto.PostCreateRequest;
 import com.jh.chamgyunin.domain.post.service.PostService;
-import com.jh.chamgyunin.domain.user.dto.SignUpRequest;
-import com.jh.chamgyunin.domain.user.service.UserService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.web.servlet.ResultActions;
 
-import javax.servlet.http.HttpSession;
-
+import static org.hamcrest.Matchers.hasSize;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -24,7 +20,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 class PostControllerTest extends IntergrationTest {
 
-    public MockHttpSession session = new MockHttpSession();
+    @Autowired
+    private PostService postService;
 
     @BeforeEach
     public void setUp() throws Exception {
@@ -39,13 +36,10 @@ class PostControllerTest extends IntergrationTest {
     @Test
     void 게시글_생성_성공() throws Exception{
         //given
-        PostCreateRequest dto = PostCreateRequest.builder()
-                .title("test1")
-                .body("test1")
-                .build();
+        PostCreateRequest dto = createPostDto("test", "testbody");
 
         //when
-        ResultActions resultActions = createPostRequest(dto);
+        ResultActions resultActions = requestPostCreate(dto);
 
         //then
         resultActions
@@ -54,7 +48,35 @@ class PostControllerTest extends IntergrationTest {
                 .andExpect(jsonPath("$.body").value(dto.getBody()));
     }
 
-    private ResultActions createPostRequest(PostCreateRequest dto) throws Exception {
+    @Test
+    void 내_게시글_조회_성공() throws Exception {
+        //given
+        for (int i = 1; i <= 3; i++) {
+            PostCreateRequest dto = createPostDto("title" + i, "body" + i);
+            postService.create(2L,dto);
+        }
+        System.out.println(postService.findAllByOwnerId(2L));
+
+        //when
+        ResultActions resultActions = mvc.perform(get("/post/my")
+                .session(session))
+                .andDo(print());
+
+        //then
+        resultActions
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(jsonPath("$", hasSize(3)));
+                ;
+    }
+
+    private PostCreateRequest createPostDto(final String title, final String body) {
+        return PostCreateRequest.builder()
+                .title(title)
+                .body(body)
+                .build();
+    }
+
+    private ResultActions requestPostCreate(PostCreateRequest dto) throws Exception {
         return mvc.perform(post("/post")
                 .session(session)
                 .contentType(MediaType.APPLICATION_JSON)
