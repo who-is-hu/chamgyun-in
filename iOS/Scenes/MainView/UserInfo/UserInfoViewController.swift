@@ -79,7 +79,6 @@ class UserInfoViewController: UIViewController, TagListViewDelegate {
         for tag in tags {
             tagListView.addTag("#\(tag)")
         }
-        tagListView.addTag("수정하기")
     }
     
     func setUpUserInfo() {
@@ -106,6 +105,7 @@ class UserInfoViewController: UIViewController, TagListViewDelegate {
     /// Push tag
     func tagPressed(_ title: String, tagView: TagView, sender: TagListView) {
         print("\(title) pushed")
+
     }
     
     /// Push remove button
