@@ -88,7 +88,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kUQ-fk-fsP">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kUQ-fk-fsP">
                                 <rect key="frame" x="0.0" y="107" width="414" height="652"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
@@ -114,6 +114,7 @@
                     <connections>
                         <outlet property="hashTableView" destination="kUQ-fk-fsP" id="Mb4-1z-yxg"/>
                         <outlet property="searchView" destination="2FI-IA-Cry" id="3kD-3A-jMb"/>
+                        <segue destination="G4Y-vA-5BA" kind="show" id="ngl-em-odK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZEm-DZ-AsN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -986,7 +987,7 @@
                                 <rect key="frame" x="0.0" y="56" width="414" height="51"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="uwg-29-ObM">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="uwg-29-ObM">
                                 <rect key="frame" x="0.0" y="107" width="414" height="652"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
@@ -1014,6 +1015,38 @@
             </objects>
             <point key="canvasLocation" x="5129" y="-1771"/>
         </scene>
+        <!--Hash Group Worry View Controller-->
+        <scene sceneID="6Oh-cF-qEm">
+            <objects>
+                <viewController storyboardIdentifier="HashGroupWorryStoryboard" useStoryboardIdentifierAsRestorationIdentifier="YES" id="G4Y-vA-5BA" customClass="HashGroupWorryViewController" customModule="iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="DI8-aJ-RCs">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zha-HC-Eou">
+                                <rect key="frame" x="0.0" y="56" width="414" height="703"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="GvN-m1-dGi"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="zha-HC-Eou" firstAttribute="leading" secondItem="GvN-m1-dGi" secondAttribute="leading" id="31O-Zg-55w"/>
+                            <constraint firstItem="GvN-m1-dGi" firstAttribute="bottom" secondItem="zha-HC-Eou" secondAttribute="bottom" id="BJi-oQ-KGR"/>
+                            <constraint firstItem="zha-HC-Eou" firstAttribute="top" secondItem="GvN-m1-dGi" secondAttribute="top" id="Llj-qo-vko"/>
+                            <constraint firstItem="GvN-m1-dGi" firstAttribute="trailing" secondItem="zha-HC-Eou" secondAttribute="trailing" id="arv-AP-zes"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="HcB-xL-GOa"/>
+                    <connections>
+                        <outlet property="tableView" destination="zha-HC-Eou" id="evG-Qt-PnM"/>
+                        <segue destination="BE8-Jd-gvF" kind="show" id="mkX-5h-zWB"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DDf-XI-O8q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5129" y="62"/>
+        </scene>
     </scenes>
     <designables>
         <designable name="Kac-Zl-0Z6">
@@ -1021,7 +1054,7 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="dQe-By-spu"/>
+        <segue reference="mkX-5h-zWB"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="appleid_button" width="300" height="45"/>

@@ -42,6 +42,8 @@ class HashTagViewController: UIViewController {
     /// - Parameter searchText: search string. if it is nil then search all hashtag
     func loadHashTagData(searchText: String? = nil) {
         // sample
+        dataSource.removeAll()
+        
         dataSource.append(HashInfoVO(hashtag: "감자", boardCnt: 3))
         dataSource.append(HashInfoVO(hashtag: "바나나", boardCnt: 1))
         dataSource.append(HashInfoVO(hashtag: "딸기", boardCnt: 2))
@@ -74,7 +76,6 @@ extension HashTagViewController: UISearchBarDelegate {
         // load data from server and apply to table datasource
         
         // --
-        self.dataSource = []
         loadHashTagData()
     }
 }
@@ -84,6 +85,11 @@ extension HashTagViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("selected row : \(indexPath.row)")
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        if let hashGroupWorryController = storyboard?.instantiateViewController(identifier: "HashGroupWorryStoryboard") as? HashGroupWorryViewController {
+            hashGroupWorryController.hashText = dataSource[indexPath.row].hashtag
+            self.navigationController?.pushViewController(hashGroupWorryController, animated: true)
+        }
     }
 }
 
