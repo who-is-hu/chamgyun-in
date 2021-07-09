@@ -6,7 +6,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum ErrorCode {
-    WORRYPOST_NOT_FOUND(404,"존재하지 않는 고민이에요"),
+    POST_NOT_FOUND(404,"존재하지 않는 고민이에요"),
     INVALID_INPUT_VALUE(400,"잘못된 입력이에요"),
 
     USER_ALREADY_EXIST(400,"이미 존재하는 이메일이에요"),

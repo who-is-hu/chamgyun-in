@@ -1,5 +1,6 @@
 package com.jh.chamgyunin.domain.post.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.jh.chamgyunin.domain.user.model.User;
 import lombok.Builder;
 import lombok.Getter;
@@ -18,8 +19,9 @@ import java.time.LocalDateTime;
 public class Post {
 
     @Id
+    @Column(name = "post_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @Column(name="title")
     private String title;
@@ -27,7 +29,9 @@ public class Post {
     @Column(name="body")
     private String body;
 
-    @Transient
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    @JsonIgnore
     private User owner;
 
     @Column(name="created_at")

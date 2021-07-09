@@ -1,5 +1,6 @@
 server:
   port: 8888
+
 spring:
   h2:
     console:
@@ -7,3 +8,4 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create
+    defer-datasource-initialization: true
