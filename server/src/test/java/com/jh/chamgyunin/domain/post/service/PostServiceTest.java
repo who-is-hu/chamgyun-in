@@ -70,10 +70,10 @@ class PostServiceTest extends MockTest {
     public void 고민게시글_유저ID_조회() {
         //given
         List<Post> posts = makePosts(user);
-        given(postRepository.findAllByOwner(user.getId())).willReturn(posts);
+        given(postRepository.findAllByOwnerId(user.getId())).willReturn(posts);
 
         //when
-        List<Post> finds = postService.findAllByUserId(user.getId());
+        List<Post> finds = postService.findAllByOwnerId(user.getId());
 
         //then
         Assertions.assertThat(finds.size()).isEqualTo(posts.size());

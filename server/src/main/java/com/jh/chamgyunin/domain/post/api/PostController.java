@@ -8,15 +8,13 @@ import com.jh.chamgyunin.global.argumentresolver.LoginUserId;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
-@RequestMapping("/api/post")
+@RequestMapping("/post")
 @RequiredArgsConstructor
 public class PostController {
 
@@ -25,8 +23,21 @@ public class PostController {
     @PostMapping
     @IsUserLoggedIn
     public ResponseEntity<Post> create(
-            @Valid @RequestBody PostCreateRequest dto, @LoginUserId Long userId){
+            @Valid @RequestBody PostCreateRequest dto, @LoginUserId Long userId) {
         Post post = postService.create(userId, dto);
         return new ResponseEntity<>(post, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/{postId}")
+    public ResponseEntity<Post> getPost(@Valid @PathVariable(name = "postId") Long postId) {
+        Post post = postService.findById(postId);
+        return new ResponseEntity<>(post, HttpStatus.OK);
+    }
+
+    @GetMapping("/my")
+    @IsUserLoggedIn
+    public ResponseEntity<List<Post>> getMyPosts(@LoginUserId Long userId) {
+        List<Post> myPosts = postService.findAllByOwnerId(userId);
+        return new ResponseEntity<>(myPosts, HttpStatus.OK);
     }
 }

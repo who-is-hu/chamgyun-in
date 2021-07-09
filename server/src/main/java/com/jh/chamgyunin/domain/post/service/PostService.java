@@ -32,8 +32,8 @@ public class PostService {
         return post.orElseThrow(() -> new PostNotFoundException(id));
     }
 
-    public List<Post> findAllByUserId(final Long id) {
-        return postRepository.findAllByOwner(id);
+    public List<Post> findAllByOwnerId(final Long id) {
+        return postRepository.findAllByOwnerId(id);
     }
 
     public List<Post> findAllByOwner(final User user) {
