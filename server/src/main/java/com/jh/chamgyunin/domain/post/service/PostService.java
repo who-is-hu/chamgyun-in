@@ -9,6 +9,7 @@ import com.jh.chamgyunin.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Transactional
@@ -22,5 +23,18 @@ public class PostService {
         User user = userService.findById(userId);
         Post post = dto.toEntity(user);
         return postRepository.save(post);
+    }
+
+    public Post findById(final Long id) {
+        Optional<Post> post = postRepository.findById(id);
+        return post.orElseThrow(() -> new PostNotFoundException(id));
+    }
+
+    public List<Post> findAllByUserId(final Long id) {
+        return postRepository.findAllByUserId(id);
+    }
+
+    public List<Post> findAllByOwner(final User user) {
+        return postRepository.findAllByOwner(user);
     }
 }
