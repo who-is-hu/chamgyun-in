@@ -3,7 +3,6 @@ package com.jh.chamgyunin.domain.auth.service;
 import com.jh.chamgyunin.domain.auth.dto.LoginResponse;
 import com.jh.chamgyunin.domain.auth.dto.UserProvider;
 import com.jh.chamgyunin.domain.auth.dto.userinfo.SocialUserInfo;
-import com.jh.chamgyunin.domain.user.dao.UserRepository;
 import com.jh.chamgyunin.domain.user.dto.SignUpRequest;
 import com.jh.chamgyunin.domain.user.model.User;
 import com.jh.chamgyunin.domain.user.service.UserService;
@@ -11,14 +10,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class SocialLoginService {
 
     private final UserService userService;
-    private final UserRepository userRepository;
     private final HttpSession session;
 
     public LoginResponse login(final SocialUserInfo socialUserInfo) {
@@ -39,8 +36,7 @@ public class SocialLoginService {
             userService.insertUser(signUpRequest);
         }
 
-        Optional<User> userOptional = userRepository.findByEmail(email);
-        User user = userOptional.get();
+        User user = userService.findByEmail(email);
         session.setAttribute(SessionKey.LOGIN_USER_ID, user.getId());
 
         return LoginResponse.builder()
