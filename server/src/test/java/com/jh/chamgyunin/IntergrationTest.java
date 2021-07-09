@@ -16,5 +16,5 @@ import org.springframework.transaction.annotation.Transactional;
 public class IntergrationTest {
     @Autowired protected MockMvc mvc;
     @Autowired protected ObjectMapper objectMapper;
-    protected MockHttpSession session;
+    protected MockHttpSession session = new MockHttpSession();
 }

@@ -25,6 +25,7 @@ public class User {
     @Column(name = "nickname")
     private String nickname;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "provider")
     private UserProvider provider;
 
