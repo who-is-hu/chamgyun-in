@@ -18,8 +18,9 @@ import java.time.LocalDateTime;
 public class Post {
 
     @Id
+    @Column(name = "post_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @Column(name="title")
     private String title;
@@ -27,7 +28,9 @@ public class Post {
     @Column(name="body")
     private String body;
 
-    @Transient
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    @Column(name="owner")
     private User owner;
 
     @Column(name="created_at")
