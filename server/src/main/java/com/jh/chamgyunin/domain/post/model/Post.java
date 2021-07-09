@@ -1,5 +1,6 @@
 package com.jh.chamgyunin.domain.post.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.jh.chamgyunin.domain.user.model.User;
 import lombok.Builder;
 import lombok.Getter;
@@ -30,6 +31,7 @@ public class Post {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
+    @JsonIgnore
     private User owner;
 
     @Column(name="created_at")
