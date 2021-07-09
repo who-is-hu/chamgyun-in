@@ -27,8 +27,6 @@ class TestController {
 
 public class LoginValidationInterceptorTest extends IntergrationTest {
 
-    protected MockHttpSession session;
-
     private ResultActions requestTestController() throws Exception{
         return mvc.perform(get("/test/login-validation")
                 .session(session))
