@@ -1007,11 +1007,12 @@
                     <connections>
                         <outlet property="boardTableView" destination="uwg-29-ObM" id="491-wv-jYi"/>
                         <outlet property="searchView" destination="wUg-fM-t8z" id="Ms2-Kf-obQ"/>
+                        <segue destination="BE8-Jd-gvF" kind="show" id="dQe-By-spu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZFI-GB-dQm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5129" y="-1331"/>
+            <point key="canvasLocation" x="5129" y="-1771"/>
         </scene>
     </scenes>
     <designables>
@@ -1019,6 +1020,9 @@
             <size key="intrinsicContentSize" width="368" height="32"/>
         </designable>
     </designables>
+    <inferredMetricsTieBreakers>
+        <segue reference="dQe-By-spu"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="appleid_button" width="300" height="45"/>
         <image name="ellipsis" catalog="system" width="128" height="37"/>

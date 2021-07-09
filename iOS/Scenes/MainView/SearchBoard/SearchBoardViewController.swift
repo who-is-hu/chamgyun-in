@@ -69,6 +69,11 @@ extension SearchBoardViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("selected row : \(indexPath.row)")
         boardTableView.deselectRow(at: indexPath, animated: true)
+        
+        if let worryViewController = storyboard?.instantiateViewController(identifier: "WorryDetailStoryboard") as? WorryDetailViewController {
+            worryViewController.data = dataSource[indexPath.row]
+            self.navigationController?.pushViewController(worryViewController, animated: true)
+        }
     }
 }
 
