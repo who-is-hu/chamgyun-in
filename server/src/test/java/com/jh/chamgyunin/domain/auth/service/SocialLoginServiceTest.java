@@ -4,7 +4,6 @@ import com.jh.chamgyunin.MockTest;
 import com.jh.chamgyunin.domain.auth.dto.LoginResponse;
 import com.jh.chamgyunin.domain.auth.dto.UserProvider;
 import com.jh.chamgyunin.domain.auth.dto.userinfo.SocialUserInfo;
-import com.jh.chamgyunin.domain.user.dao.UserRepository;
 import com.jh.chamgyunin.domain.user.model.User;
 import com.jh.chamgyunin.domain.user.service.UserService;
 import org.assertj.core.api.Assertions;
@@ -14,9 +13,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
 import javax.servlet.http.HttpSession;
-import java.util.Optional;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 
 class SocialLoginServiceTest extends MockTest {
@@ -26,8 +23,6 @@ class SocialLoginServiceTest extends MockTest {
 
     @Mock
     private UserService userService;
-    @Mock
-    private UserRepository userRepository;
     @Mock
     private HttpSession session;
 
@@ -46,7 +41,7 @@ class SocialLoginServiceTest extends MockTest {
                 .provider(user.getProvider())
                 .build();
 
-        given(userRepository.findByEmail(user.getEmail())).willReturn(Optional.of(user));
+        given(userService.findByEmail(user.getEmail())).willReturn(user);
 
         //when
         LoginResponse response = socialLoginService.login(socialInfo);
