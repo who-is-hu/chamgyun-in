@@ -8,6 +8,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
 
@@ -51,21 +53,22 @@ class PostControllerTest extends IntergrationTest {
     @Test
     void 내_게시글_조회_성공() throws Exception {
         //given
-        for (int i = 1; i <= 3; i++) {
+        for (int i = 1; i <= 10; i++) {
             PostCreateRequest dto = createPostDto("title" + i, "body" + i);
             postService.create(2L,dto);
         }
-        System.out.println(postService.findAllByOwnerId(2L));
 
         //when
         ResultActions resultActions = mvc.perform(get("/post/my")
-                .session(session))
+                .session(session)
+                .param("page", "0")
+                .param("size", "3"))
                 .andDo(print());
 
         //then
         resultActions
                 .andExpect(status().is2xxSuccessful())
-                .andExpect(jsonPath("$", hasSize(3)));
+                .andExpect(jsonPath("$.content", hasSize(3)));
                 ;
     }
 

@@ -7,6 +7,10 @@ import com.jh.chamgyunin.domain.post.model.Post;
 import com.jh.chamgyunin.domain.user.model.User;
 import com.jh.chamgyunin.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,11 +36,11 @@ public class PostService {
         return post.orElseThrow(() -> new PostNotFoundException(id));
     }
 
-    public List<Post> findAllByOwnerId(final Long id) {
-        return postRepository.findAllByOwnerId(id);
+    public Page<Post> findAllByOwnerId(final Long id, final Pageable pageable) {
+        return postRepository.findAllByOwnerId(id, pageable);
     }
 
-    public List<Post> findAllByOwner(final User user) {
-        return postRepository.findAllByOwner(user);
+    public Page<Post> findAllByOwner(final User user, final Pageable pageable) {
+        return postRepository.findAllByOwner(user, pageable);
     }
 }
