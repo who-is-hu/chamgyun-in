@@ -80,22 +80,45 @@
             </objects>
             <point key="canvasLocation" x="1677" y="62"/>
         </scene>
-        <!--검색-->
+        <!--해시태그-->
         <scene sceneID="duu-OA-e9D">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="IMX-BK-r76" customClass="MainViewController" customModule="iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="IMX-BK-r76" customClass="HashTagViewController" customModule="iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cj0-KE-Gkl">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kUQ-fk-fsP">
+                                <rect key="frame" x="0.0" y="107" width="414" height="652"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                            <searchBar contentMode="redraw" placeholder="해시태그 검색" translatesAutoresizingMaskIntoConstraints="NO" id="2FI-IA-Cry">
+                                <rect key="frame" x="0.0" y="56" width="414" height="51"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="Neg-ds-y9O"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="2FI-IA-Cry" firstAttribute="top" secondItem="Neg-ds-y9O" secondAttribute="top" id="ETu-wl-QcP"/>
+                            <constraint firstItem="2FI-IA-Cry" firstAttribute="leading" secondItem="Neg-ds-y9O" secondAttribute="leading" id="FWF-FR-t7H"/>
+                            <constraint firstItem="kUQ-fk-fsP" firstAttribute="leading" secondItem="Neg-ds-y9O" secondAttribute="leading" id="Mwn-nf-QBF"/>
+                            <constraint firstItem="Neg-ds-y9O" firstAttribute="bottom" secondItem="kUQ-fk-fsP" secondAttribute="bottom" id="PYB-0j-CcH"/>
+                            <constraint firstItem="Neg-ds-y9O" firstAttribute="trailing" secondItem="kUQ-fk-fsP" secondAttribute="trailing" id="XRf-eL-efx"/>
+                            <constraint firstItem="2FI-IA-Cry" firstAttribute="trailing" secondItem="Neg-ds-y9O" secondAttribute="trailing" id="jg5-2t-KmK"/>
+                            <constraint firstItem="kUQ-fk-fsP" firstAttribute="top" secondItem="2FI-IA-Cry" secondAttribute="bottom" id="uHx-9h-B9Z"/>
+                        </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="검색" image="magnifyingglass" catalog="system" id="bYE-6M-izB"/>
-                    <navigationItem key="navigationItem" title="검색" id="Otu-2P-NGt"/>
+                    <tabBarItem key="tabBarItem" title="해시태그" image="number" catalog="system" id="bYE-6M-izB"/>
+                    <navigationItem key="navigationItem" title="해시태그" id="Otu-2P-NGt"/>
+                    <connections>
+                        <outlet property="hashTableView" destination="kUQ-fk-fsP" id="Mb4-1z-yxg"/>
+                        <outlet property="searchView" destination="2FI-IA-Cry" id="3kD-3A-jMb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZEm-DZ-AsN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4213" y="62"/>
+            <point key="canvasLocation" x="4211.594202898551" y="61.607142857142854"/>
         </scene>
         <!--인기-->
         <scene sceneID="BhQ-3d-aYf">
@@ -123,11 +146,14 @@
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
                     </tabBarItem>
                     <navigationItem key="navigationItem" title="인기" id="5Ja-7g-ZD8">
-                        <barButtonItem key="rightBarButtonItem" title="add" image="plus" catalog="system" id="TT1-xN-1mP">
-                            <connections>
-                                <segue destination="jPV-mT-s6k" kind="show" id="Gog-hv-mLt"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="TT1-xN-1mP">
+                                <connections>
+                                    <segue destination="jPV-mT-s6k" kind="show" id="Gog-hv-mLt"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="search" id="JyF-eu-phR"/>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="gta-cG-wFG" id="nUj-bh-Fxg"/>
@@ -954,9 +980,8 @@
         <image name="appleid_button" width="300" height="45"/>
         <image name="ellipsis" catalog="system" width="128" height="37"/>
         <image name="kakao_login_medium_wide" width="300" height="45"/>
-        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
+        <image name="number" catalog="system" width="128" height="124"/>
         <image name="person.circle.fill" catalog="system" width="128" height="121"/>
-        <image name="plus" catalog="system" width="128" height="113"/>
         <image name="star" catalog="system" width="128" height="116"/>
         <image name="star.fill" catalog="system" width="128" height="116"/>
         <systemColor name="labelColor">
