@@ -7,6 +7,7 @@ import com.jh.chamgyunin.domain.post.dto.PostCreateRequest;
 import com.jh.chamgyunin.domain.post.exception.PostNotFoundException;
 import com.jh.chamgyunin.domain.post.model.Post;
 import com.jh.chamgyunin.domain.user.model.User;
+import com.jh.chamgyunin.domain.user.service.UserService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,6 +29,9 @@ class PostServiceTest extends MockTest {
     @Mock
     private PostRepository postRepository;
 
+    @Mock
+    private UserService userService;
+
     private User user;
 
     @BeforeEach
@@ -44,6 +48,7 @@ class PostServiceTest extends MockTest {
                 .build();
         Post post = dto.toEntity(user);
 
+        given(userService.findById(any())).willReturn(user);
         given(postRepository.save(any())).willReturn(post);
 
         //when
@@ -65,7 +70,7 @@ class PostServiceTest extends MockTest {
     public void 고민게시글_유저ID_조회() {
         //given
         List<Post> posts = makePosts(user);
-        given(postRepository.findAllByUserId(user.getId())).willReturn(posts);
+        given(postRepository.findAllByOwner(user.getId())).willReturn(posts);
 
         //when
         List<Post> finds = postService.findAllByUserId(user.getId());
