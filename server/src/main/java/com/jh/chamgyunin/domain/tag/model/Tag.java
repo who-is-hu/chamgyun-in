@@ -22,4 +22,12 @@ public class Tag {
 
     @Column(name = "name", unique = true)
     private String name;
+
+    private Tag(String name) {
+        this.name = name;
+    }
+
+    public static Tag of(final String name) {
+        return new Tag(name);
+    }
 }
