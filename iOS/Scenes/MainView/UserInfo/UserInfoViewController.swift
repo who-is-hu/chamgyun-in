@@ -11,14 +11,19 @@ import KakaoSDKAuth
 import KakaoSDKUser
 import KakaoSDKCommon
 
-class UserInfoViewController: UIViewController, TagListViewDelegate {
-
+class UserInfoViewController: UIViewController {
+    // MARK: - Properties
+    var myWorryDataSource: [WorryDataVO] = []
+    var ansWorryDataSource: [WorryDataVO] = []
+    
     // MARK: - IBOutlet
     @IBOutlet weak var pointView: UIView!
     @IBOutlet weak var tagListView: TagListView!
     @IBOutlet weak var userEmailView: UILabel!
     @IBOutlet weak var userNameView: UILabel!
     @IBOutlet weak var userProfileImageView: UIImageView!
+    @IBOutlet weak var myWorryTableView: UITableView!
+    @IBOutlet weak var ansWorryTableView: UITableView!
     
     // MARK: - override Method
     override func viewDidLoad() {
@@ -26,8 +31,26 @@ class UserInfoViewController: UIViewController, TagListViewDelegate {
 
         // Do any additional setup after loading the view.
         pointView.layer.cornerRadius = 5.0
-        userProfileImageView.layer.cornerRadius = 9.0
+        userProfileImageView.layer.cornerRadius = userProfileImageView.frame.width / 2
         
+        let nibId = String(describing: SimpleWorryTableViewCell.self)
+        let nib = UINib(nibName: nibId, bundle: nil)
+        
+        myWorryTableView.register(nib, forCellReuseIdentifier: nibId)
+        ansWorryTableView.register(nib, forCellReuseIdentifier: nibId)
+        
+        myWorryTableView.rowHeight = UITableView.automaticDimension
+        ansWorryTableView.rowHeight = UITableView.automaticDimension
+        
+        myWorryTableView.estimatedRowHeight = 44
+        ansWorryTableView.estimatedRowHeight = 44
+        
+        myWorryTableView.delegate = self
+        myWorryTableView.dataSource = self
+        ansWorryTableView.delegate = self
+        ansWorryTableView.dataSource = self
+        
+        loadWorryData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -61,8 +84,22 @@ class UserInfoViewController: UIViewController, TagListViewDelegate {
         alertController.addAction(actionCancel)
         
         self.present(alertController, animated: true, completion: nil)
-        
-        
+    }
+    
+    @IBAction func myWorryDetailButtonTouchInside(_ sender: UIButton) {
+        if let worryViewController = storyboard?.instantiateViewController(identifier: "WorryViewStoryboard") as? WorryViewController {
+            worryViewController.title = "내고민"
+            worryViewController.loadType = .MyWorry
+            self.navigationController?.pushViewController(worryViewController, animated: true)
+        }
+    }
+    
+    @IBAction func ansWorryDetailButtonTouchInside(_ sender: UIButton) {
+        if let worryViewController = storyboard?.instantiateViewController(identifier: "WorryViewStoryboard") as? WorryViewController {
+            worryViewController.title = "답한 고민"
+            worryViewController.loadType = .AnsWorry
+            self.navigationController?.pushViewController(worryViewController, animated: true)
+        }
     }
     
     // MARK: - View setup method
@@ -101,11 +138,82 @@ class UserInfoViewController: UIViewController, TagListViewDelegate {
         }
     }
     
-    // MARK: - TagListViewDelegate Method
+    func loadWorryData() {
+        // myWorry
+        myWorryDataSource.removeAll()
+        myWorryDataSource.append(WorryDataVO(id: 0, title: "MyWorry1", body: "packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)", viewCount: 3, tags: ["a", "b", "c"], viewType: .N))
+        myWorryDataSource.append(WorryDataVO(id: 0, title: "MyWorry2", body: "packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)", viewCount: 3, tags: ["a", "b", "c"], viewType: .N))
+        myWorryDataSource.append(WorryDataVO(id: 0, title: "MyWorry3", body: "packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)", viewCount: 3, tags: ["a", "b", "c"], viewType: .N))
+        myWorryDataSource.append(WorryDataVO(id: 0, title: "MyWorry4", body: "packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)", viewCount: 3, tags: ["a", "b", "c"], viewType: .N))
+        myWorryDataSource.append(WorryDataVO(id: 0, title: "MyWorry4", body: "packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)", viewCount: 3, tags: ["a", "b", "c"], viewType: .N))
+        myWorryDataSource.append(WorryDataVO(id: 0, title: "MyWorry4", body: "packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)", viewCount: 3, tags: ["a", "b", "c"], viewType: .N))
+        myWorryDataSource.append(WorryDataVO(id: 0, title: "MyWorry4", body: "packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)", viewCount: 3, tags: ["a", "b", "c"], viewType: .N))
+        
+        
+        // ansWorry
+        ansWorryDataSource.removeAll()
+        ansWorryDataSource.append(WorryDataVO(id: 0, title: "AnsWorry1", body: "packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)", viewCount: 3, tags: ["a", "b", "c"], viewType: .N))
+        
+        myWorryTableView.reloadData()
+        ansWorryTableView.reloadData()
+    }
+
+}
+
+// MARK: - Extension and delegate
+// tableView
+
+extension UserInfoViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedVO: WorryDataVO
+        
+        if tableView == myWorryTableView {
+            print("myWorry selected row : \(indexPath.row)")
+            selectedVO = myWorryDataSource[indexPath.row]
+        } else {
+            print("ansWorry selected row : \(indexPath.row)")
+            selectedVO = ansWorryDataSource[indexPath.row]
+        }
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        if let worryDetailViewController = storyboard?.instantiateViewController(identifier: "WorryDetailStoryboard") as? WorryDetailViewController {
+            worryDetailViewController.data = selectedVO
+            self.navigationController?.pushViewController(worryDetailViewController, animated: true)
+        }
+    }
+}
+
+extension UserInfoViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if tableView == myWorryTableView {
+            return myWorryDataSource.count
+        } else {
+            return ansWorryDataSource.count
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: SimpleWorryTableViewCell.self)) as! SimpleWorryTableViewCell
+        
+        if tableView == myWorryTableView {
+            cell.simpleTitle.text = myWorryDataSource[indexPath.row].title
+        } else {
+            cell.simpleTitle.text = ansWorryDataSource[indexPath.row].title
+        }
+        
+        return cell
+    }
+    
+    
+}
+
+// taglistview
+extension UserInfoViewController: TagListViewDelegate {
     /// Push tag
     func tagPressed(_ title: String, tagView: TagView, sender: TagListView) {
         print("\(title) pushed")
-
+        
     }
     
     /// Push remove button
@@ -113,18 +221,4 @@ class UserInfoViewController: UIViewController, TagListViewDelegate {
         print("\(title) remove button pushed")
         sender.removeTagView(tagView)
     }
-
-    
-    
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
