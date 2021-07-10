@@ -49,7 +49,9 @@ class WorryDetailViewController: UIViewController {
             setUpOXData()
         }
         
-        
+        // update View
+        self.titleLable.text = data?.title
+        self.bodyLable.text = data?.body
     }
     
     // MARK: - SetUp
@@ -99,20 +101,6 @@ class WorryDetailViewController: UIViewController {
 
 
 extension WorryDetailViewController {
-//    func setContainerViewController(storyboard: String, viewControllerId: String) -> UIViewController {
-//
-//        let storyboard = self.storyboard!
-//        let VC = storyboard.instantiateViewController(withIdentifier: viewControllerId)
-//        self.addChild(VC)
-//
-////        VC.view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-////        VC.view.frame = questionContentView.bounds
-//        questionContentView.addSubview((VC.view)!)
-//        VC.didMove(toParent: self)
-//
-//        return VC
-//    }
-    
     func loadQuestionTypeView(type: ViewType) {
         if type == .OX {
             questionContentView.isHidden = false
