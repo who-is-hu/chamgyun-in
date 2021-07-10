@@ -1,6 +1,7 @@
 package com.jh.chamgyunin;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Disabled;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -13,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 @SpringBootTest
 @AutoConfigureMockMvc
 @Transactional
-public class IntergrationTest {
+public class IntegrationTest {
     @Autowired protected MockMvc mvc;
     @Autowired protected ObjectMapper objectMapper;
     protected MockHttpSession session = new MockHttpSession();

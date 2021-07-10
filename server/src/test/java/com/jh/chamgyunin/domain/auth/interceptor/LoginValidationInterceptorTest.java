@@ -1,6 +1,6 @@
 package com.jh.chamgyunin.domain.auth.interceptor;
 
-import com.jh.chamgyunin.IntergrationTest;
+import com.jh.chamgyunin.IntegrationTest;
 import com.jh.chamgyunin.domain.auth.service.SessionKey;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -25,7 +25,7 @@ class TestController {
     }
 }
 
-public class LoginValidationInterceptorTest extends IntergrationTest {
+public class LoginValidationInterceptorTest extends IntegrationTest {
 
     private ResultActions requestTestController() throws Exception{
         return mvc.perform(get("/test/login-validation")
