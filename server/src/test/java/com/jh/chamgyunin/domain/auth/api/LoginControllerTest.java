@@ -1,6 +1,6 @@
 package com.jh.chamgyunin.domain.auth.api;
 
-import com.jh.chamgyunin.IntergrationTest;
+import com.jh.chamgyunin.IntegrationTest;
 import com.jh.chamgyunin.domain.auth.dto.SocialLoginRequest;
 import com.jh.chamgyunin.domain.auth.dto.UserProvider;
 import org.junit.jupiter.api.Disabled;
@@ -13,7 +13,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-class LoginControllerTest extends IntergrationTest {
+class LoginControllerTest extends IntegrationTest {
 
     public ResultActions requestSocialLogin(SocialLoginRequest dto) throws Exception {
         return mvc.perform(

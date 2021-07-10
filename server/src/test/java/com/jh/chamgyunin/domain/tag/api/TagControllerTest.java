@@ -1,12 +1,14 @@
 package com.jh.chamgyunin.domain.tag.api;
 
-import com.jh.chamgyunin.IntergrationTest;
+import com.jh.chamgyunin.IntegrationTest;
 import com.jh.chamgyunin.domain.auth.service.SessionKey;
 import com.jh.chamgyunin.domain.tag.dao.TagRepository;
 import com.jh.chamgyunin.domain.tag.dto.UpdateInterestTagRequest;
 import com.jh.chamgyunin.domain.tag.model.Tag;
 import com.jh.chamgyunin.domain.user.model.User;
 import com.jh.chamgyunin.domain.user.service.UserService;
+import com.jh.chamgyunin.setup.TagSetUp;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-class TagControllerTest extends IntergrationTest {
+class TagControllerTest extends IntegrationTest {
 
     @Autowired
     private TagRepository tagRepository;
@@ -32,21 +34,24 @@ class TagControllerTest extends IntergrationTest {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private TagSetUp tagSetUp;
+
     @BeforeEach
     public void setUp() {
         session.setAttribute(SessionKey.LOGIN_USER_ID, 2L);
-        List<Tag> tags = new ArrayList<>(Arrays.asList(
-                new Tag(1L, "life"),
-                new Tag(2L, "love"),
-                new Tag(3L, "food"),
-                new Tag(4L, "my1"),
-                new Tag(5L, "my2")));
+    }
 
-        tagRepository.saveAll(tags);
+    @AfterEach
+    public void cleanUp() {
+        session.clearAttributes();
     }
 
     @Test
     void 키워드없이_태그검색() throws Exception{
+        //given
+        tagSetUp.save();
+
         //when
         ResultActions resultActions = mvc.perform(get("/tag")
                 .param("page","0")
@@ -64,6 +69,7 @@ class TagControllerTest extends IntergrationTest {
     void 키워드_태그검색() throws Exception{
         //given
         final String searchKey = "my";
+        tagSetUp.save();
 
         //when
         ResultActions resultActions = mvc.perform(get("/tag")
@@ -81,6 +87,10 @@ class TagControllerTest extends IntergrationTest {
     @Test
     void 내_관심사_태그_변경() throws Exception{
         //given
+        tagSetUp.save();
+        tagRepository.findAll().stream().forEach((tag)->{
+            System.out.printf("%d %s\n", tag.getId(), tag.getName());
+        });
         ArrayList<String> interest = new ArrayList<>(Arrays.asList(
                 "boxing", // new tag
                 "food"    // exist tag

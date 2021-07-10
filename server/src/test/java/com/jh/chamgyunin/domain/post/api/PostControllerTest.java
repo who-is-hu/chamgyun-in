@@ -1,6 +1,6 @@
 package com.jh.chamgyunin.domain.post.api;
 
-import com.jh.chamgyunin.IntergrationTest;
+import com.jh.chamgyunin.IntegrationTest;
 import com.jh.chamgyunin.domain.auth.service.SessionKey;
 import com.jh.chamgyunin.domain.post.dto.PostCreateRequest;
 import com.jh.chamgyunin.domain.post.service.PostService;
@@ -8,8 +8,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
 
@@ -20,7 +18,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-class PostControllerTest extends IntergrationTest {
+class PostControllerTest extends IntegrationTest {
 
     @Autowired
     private PostService postService;
