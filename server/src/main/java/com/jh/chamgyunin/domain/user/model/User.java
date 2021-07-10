@@ -1,11 +1,14 @@
 package com.jh.chamgyunin.domain.user.model;
 
 import com.jh.chamgyunin.domain.auth.dto.UserProvider;
+import com.jh.chamgyunin.domain.tag.model.Tag;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Entity
@@ -28,6 +31,11 @@ public class User {
     @Enumerated(EnumType.STRING)
     @Column(name = "provider")
     private UserProvider provider;
+
+    @Setter
+    @JoinColumn(name = "tag_id")
+    @ManyToMany
+    private List<Tag> interestTags = new ArrayList<>();
 
     @Column(name = "created_at")
     @CreationTimestamp

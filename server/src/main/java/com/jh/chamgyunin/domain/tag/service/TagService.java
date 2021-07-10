@@ -1,6 +1,7 @@
 package com.jh.chamgyunin.domain.tag.service;
 
 import com.jh.chamgyunin.domain.tag.dao.TagRepository;
+import com.jh.chamgyunin.domain.tag.dto.UpdateInterestTagRequest;
 import com.jh.chamgyunin.domain.tag.model.Tag;
 import com.jh.chamgyunin.domain.user.model.User;
 import com.jh.chamgyunin.domain.user.service.UserService;
@@ -22,19 +23,12 @@ public class TagService {
     private final TagRepository tagRepository;
     private final UserService userService;
 
-    /*
-    * tags 중에서 현재 존재하지 않는 tag만 저장한다.
-    * return : 저장된 tag
-    * */
-    public List<Tag> insertTag(List<Tag> tags) {
-        ArrayList<Tag> savedTags = new ArrayList<>();
-        for (Tag tag : tags) {
-            Optional<Tag> existTag = tagRepository.findByName(tag.getName());
-            if (!existTag.isPresent()) {
-                savedTags.add(tagRepository.save(tag));
-            }
+    public Tag insertTag(Tag tag) {
+        Optional<Tag> existTag = tagRepository.findByName(tag.getName());
+        if (!existTag.isPresent()) {
+            return tagRepository.save(tag);
         }
-        return savedTags;
+        return existTag.get();
     }
 
     public Page<Tag> findAllByNameStartingWith(final String key, final Pageable pageable) {
@@ -46,9 +40,15 @@ public class TagService {
         return user.getInterestTags();
     }
 
-    public List<Tag> setMyInterestTag(final Long userId, List<Tag> updatedTags) {
+    public List<Tag> setMyInterestTag(final Long userId, List<Tag> interestTags) {
         User user = userService.findById(userId);
-        user.setInterestTags(updatedTags);
+
+        List<Tag> updatedInterest = new ArrayList<>();
+        for (Tag tag : interestTags) {
+            updatedInterest.add(insertTag(tag));
+        }
+        user.setInterestTags(updatedInterest);
+
         return user.getInterestTags();
     }
 }
