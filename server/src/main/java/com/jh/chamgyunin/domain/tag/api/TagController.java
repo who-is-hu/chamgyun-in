@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,7 +20,8 @@ public class TagController {
 
     private final TagService tagService;
 
-    public ResponseEntity<Page<Tag>> searchTags(@PageableDefault(size = 10, page = 0) Pageable pageable, @RequestParam(name = "key") String key) {
+    @GetMapping
+    public ResponseEntity<Page<Tag>> searchTags(@PageableDefault(size = 10, page = 0) Pageable pageable, @RequestParam(name = "key", defaultValue = "") String key) {
         Page<Tag> tags = tagService.findAllByNameStartingWith(key, pageable);
         return new ResponseEntity<>(tags, HttpStatus.OK);
     }
