@@ -46,12 +46,15 @@ class AddWorryViewController: UIViewController {
         
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setUpWorryBody()
         segControlView.addTarget(self, action: #selector(segValueChange(_:)), for: .valueChanged)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
 
     // MARK: - Navigation
@@ -105,4 +108,3 @@ extension AddWorryViewController: UITextViewDelegate {
         }
     }
 }
-

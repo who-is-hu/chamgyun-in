@@ -24,6 +24,12 @@ class NQueryContainerViewController: UIViewController {
         self.dataSource.append(answer)
         self.tableView.reloadData()
         self.answerTextView.text = nil
+        
+        self.view.endEditing(true)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
     
     
@@ -31,6 +37,8 @@ class NQueryContainerViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.answerTextView.delegate = self
+        
         let addWorryCellNib: UINib = UINib(nibName: String(describing: AddWorryTableViewCell.self), bundle: nil)
         
         tableView.register(addWorryCellNib, forCellReuseIdentifier: "addWorryCellNib")
@@ -79,4 +87,11 @@ extension NQueryContainerViewController: UITableViewDataSource {
         }
     }
     
+}
+
+// textfield
+extension NQueryContainerViewController : UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+    }
 }
