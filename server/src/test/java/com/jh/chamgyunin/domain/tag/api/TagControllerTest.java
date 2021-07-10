@@ -96,7 +96,7 @@ class TagControllerTest extends IntergrationTest {
                 .andExpect(jsonPath("$[0].name").value("boxing"))
                 .andExpect(jsonPath("$[0].id").value("6")) //new tag
                 .andExpect(jsonPath("$[1].name").value("food"))
-                .andExpect(jsonPath("$[0].id").value("3")); //exist tag
+                .andExpect(jsonPath("$[1].id").value("3")); //exist tag
     }
 
     @Test
