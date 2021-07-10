@@ -43,6 +43,7 @@ public class ErrorResponse {
         return new ErrorResponse(errorCode, FieldError.of(bindingResult));
     }
 
+    @Getter
     public static class FieldError {
         private String field;
         private String rejectedValue;

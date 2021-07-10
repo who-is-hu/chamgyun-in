@@ -1,13 +1,14 @@
 package com.jh.chamgyunin.domain.tag.api;
 
 import com.jh.chamgyunin.IntergrationTest;
+import com.jh.chamgyunin.domain.auth.service.SessionKey;
 import com.jh.chamgyunin.domain.tag.dao.TagRepository;
+import com.jh.chamgyunin.domain.tag.dto.UpdateInterestTagRequest;
 import com.jh.chamgyunin.domain.tag.model.Tag;
-import org.aspectj.lang.annotation.Before;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
 
 import java.util.ArrayList;
@@ -15,8 +16,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -28,6 +29,7 @@ class TagControllerTest extends IntergrationTest {
 
     @BeforeEach
     public void setUp() {
+        session.setAttribute(SessionKey.LOGIN_USER_ID, 2L);
         List<Tag> tags = new ArrayList<>(Arrays.asList(
                 new Tag(1L, "life"),
                 new Tag(2L, "love"),
@@ -69,5 +71,72 @@ class TagControllerTest extends IntergrationTest {
         resultActions
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(jsonPath("$.content", hasSize(2)));
+    }
+
+    @Test
+    void 내_관심사_태그_변경() throws Exception{
+        //given
+        ArrayList<String> interest = new ArrayList<>(Arrays.asList(
+                "boxing", // new tag
+                "food"    // exist tag
+        ));
+
+        //when
+        ResultActions resultActions = requestUpdateInterest(interest);
+
+        //then
+        resultActions
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(jsonPath("$", hasSize(2)))
+                .andExpect(jsonPath("$[0].name").value("boxing"))
+                .andExpect(jsonPath("$[0].id").value("6")) //new tag
+                .andExpect(jsonPath("$[1].name").value("food"))
+                .andExpect(jsonPath("$[0].id").value("3")); //exist tag
+    }
+
+    @Test
+    void 내_관심사_태그_초기화() throws Exception {
+        //given
+        ArrayList<String> interest = new ArrayList<>(Arrays.asList());
+
+        //when
+        ResultActions resultActions = requestUpdateInterest(interest);
+
+        //then
+        resultActions
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(jsonPath("$", hasSize(0)));
+    }
+
+    @Test
+    void 내_관심사_태그_변경_실패() throws Exception {
+        //given
+        ArrayList<String> interest = new ArrayList<>(Arrays.asList(
+                "food1",
+                "food2",
+                "food3",
+                "food4",
+                "food5",
+                "food6" //over
+        ));
+
+        //when
+        ResultActions resultActions = requestUpdateInterest(interest);
+
+        //then
+        resultActions
+                .andExpect(status().is4xxClientError());
+    }
+
+    private ResultActions requestUpdateInterest(List<String> interest) throws Exception {
+        UpdateInterestTagRequest dto = UpdateInterestTagRequest.builder()
+                .tagNames(interest)
+                .build();
+
+        return mvc.perform(patch("/tag/interest")
+                .session(session)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(dto)))
+                .andDo(print());
     }
 }
