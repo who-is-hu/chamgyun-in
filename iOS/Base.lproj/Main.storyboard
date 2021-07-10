@@ -372,12 +372,13 @@
                                                     <constraint firstItem="leW-Eb-C09" firstAttribute="top" secondItem="5SN-I1-zGf" secondAttribute="top" constant="8" id="bXg-ks-aEy"/>
                                                 </constraints>
                                             </view>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="VOJ-OO-v5U" userLabel="MyWorryTableView">
-                                                <rect key="frame" x="20" y="348" width="374" height="200"/>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="VOJ-OO-v5U" userLabel="MyWorryTableView">
+                                                <rect key="frame" x="0.0" y="348" width="414" height="200"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="200" id="doX-J1-CXq"/>
                                                 </constraints>
+                                                <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                                             </tableView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g8s-0u-fQX" userLabel="MyWorryView">
                                                 <rect key="frame" x="15" y="564" width="384" height="38"/>
@@ -409,24 +410,25 @@
                                                     <constraint firstItem="vh7-Jk-Yyv" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="eGw-JU-ReH" secondAttribute="trailing" constant="10" id="qPS-5K-9Xm"/>
                                                 </constraints>
                                             </view>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="KqH-Os-8zX" userLabel="SolveWorryTableView">
-                                                <rect key="frame" x="20" y="610" width="374" height="200"/>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="KqH-Os-8zX" userLabel="SolveWorryTableView">
+                                                <rect key="frame" x="0.0" y="610" width="414" height="200"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="200" id="4cO-cu-zoQ"/>
                                                 </constraints>
+                                                <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                                             </tableView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstItem="5SN-I1-zGf" firstAttribute="top" secondItem="Uwz-4x-2ru" secondAttribute="bottom" constant="19" id="5ay-oh-ZLt"/>
-                                            <constraint firstAttribute="trailing" secondItem="KqH-Os-8zX" secondAttribute="trailing" constant="20" symbolic="YES" id="6Hu-Ed-1JC"/>
+                                            <constraint firstAttribute="trailing" secondItem="KqH-Os-8zX" secondAttribute="trailing" id="6Hu-Ed-1JC"/>
                                             <constraint firstAttribute="trailing" secondItem="Uwz-4x-2ru" secondAttribute="trailing" constant="15" id="98d-WY-VXy"/>
                                             <constraint firstItem="crH-i0-Ovg" firstAttribute="leading" secondItem="UqR-Zu-Agq" secondAttribute="leading" constant="10" id="9NH-Wv-7ga"/>
                                             <constraint firstItem="crH-i0-Ovg" firstAttribute="top" secondItem="UqR-Zu-Agq" secondAttribute="top" constant="10" id="DYM-Q7-7mH"/>
                                             <constraint firstItem="s67-k0-7Qg" firstAttribute="leading" secondItem="UqR-Zu-Agq" secondAttribute="leading" constant="20" id="EnV-vN-hEK"/>
-                                            <constraint firstItem="KqH-Os-8zX" firstAttribute="leading" secondItem="UqR-Zu-Agq" secondAttribute="leading" constant="20" symbolic="YES" id="Na6-sS-uLu"/>
-                                            <constraint firstAttribute="trailing" secondItem="VOJ-OO-v5U" secondAttribute="trailing" constant="20" symbolic="YES" id="P3L-gz-RwF"/>
+                                            <constraint firstItem="KqH-Os-8zX" firstAttribute="leading" secondItem="UqR-Zu-Agq" secondAttribute="leading" id="Na6-sS-uLu"/>
+                                            <constraint firstAttribute="trailing" secondItem="VOJ-OO-v5U" secondAttribute="trailing" id="P3L-gz-RwF"/>
                                             <constraint firstItem="Uwz-4x-2ru" firstAttribute="leading" secondItem="UqR-Zu-Agq" secondAttribute="leading" constant="15" id="RXT-Sj-RS0"/>
                                             <constraint firstAttribute="bottom" secondItem="KqH-Os-8zX" secondAttribute="bottom" constant="10" id="Ucx-8U-k2Z"/>
                                             <constraint firstItem="KqH-Os-8zX" firstAttribute="top" secondItem="g8s-0u-fQX" secondAttribute="bottom" constant="8" symbolic="YES" id="WYI-R7-us3"/>
@@ -436,7 +438,7 @@
                                             <constraint firstAttribute="trailing" secondItem="s67-k0-7Qg" secondAttribute="trailing" constant="20" id="bF3-L2-dPH"/>
                                             <constraint firstAttribute="trailing" secondItem="crH-i0-Ovg" secondAttribute="trailing" constant="10" id="fOe-KQ-HZD"/>
                                             <constraint firstAttribute="trailing" secondItem="5SN-I1-zGf" secondAttribute="trailing" constant="15" id="fiJ-OY-qmS"/>
-                                            <constraint firstItem="VOJ-OO-v5U" firstAttribute="leading" secondItem="UqR-Zu-Agq" secondAttribute="leading" constant="20" symbolic="YES" id="gtH-lG-gnq"/>
+                                            <constraint firstItem="VOJ-OO-v5U" firstAttribute="leading" secondItem="UqR-Zu-Agq" secondAttribute="leading" id="gtH-lG-gnq"/>
                                             <constraint firstAttribute="trailing" secondItem="g8s-0u-fQX" secondAttribute="trailing" constant="15" id="hcb-np-91W"/>
                                             <constraint firstItem="s67-k0-7Qg" firstAttribute="top" secondItem="crH-i0-Ovg" secondAttribute="bottom" constant="15" id="mYP-qp-uLN"/>
                                             <constraint firstItem="g8s-0u-fQX" firstAttribute="leading" secondItem="UqR-Zu-Agq" secondAttribute="leading" constant="15" id="nRJ-Sm-SKt"/>
@@ -469,11 +471,14 @@
                     </tabBarItem>
                     <navigationItem key="navigationItem" title="더보기" id="VxE-vq-Zs0"/>
                     <connections>
+                        <outlet property="ansWorryTableView" destination="KqH-Os-8zX" id="RGZ-oW-CB7"/>
+                        <outlet property="myWorryTableView" destination="VOJ-OO-v5U" id="MjY-T5-xJm"/>
                         <outlet property="pointView" destination="s67-k0-7Qg" id="d9z-Fu-P5z"/>
                         <outlet property="tagListView" destination="Kac-Zl-0Z6" id="whv-tN-Fee"/>
                         <outlet property="userEmailView" destination="M1A-i0-f3W" id="Bv3-9z-xJQ"/>
                         <outlet property="userNameView" destination="1RL-H6-Zxb" id="0iY-kz-HFB"/>
                         <outlet property="userProfileImageView" destination="4f7-U8-BEZ" id="ffG-nA-7d6"/>
+                        <segue destination="BE8-Jd-gvF" kind="show" id="rEB-NA-FeD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cI9-YU-DHl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -518,7 +523,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="kDv-ZR-Dzj">
                                 <rect key="frame" x="10" y="66" width="394" height="34"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="태그입력" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zGu-Gw-rKg">
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zGu-Gw-rKg">
                                         <rect key="frame" x="0.0" y="0.0" width="359" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -557,7 +562,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Mt-FM-I66" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5128.985507246377" y="774.77678571428567"/>
+            <point key="canvasLocation" x="5129" y="1508"/>
         </scene>
         <!--Custom Tab Bar View Controller-->
         <scene sceneID="bcC-xk-aAh">
@@ -1102,7 +1107,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZFI-GB-dQm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5129" y="-1771"/>
+            <point key="canvasLocation" x="5129" y="-1810"/>
         </scene>
         <!--Hash Group Worry View Controller-->
         <scene sceneID="6Oh-cF-qEm">
@@ -1143,7 +1148,7 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="mkX-5h-zWB"/>
+        <segue reference="rEB-NA-FeD"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="appleid_button" width="300" height="45"/>
