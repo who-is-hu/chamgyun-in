@@ -5,6 +5,8 @@ import com.jh.chamgyunin.domain.auth.service.SessionKey;
 import com.jh.chamgyunin.domain.tag.dao.TagRepository;
 import com.jh.chamgyunin.domain.tag.dto.UpdateInterestTagRequest;
 import com.jh.chamgyunin.domain.tag.model.Tag;
+import com.jh.chamgyunin.domain.user.model.User;
+import com.jh.chamgyunin.domain.user.service.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,9 @@ class TagControllerTest extends IntergrationTest {
 
     @Autowired
     private TagRepository tagRepository;
+
+    @Autowired
+    private UserService userService;
 
     @BeforeEach
     public void setUp() {
@@ -126,6 +131,26 @@ class TagControllerTest extends IntergrationTest {
         //then
         resultActions
                 .andExpect(status().is4xxClientError());
+    }
+
+    @Test
+    void 내_관심사_조회() throws Exception {
+        //given
+        List<Tag> interest = new ArrayList<>(Arrays.asList(
+                Tag.of("basketball"),
+                Tag.of("baseball")
+        ));
+        User user = userService.findById(2L);
+        user.setInterestTags(interest);
+
+        //when
+        ResultActions resultActions = mvc.perform(get("/tag/interest")
+                .session(session)).andDo(print());
+
+        //then
+        resultActions
+                .andExpect(jsonPath("$[0].name").value("basketball"))
+                .andExpect(jsonPath("$[1].name").value("baseball"));
     }
 
     private ResultActions requestUpdateInterest(List<String> interest) throws Exception {
