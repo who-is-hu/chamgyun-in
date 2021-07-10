@@ -8,15 +8,6 @@
 import UIKit
 import TagListView
 
-struct WorryDataVO {
-    let id: Int
-    let title: String
-    let body: String
-    let viewCount: Int
-    let tags: [String]
-    let viewType: WorryDetailViewController.ViewType
-}
-
 class PopularityViewController: UIViewController {
     
     var dataSource: [WorryDataVO] = []
