@@ -360,6 +360,9 @@
                                                         <state key="normal" title="자세히">
                                                             <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="myWorryDetailButtonTouchInside:" destination="yXU-0X-rve" eventType="touchUpInside" id="h74-mG-hBt"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -397,6 +400,9 @@
                                                         <state key="normal" title="자세히">
                                                             <color key="titleColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="ansWorryDetailButtonTouchInside:" destination="yXU-0X-rve" eventType="touchUpInside" id="EzW-B5-7oN"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -479,11 +485,44 @@
                         <outlet property="userNameView" destination="1RL-H6-Zxb" id="0iY-kz-HFB"/>
                         <outlet property="userProfileImageView" destination="4f7-U8-BEZ" id="ffG-nA-7d6"/>
                         <segue destination="BE8-Jd-gvF" kind="show" id="rEB-NA-FeD"/>
+                        <segue destination="Pxr-uB-snB" kind="show" id="nM2-df-ze0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cI9-YU-DHl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4213.04347826087" y="774.77678571428567"/>
+            <point key="canvasLocation" x="4212" y="775"/>
+        </scene>
+        <!--Worry View Controller-->
+        <scene sceneID="pI6-G4-bgl">
+            <objects>
+                <viewController storyboardIdentifier="WorryViewStoryboard" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Pxr-uB-snB" customClass="WorryViewController" customModule="iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="SBh-ad-1oj">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gAj-WK-Ad1">
+                                <rect key="frame" x="0.0" y="56" width="414" height="703"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="CqJ-5V-N5Z"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="CqJ-5V-N5Z" firstAttribute="trailing" secondItem="gAj-WK-Ad1" secondAttribute="trailing" id="TbT-ex-WQh"/>
+                            <constraint firstItem="CqJ-5V-N5Z" firstAttribute="bottom" secondItem="gAj-WK-Ad1" secondAttribute="bottom" id="a3Y-d1-Dg4"/>
+                            <constraint firstItem="gAj-WK-Ad1" firstAttribute="leading" secondItem="CqJ-5V-N5Z" secondAttribute="leading" id="gur-Y6-3ch"/>
+                            <constraint firstItem="gAj-WK-Ad1" firstAttribute="top" secondItem="CqJ-5V-N5Z" secondAttribute="top" id="nen-SF-dKB"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="9Xe-mQ-eyj"/>
+                    <connections>
+                        <outlet property="worryTableView" destination="gAj-WK-Ad1" id="W49-jY-nC0"/>
+                        <segue destination="BE8-Jd-gvF" kind="show" id="oKj-p1-xgu"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rgr-IH-DoJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5129" y="1082"/>
         </scene>
         <!--내 태그-->
         <scene sceneID="FZt-o7-eC9">
@@ -562,7 +601,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Mt-FM-I66" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5129" y="1508"/>
+            <point key="canvasLocation" x="4213" y="1517"/>
         </scene>
         <!--Custom Tab Bar View Controller-->
         <scene sceneID="bcC-xk-aAh">
