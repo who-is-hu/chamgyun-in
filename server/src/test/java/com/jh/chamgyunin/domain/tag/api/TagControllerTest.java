@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -104,9 +105,7 @@ class TagControllerTest extends IntegrationTest {
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(jsonPath("$", hasSize(2)))
                 .andExpect(jsonPath("$[0].name").value("boxing"))
-                .andExpect(jsonPath("$[0].id").value("6")) //new tag
-                .andExpect(jsonPath("$[1].name").value("food"))
-                .andExpect(jsonPath("$[1].id").value("3")); //exist tag
+                .andExpect(jsonPath("$[1].name").value("food"));
     }
 
     @Test
