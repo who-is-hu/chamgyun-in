@@ -1,11 +1,8 @@
+spring:
+  profiles:
+    active: local
+
 server:
   port: 8888
 
-spring:
-  h2:
-    console:
-      enabled: true
-  jpa:
-    hibernate:
-      ddl-auto: create
-    defer-datasource-initialization: true
+
