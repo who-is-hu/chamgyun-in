@@ -29,7 +29,6 @@ class AddWorryViewController: UIViewController {
     }
     
     @IBAction func addWorry(_ sender: UIButton) {
-        print("asd")
         if segControlView.selectedSegmentIndex == 0 {
             // OX
             if let text = oxContainerViewController?.queryTextView.text {
@@ -44,6 +43,16 @@ class AddWorryViewController: UIViewController {
             print("asd")
         }
         
+        guard let title = self.worryTitle.text, let body = self.worryBody.text else {
+            return
+        }
+        
+        let worryData: [String: Any] = ["title": title, "body": body]
+        APIRequest().request(url: APIRequest.worryPostUrl, method: "POST", voType: AddWorryResponseVO.self, param: worryData) { success, data in
+            if success {
+                print(data)
+            }
+        }
     }
     
     override func viewDidLoad() {

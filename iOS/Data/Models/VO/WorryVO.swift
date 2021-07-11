@@ -7,12 +7,12 @@
 
 import Foundation
 
-struct AddWorryVO {
+struct AddWorryVO : Codable {
     let title: String
     let body: String
 }
 
-struct AddWorryResponseVO {
+struct AddWorryResponseVO : Codable {
     let id: Int
     let title: String
     let body: String
