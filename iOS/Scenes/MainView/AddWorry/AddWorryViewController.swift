@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import TagListView
 
 class AddWorryViewController: UIViewController {
 
@@ -21,11 +22,24 @@ class AddWorryViewController: UIViewController {
     @IBOutlet weak var segControlView: UISegmentedControl!
     @IBOutlet weak var oxQuestionContainer: UIView!
     @IBOutlet weak var nQuestionContaioner: UIView!
+    @IBOutlet weak var tagListView: TagListView!
+    @IBOutlet weak var addTagText: UITextField!
     
     // MARk: - IBAction
     @IBAction func cancel(_ sender: UIButton) {
 //        self.dismiss(animated: true, completion: nil)
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func addTagTouchInside(_ sender: UIButton) {
+        if let text = addTagText.text {
+            if !text.isEmpty {
+                tagListView.addTag("#\(text)")
+                addTagText.text = nil
+            }
+        }
+        
+        self.view.endEditing(true)
     }
     
     @IBAction func addWorry(_ sender: UIButton) {
@@ -73,6 +87,8 @@ class AddWorryViewController: UIViewController {
 
         setUpWorryBody()
         segControlView.addTarget(self, action: #selector(segValueChange(_:)), for: .valueChanged)
+        
+        setUpTagListView()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -100,6 +116,11 @@ class AddWorryViewController: UIViewController {
         worryBody.delegate = self
     }
     
+    func setUpTagListView() {
+        tagListView.delegate = self
+        tagListView.textFont = UIFont.boldSystemFont(ofSize: 13)
+    }
+    
     // MARK: - Objc
     @objc func segValueChange(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
@@ -113,7 +134,7 @@ class AddWorryViewController: UIViewController {
     }
 }
 
-// MARK: - Delegate
+// MARK: - Extension and Delegate
 /// UITextView Placeholder
 extension AddWorryViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
@@ -128,5 +149,12 @@ extension AddWorryViewController: UITextViewDelegate {
             worryBody.text = placeholder
             worryBody.textColor = .lightGray
         }
+    }
+}
+
+// taglistview
+extension AddWorryViewController: TagListViewDelegate {
+    func tagRemoveButtonPressed(_ title: String, tagView: TagView, sender: TagListView) {
+        tagListView.removeTag(title)
     }
 }

@@ -35,10 +35,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c5S-rL-BY1" userLabel="TagListView" customClass="TagListView" customModule="TagListView">
-                        <rect key="frame" x="20" y="76" width="374" height="34"/>
-                        <constraints>
-                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="34" id="iql-Ve-mXY"/>
-                        </constraints>
+                        <rect key="frame" x="20" y="76" width="374" height="27"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="paddingY">
                                 <real key="value" value="10"/>
@@ -83,16 +80,16 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="O7V-9K-1TQ">
-                        <rect key="frame" x="305" y="118" width="89" height="13"/>
+                        <rect key="frame" x="305" y="111" width="89" height="20"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="조회수 3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ebe-Lh-mzk">
-                                <rect key="frame" x="0.0" y="0.0" width="49" height="13"/>
+                                <rect key="frame" x="0.0" y="0.0" width="49" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" systemColor="systemGrayColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tFc-mM-Rhv">
-                                <rect key="frame" x="59" y="0.0" width="30" height="13"/>
+                                <rect key="frame" x="59" y="0.0" width="30" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="tintColor" systemColor="systemRedColor"/>
                                 <state key="normal" title="3" image="hand.thumbsup.fill" catalog="system">
@@ -127,11 +124,6 @@
             <point key="canvasLocation" x="137.68115942028987" y="82.700892857142847"/>
         </tableViewCell>
     </objects>
-    <designables>
-        <designable name="c5S-rL-BY1">
-            <size key="intrinsicContentSize" width="374" height="32"/>
-        </designable>
-    </designables>
     <resources>
         <image name="hand.thumbsup.fill" catalog="system" width="128" height="121"/>
         <systemColor name="labelColor">
