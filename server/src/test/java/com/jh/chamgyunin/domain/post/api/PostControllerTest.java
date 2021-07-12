@@ -4,12 +4,17 @@ import com.jh.chamgyunin.IntegrationTest;
 import com.jh.chamgyunin.domain.auth.service.SessionKey;
 import com.jh.chamgyunin.domain.post.dto.PostCreateRequest;
 import com.jh.chamgyunin.domain.post.service.PostService;
+import com.jh.chamgyunin.domain.tag.model.Tag;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -36,7 +41,8 @@ class PostControllerTest extends IntegrationTest {
     @Test
     void 게시글_생성_성공() throws Exception{
         //given
-        PostCreateRequest dto = createPostDto("test", "testbody");
+        PostCreateRequest dto = createPostDto("test", "testbody",
+                new ArrayList<>(Arrays.asList("love", "life", "work")));
 
         //when
         ResultActions resultActions = requestPostCreate(dto);
@@ -45,14 +51,33 @@ class PostControllerTest extends IntegrationTest {
         resultActions
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(jsonPath("$.title").value(dto.getTitle()))
-                .andExpect(jsonPath("$.body").value(dto.getBody()));
+                .andExpect(jsonPath("$.body").value(dto.getBody()))
+                .andExpect(jsonPath("$.tag[0].name").value("love"))
+                .andExpect(jsonPath("$.tag[1].name").value("life"))
+                .andExpect(jsonPath("$.tag[2].name").value("work"))
+        ;
+    }
+
+    @Test
+    void 게시글_생성_실패() throws Exception{
+        //given
+        PostCreateRequest dto = createPostDto("test", "testbody",
+                new ArrayList<>(Arrays.asList("love", "life", "work", "food", "sport", "overflow"))); //5개 초과
+
+        //when
+        ResultActions resultActions = requestPostCreate(dto);
+
+        //then
+        resultActions
+                .andExpect(status().is4xxClientError())
+        ;
     }
 
     @Test
     void 내_게시글_조회_성공() throws Exception {
         //given
         for (int i = 1; i <= 10; i++) {
-            PostCreateRequest dto = createPostDto("title" + i, "body" + i);
+            PostCreateRequest dto = createPostDto("title" + i, "body" + i, new ArrayList<>());
             postService.create(2L,dto);
         }
 
@@ -70,10 +95,11 @@ class PostControllerTest extends IntegrationTest {
                 ;
     }
 
-    private PostCreateRequest createPostDto(final String title, final String body) {
+    private PostCreateRequest createPostDto(final String title, final String body, final List<String> tagNames) {
         return PostCreateRequest.builder()
                 .title(title)
                 .body(body)
+                .tagNames(tagNames)
                 .build();
     }
 

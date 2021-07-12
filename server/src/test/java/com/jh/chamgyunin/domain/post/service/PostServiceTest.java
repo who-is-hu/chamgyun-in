@@ -6,6 +6,8 @@ import com.jh.chamgyunin.domain.post.dao.PostRepository;
 import com.jh.chamgyunin.domain.post.dto.PostCreateRequest;
 import com.jh.chamgyunin.domain.post.exception.PostNotFoundException;
 import com.jh.chamgyunin.domain.post.model.Post;
+import com.jh.chamgyunin.domain.tag.model.Tag;
+import com.jh.chamgyunin.domain.tag.service.TagService;
 import com.jh.chamgyunin.domain.user.model.User;
 import com.jh.chamgyunin.domain.user.service.UserService;
 import org.assertj.core.api.Assertions;
@@ -20,6 +22,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -33,9 +36,10 @@ class PostServiceTest extends MockTest {
 
     @Mock
     private PostRepository postRepository;
-
     @Mock
     private UserService userService;
+    @Mock
+    private TagService tagService;
 
     private User user;
 
@@ -47,13 +51,20 @@ class PostServiceTest extends MockTest {
     @Test
     public void 고민게시글_게시_성공(){
         //given
+        List<String> tagNames = new ArrayList<>(Arrays.asList("love", "life", "work"));
         PostCreateRequest dto = PostCreateRequest.builder()
                 .title("test worry post title")
                 .body("test post body")
+                .tagNames(tagNames)
                 .build();
         Post post = dto.toEntity(user);
+        post.setTag(Tag.of(tagNames));
 
         given(userService.findById(any())).willReturn(user);
+        given(tagService.insertTag(any()))
+                .willReturn(Tag.of("love"))
+                .willReturn(Tag.of("life"))
+                .willReturn(Tag.of("work"));
         given(postRepository.save(any())).willReturn(post);
 
         //when
