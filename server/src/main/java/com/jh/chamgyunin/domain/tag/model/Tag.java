@@ -30,10 +30,10 @@ public class Tag {
     }
 
     public static Tag of(final String name) {
-        return new Tag(name);
+        return new Tag(name.toLowerCase());
     }
 
     public static List<Tag> of(final List<String> names) {
-        return names.stream().map(name -> Tag.of(name)).collect(Collectors.toList());
+        return names.stream().map(name -> Tag.of(name.toLowerCase())).collect(Collectors.toList());
     }
 }
