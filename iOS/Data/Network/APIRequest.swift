@@ -8,10 +8,12 @@
 import UIKit
 
 class APIRequest {
-    // with nobody
     private let baseUrl: String = "http://118.67.131.182:8888"
+    
     static let authSignInUrl: String = "/auth/social/login"
+    
     static let worryPostUrl: String = "/post"
+    static let tagGetPatchUrl: String = "/tag/interest"
     
     func requestGet<T: Codable>(url: String, voType: T.Type, completionHandler: @escaping (Bool, Any) -> Void) {
         guard let url = URL(string: "\(baseUrl)\(url)") else {
