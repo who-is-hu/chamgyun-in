@@ -50,7 +50,7 @@ class UserInfoViewController: UIViewController {
         ansWorryTableView.delegate = self
         ansWorryTableView.dataSource = self
         
-        loadWorryData()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -62,6 +62,8 @@ class UserInfoViewController: UIViewController {
         // setup tags
         setUpPrepareTags()
         
+        // load data
+        loadWorryData()
     }
 
     // MARK: - IBAction
@@ -139,23 +141,22 @@ class UserInfoViewController: UIViewController {
     }
     
     func loadWorryData() {
-        // myWorry
-        myWorryDataSource.removeAll()
-        myWorryDataSource.append(WorryDataVO(id: 0, title: "MyWorry1", body: "packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)", viewCount: 3, tags: ["a", "b", "c"], viewType: .N))
-        myWorryDataSource.append(WorryDataVO(id: 0, title: "MyWorry2", body: "packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)", viewCount: 3, tags: ["a", "b", "c"], viewType: .N))
-        myWorryDataSource.append(WorryDataVO(id: 0, title: "MyWorry3", body: "packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)", viewCount: 3, tags: ["a", "b", "c"], viewType: .N))
-        myWorryDataSource.append(WorryDataVO(id: 0, title: "MyWorry4", body: "packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)", viewCount: 3, tags: ["a", "b", "c"], viewType: .N))
-        myWorryDataSource.append(WorryDataVO(id: 0, title: "MyWorry4", body: "packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)", viewCount: 3, tags: ["a", "b", "c"], viewType: .N))
-        myWorryDataSource.append(WorryDataVO(id: 0, title: "MyWorry4", body: "packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)", viewCount: 3, tags: ["a", "b", "c"], viewType: .N))
-        myWorryDataSource.append(WorryDataVO(id: 0, title: "MyWorry4", body: "packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)", viewCount: 3, tags: ["a", "b", "c"], viewType: .N))
-        
-        
-        // ansWorry
-        ansWorryDataSource.removeAll()
-        ansWorryDataSource.append(WorryDataVO(id: 0, title: "AnsWorry1", body: "packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)", viewCount: 3, tags: ["a", "b", "c"], viewType: .N))
-        
-        myWorryTableView.reloadData()
-        ansWorryTableView.reloadData()
+        let display: Int = 10
+
+        APIRequest().request(url: "\(APIRequest.worryPostUrl)/my?page=0&size=\(display)", method: "GET", voType: PageableWorryDataVO.self) { success, data in
+            if success {
+                if let data = data as? PageableWorryDataVO {
+                    self.myWorryDataSource = data.content
+                    
+                    DispatchQueue.main.async {
+                        self.myWorryTableView.reloadData()
+                    }
+                    
+                    print(data)
+                }
+            }
+        }
+
     }
 
 }

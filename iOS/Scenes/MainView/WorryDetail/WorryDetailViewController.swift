@@ -8,12 +8,6 @@
 import UIKit
 
 class WorryDetailViewController: UIViewController {
-
-    enum ViewType {
-        case OX
-        case N
-    }
-    
     // MARK: - Properties
     private var oxContentViewController: ChooseWorryOXContentViewController?
     private var nContentViewController: ChooseWorryNViewController?
@@ -101,7 +95,7 @@ class WorryDetailViewController: UIViewController {
 
 
 extension WorryDetailViewController {
-    func loadQuestionTypeView(type: ViewType) {
+    func loadQuestionTypeView(type: WorryViewType) {
         if type == .OX {
             questionContentView.isHidden = false
             questionNContentView.isHidden = true

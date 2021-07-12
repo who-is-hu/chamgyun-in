@@ -19,6 +19,9 @@ class WorryViewController: UIViewController {
     // MARK: - Properties
     var loadType: LoadType?
     var dataSource: [WorryDataVO] = []
+    private var lastLoadedPage: Int = 0
+    private var totalPage: Int = 0
+    private let display: Int = 10
     
     // MARK: - IBOutlet
     @IBOutlet weak var worryTableView: UITableView!
@@ -38,25 +41,36 @@ class WorryViewController: UIViewController {
         loadWorryData()
     }
     
-    func loadWorryData() {
-        dataSource.removeAll()
-        
+    func loadWorryData(page: Int = 0) {
         // load my worry boards
+        lastLoadedPage = page
+        
         if loadType == .MyWorry {
-            dataSource.append(WorryDataVO(id: 0, title: "MyWorry1", body: "packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)", viewCount: 3, tags: ["a", "b", "c"], viewType: .N))
-            dataSource.append(WorryDataVO(id: 0, title: "MyWorry2", body: "packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)", viewCount: 3, tags: ["a", "b", "c"], viewType: .N))
-            dataSource.append(WorryDataVO(id: 0, title: "MyWorry3", body: "packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)", viewCount: 3, tags: ["a", "b", "c"], viewType: .N))
-            dataSource.append(WorryDataVO(id: 0, title: "MyWorry4", body: "packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)", viewCount: 3, tags: ["a", "b", "c"], viewType: .N))
-            dataSource.append(WorryDataVO(id: 0, title: "MyWorry4", body: "packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)", viewCount: 3, tags: ["a", "b", "c"], viewType: .N))
-            dataSource.append(WorryDataVO(id: 0, title: "MyWorry4", body: "packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)", viewCount: 3, tags: ["a", "b", "c"], viewType: .N))
-            dataSource.append(WorryDataVO(id: 0, title: "MyWorry4", body: "packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)", viewCount: 3, tags: ["a", "b", "c"], viewType: .N))
+
+            APIRequest().request(url: "\(APIRequest.worryPostUrl)/my?page=\(page)&size=\(display)", method: "GET", voType: PageableWorryDataVO.self) { success, data in
+                if success {
+                    if let data = data as?
+                        PageableWorryDataVO {
+                        
+                        self.totalPage = data.totalPages
+                        
+                        for worryVO in data.content {
+                            self.dataSource.append(worryVO)
+                        }
+                        
+                        DispatchQueue.main.async {
+                            self.worryTableView.reloadData()
+                        }
+                        
+                        print(data)
+                    }
+                }
+            }
             
         } else {
             // load answer worry boards
-            dataSource.append(WorryDataVO(id: 0, title: "AnsWorry1", body: "packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)", viewCount: 3, tags: ["a", "b", "c"], viewType: .N))
+
         }
-        
-        worryTableView.reloadData()
     }
 }
 
@@ -78,13 +92,18 @@ extension WorryViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if totalPage > lastLoadedPage && indexPath.row > dataSource.count - (display - 7) {
+            loadWorryData(page: lastLoadedPage+1)
+        }
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WorryTableViewCell.self), for: indexPath) as! WorryTableViewCell
         
         cell.titleView.text = dataSource[indexPath.row].title
         cell.bodyView.text = dataSource[indexPath.row].body
-        cell.selectedCountView.text = "조회수 \(dataSource[indexPath.row].viewCount)"
+        cell.selectedCountView.text = "조회수 \(dataSource[indexPath.row].viewCount ?? 0)"
         cell.tagListView.removeAllTags()
-        cell.tagListView.addTags(dataSource[indexPath.row].tags)
+        cell.tagListView.addTags(dataSource[indexPath.row].tags ?? [])
         cell.tagListView.delegate = self
         cell.tagListView.textFont = UIFont.boldSystemFont(ofSize: 13)
         
@@ -98,4 +117,5 @@ extension WorryViewController: TagListViewDelegate {
         print("tab pressed title : \(title)")
     }
 }
+
 
