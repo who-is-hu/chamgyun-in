@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AttentionTableViewCell: UITableViewCell {
+class InterestTableViewCell: UITableViewCell {
 
     @IBOutlet weak var tagText: UILabel!
     
