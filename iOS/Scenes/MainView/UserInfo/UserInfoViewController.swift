@@ -50,7 +50,7 @@ class UserInfoViewController: UIViewController {
         ansWorryTableView.delegate = self
         ansWorryTableView.dataSource = self
         
-        loadWorryData()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -62,6 +62,8 @@ class UserInfoViewController: UIViewController {
         // setup tags
         setUpPrepareTags()
         
+        // load data
+        loadWorryData()
     }
 
     // MARK: - IBAction
@@ -139,15 +141,22 @@ class UserInfoViewController: UIViewController {
     }
     
     func loadWorryData() {
-        // myWorry
-        myWorryDataSource.removeAll()
-        
-        
-        // ansWorry
-        ansWorryDataSource.removeAll()
+        let display: Int = 10
 
-        myWorryTableView.reloadData()
-        ansWorryTableView.reloadData()
+        APIRequest().request(url: "\(APIRequest.worryPostUrl)/my?page=0&size=\(display)", method: "GET", voType: PageableWorryDataVO.self) { success, data in
+            if success {
+                if let data = data as? PageableWorryDataVO {
+                    self.myWorryDataSource = data.content
+                    
+                    DispatchQueue.main.async {
+                        self.myWorryTableView.reloadData()
+                    }
+                    
+                    print(data)
+                }
+            }
+        }
+
     }
 
 }
