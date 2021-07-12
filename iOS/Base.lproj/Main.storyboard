@@ -301,20 +301,20 @@
                                                             <userDefinedRuntimeAttribute type="number" keyPath="marginY">
                                                                 <real key="value" value="6"/>
                                                             </userDefinedRuntimeAttribute>
-                                                            <userDefinedRuntimeAttribute type="color" keyPath="tagBackgroundColor">
-                                                                <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            </userDefinedRuntimeAttribute>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="marginX">
                                                                 <real key="value" value="6"/>
                                                             </userDefinedRuntimeAttribute>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                                                 <real key="value" value="0.0"/>
                                                             </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="selectedTextColor">
+                                                                <color key="value" systemColor="labelColor"/>
+                                                            </userDefinedRuntimeAttribute>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="textColor">
                                                                 <color key="value" systemColor="labelColor"/>
                                                             </userDefinedRuntimeAttribute>
-                                                            <userDefinedRuntimeAttribute type="color" keyPath="selectedTextColor">
-                                                                <color key="value" systemColor="labelColor"/>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="tagBackgroundColor">
+                                                                <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
@@ -895,20 +895,20 @@
                                 <rect key="frame" x="0.0" y="56" width="414" height="653"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dfr-XN-ULu">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="635"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="780"/>
                                         <subviews>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="394" placeholderIntrinsicHeight="214" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="paT-Iy-EEg">
                                                 <rect key="frame" x="10" y="60" width="394" height="214"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="214" id="mIN-Ic-6r4"/>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="150" id="mIN-Ic-6r4"/>
                                                 </constraints>
                                                 <color key="textColor" systemColor="labelColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="45i-cZ-vX9">
-                                                <rect key="frame" x="10" y="284" width="394" height="32"/>
+                                                <rect key="frame" x="10" y="429" width="394" height="32"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="31" id="9fi-Al-B01"/>
                                                     <constraint firstAttribute="height" constant="31" id="LmM-8y-EUr"/>
@@ -927,7 +927,7 @@
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <containerView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="mCk-1E-r60">
-                                                <rect key="frame" x="10" y="325" width="394" height="300"/>
+                                                <rect key="frame" x="10" y="470" width="394" height="300"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="300" id="tt7-i0-bJv"/>
                                                 </constraints>
@@ -936,7 +936,7 @@
                                                 </connections>
                                             </containerView>
                                             <containerView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5dV-YE-X8Z">
-                                                <rect key="frame" x="10" y="325" width="394" height="300"/>
+                                                <rect key="frame" x="10" y="470" width="394" height="300"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="300" id="2qt-3O-emZ"/>
                                                 </constraints>
@@ -944,25 +944,107 @@
                                                     <segue destination="rBU-M9-nAy" kind="embed" id="hHN-RN-gd7"/>
                                                 </connections>
                                             </containerView>
+                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="394" placeholderIntrinsicHeight="55" translatesAutoresizingMaskIntoConstraints="NO" id="NwE-J6-KS7" customClass="TagListView" customModule="TagListView">
+                                                <rect key="frame" x="15" y="364" width="384" height="55"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="55" id="2W0-lf-f9L"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                                        <real key="value" value="3"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                                        <size key="value" width="2" height="2"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                                                        <color key="value" systemColor="labelColor"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="selectedTextColor">
+                                                        <color key="value" systemColor="labelColor"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                                        <real key="value" value="0.5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="8"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="tagBackgroundColor">
+                                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                                        <color key="value" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="paddingY">
+                                                        <real key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="paddingX">
+                                                        <real key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="marginY">
+                                                        <real key="value" value="6"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="marginX">
+                                                        <real key="value" value="6"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="enableRemoveButton" value="YES"/>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="removeIconLineColor">
+                                                        <color key="value" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="Pr5-Vx-PLZ">
+                                                <rect key="frame" x="10" y="284" width="394" height="70"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="태그" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YAL-32-a4U">
+                                                        <rect key="frame" x="0.0" y="0.0" width="394" height="23"/>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="500-Nb-QcV">
+                                                        <rect key="frame" x="0.0" y="36" width="394" height="34"/>
+                                                        <subviews>
+                                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pEz-rU-EIg">
+                                                                <rect key="frame" x="0.0" y="0.0" width="358" height="34"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                <textInputTraits key="textInputTraits"/>
+                                                            </textField>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="45J-q5-A8M">
+                                                                <rect key="frame" x="364" y="0.0" width="30" height="34"/>
+                                                                <state key="normal" title="추가"/>
+                                                                <connections>
+                                                                    <action selector="addTagTouchInside:" destination="jPV-mT-s6k" eventType="touchUpInside" id="iTR-vI-kOP"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                            </stackView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstItem="5dV-YE-X8Z" firstAttribute="top" secondItem="45i-cZ-vX9" secondAttribute="bottom" constant="10" id="0oL-aR-CFR"/>
                                             <constraint firstAttribute="trailing" secondItem="c06-NM-0BL" secondAttribute="trailing" constant="15" id="1e1-Zp-0vf"/>
+                                            <constraint firstItem="Pr5-Vx-PLZ" firstAttribute="leading" secondItem="dfr-XN-ULu" secondAttribute="leading" constant="10" id="4pO-dM-1ll"/>
+                                            <constraint firstAttribute="trailing" secondItem="NwE-J6-KS7" secondAttribute="trailing" constant="15" id="68C-TH-J2u"/>
                                             <constraint firstItem="mCk-1E-r60" firstAttribute="leading" secondItem="dfr-XN-ULu" secondAttribute="leading" constant="10" id="7FP-3n-Xu9"/>
                                             <constraint firstItem="c06-NM-0BL" firstAttribute="top" secondItem="dfr-XN-ULu" secondAttribute="top" constant="10" id="AyU-Tf-2Nc"/>
+                                            <constraint firstItem="NwE-J6-KS7" firstAttribute="top" secondItem="Pr5-Vx-PLZ" secondAttribute="bottom" constant="10" id="CcQ-ej-BhS"/>
                                             <constraint firstAttribute="trailing" secondItem="5dV-YE-X8Z" secondAttribute="trailing" constant="10" id="Cey-7p-M2t"/>
                                             <constraint firstAttribute="bottom" secondItem="5dV-YE-X8Z" secondAttribute="bottom" constant="10" id="HfZ-mp-zhb"/>
                                             <constraint firstAttribute="trailing" secondItem="paT-Iy-EEg" secondAttribute="trailing" constant="10" id="KG0-7W-zGT"/>
                                             <constraint firstItem="45i-cZ-vX9" firstAttribute="leading" secondItem="dfr-XN-ULu" secondAttribute="leading" constant="10" id="QM0-XG-mx9"/>
                                             <constraint firstItem="paT-Iy-EEg" firstAttribute="top" secondItem="c06-NM-0BL" secondAttribute="bottom" constant="10" id="SFf-U7-52b"/>
                                             <constraint firstItem="mCk-1E-r60" firstAttribute="top" secondItem="45i-cZ-vX9" secondAttribute="bottom" constant="10" id="Thu-0d-uGD"/>
+                                            <constraint firstItem="Pr5-Vx-PLZ" firstAttribute="top" secondItem="paT-Iy-EEg" secondAttribute="bottom" constant="10" id="U8p-49-HsC"/>
                                             <constraint firstAttribute="trailing" secondItem="45i-cZ-vX9" secondAttribute="trailing" constant="10" id="VgI-NM-o4G"/>
                                             <constraint firstItem="c06-NM-0BL" firstAttribute="leading" secondItem="dfr-XN-ULu" secondAttribute="leading" constant="15" id="abO-C0-ZP2"/>
                                             <constraint firstItem="paT-Iy-EEg" firstAttribute="leading" secondItem="dfr-XN-ULu" secondAttribute="leading" constant="10" id="b6H-aL-hmo"/>
-                                            <constraint firstItem="45i-cZ-vX9" firstAttribute="top" secondItem="paT-Iy-EEg" secondAttribute="bottom" constant="10" id="bZZ-RM-3aa"/>
+                                            <constraint firstItem="45i-cZ-vX9" firstAttribute="top" secondItem="NwE-J6-KS7" secondAttribute="bottom" constant="10" id="bZZ-RM-3aa"/>
                                             <constraint firstAttribute="trailing" secondItem="mCk-1E-r60" secondAttribute="trailing" constant="10" id="iHj-he-BiM"/>
                                             <constraint firstAttribute="bottom" secondItem="mCk-1E-r60" secondAttribute="bottom" constant="10" id="kSQ-63-6qH"/>
+                                            <constraint firstAttribute="trailing" secondItem="Pr5-Vx-PLZ" secondAttribute="trailing" constant="10" id="ule-xm-Mko"/>
+                                            <constraint firstItem="NwE-J6-KS7" firstAttribute="leading" secondItem="dfr-XN-ULu" secondAttribute="leading" constant="15" id="viA-l1-yXq"/>
                                             <constraint firstItem="5dV-YE-X8Z" firstAttribute="leading" secondItem="dfr-XN-ULu" secondAttribute="leading" constant="10" id="whW-w8-oEO"/>
                                         </constraints>
                                     </view>
@@ -1013,16 +1095,18 @@
                     </view>
                     <navigationItem key="navigationItem" title="고민생성" id="58l-6r-PrE"/>
                     <connections>
+                        <outlet property="addTagText" destination="pEz-rU-EIg" id="Ta5-6U-B6q"/>
                         <outlet property="nQuestionContaioner" destination="5dV-YE-X8Z" id="RBO-iK-99W"/>
                         <outlet property="oxQuestionContainer" destination="mCk-1E-r60" id="k6n-ZZ-Fau"/>
                         <outlet property="segControlView" destination="45i-cZ-vX9" id="DQA-NH-52B"/>
+                        <outlet property="tagListView" destination="NwE-J6-KS7" id="dKe-LJ-04Z"/>
                         <outlet property="worryBody" destination="paT-Iy-EEg" id="JK5-6K-uYx"/>
                         <outlet property="worryTitle" destination="c06-NM-0BL" id="4AV-R9-RBF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GoH-fn-DpN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5129" y="-633"/>
+            <point key="canvasLocation" x="5128.985507246377" y="-633.48214285714278"/>
         </scene>
         <!--Container View Controller-->
         <scene sceneID="lgG-Rm-5PP">
@@ -1186,7 +1270,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="rEB-NA-FeD"/>
+        <segue reference="mxL-3H-COY"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="appleid_button" width="300" height="45"/>
