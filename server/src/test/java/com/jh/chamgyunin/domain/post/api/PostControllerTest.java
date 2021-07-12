@@ -2,10 +2,10 @@ package com.jh.chamgyunin.domain.post.api;
 
 import com.jh.chamgyunin.IntegrationTest;
 import com.jh.chamgyunin.domain.auth.service.SessionKey;
+import com.jh.chamgyunin.domain.post.dao.PostRepository;
 import com.jh.chamgyunin.domain.post.dto.PostCreateRequest;
+import com.jh.chamgyunin.domain.post.model.Post;
 import com.jh.chamgyunin.domain.post.service.PostService;
-import com.jh.chamgyunin.domain.tag.model.Tag;
-import com.jh.chamgyunin.setup.TagSetUp;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,9 +28,8 @@ class PostControllerTest extends IntegrationTest {
 
     @Autowired
     private PostService postService;
-
     @Autowired
-    private TagSetUp tagSetUp;
+    private PostRepository postRepository;
 
     @BeforeEach
     public void setUp() throws Exception {
@@ -118,6 +117,37 @@ class PostControllerTest extends IntegrationTest {
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(jsonPath("$.content", hasSize(3)));
                 ;
+    }
+
+    @Test
+    void 태그로_게시글_조회() throws Exception {
+        //given
+        String searchTags = "love,life,food";
+        ArrayList<Post> posts = new ArrayList<>();
+        for (int i = 0; i < 6; i++) {
+            Post post = Post.builder()
+                    .title("title" + i)
+                    .body("body"+i)
+                    .build();
+            posts.add(post);
+        }
+        posts.get(0).setTags("love");
+        posts.get(1).setTags("life");
+        posts.get(2).setTags("food");
+        posts.get(3).setTags("love,food");
+        posts.get(4).setTags("love,food,life");
+        posts.get(5).setTags("no");
+        postRepository.saveAll(posts);
+
+        //when
+        ResultActions resultActions = mvc.perform(get("/post")
+                .param("tags", searchTags))
+                .andDo(print());
+
+        //then
+        resultActions
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(jsonPath("$.content", hasSize(5)));
     }
 
     private PostCreateRequest createPostDto(final String title, final String body, final List<String> tagNames) {
