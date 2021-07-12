@@ -7,13 +7,6 @@
 
 import Foundation
 
-struct WorryDataRVO : Codable {
-    let id: Int
-    let title: String
-    let body: String
-    let createdAt: String
-}
-
 struct WorryDataVO : Codable {
     let id: Int?
     let title: String
@@ -22,17 +15,25 @@ struct WorryDataVO : Codable {
     let tags: [String]?
     let viewType: WorryViewType?
     let createdAt: String?
-    
-//    init(id: Int = -1, title: String, body: String, viewCount: Int, tags: [String], viewType: WorryViewType = .OX, createdAt: String = "") {
-//        self.id = id
-//        self.title = title
-//        self.body = body
-//    }
 }
 
 enum WorryViewType : Int, Codable {
     case OX
     case N
+}
+
+struct PageableWorryDataVO: Codable {
+    let content: [WorryDataVO]
+    let empty: Bool
+    let first: Bool
+    let last: Bool
+    let number: Int
+    let numberOfElements: Int
+    let pageable: Pageable
+    let sort: Sort
+    let size: Int
+    let totalElements: Int
+    let totalPages: Int
 }
 
 //{
@@ -49,24 +50,9 @@ enum WorryViewType : Int, Codable {
 //  "last": true,
 //  "number": 0,
 //  "numberOfElements": 0,
-//  "pageable": {
-//    "offset": 0,
-//    "pageNumber": 0,
-//    "pageSize": 0,
-//    "paged": true,
-//    "sort": {
-//      "empty": true,
-//      "sorted": true,
-//      "unsorted": true
-//    },
-//    "unpaged": true
-//  },
-//  "size": 0,
-//  "sort": {
-//    "empty": true,
-//    "sorted": true,
-//    "unsorted": true
-//  },
+//  "pageable":
+//  "size": 0
+//  "sort":
 //  "totalElements": 0,
 //  "totalPages": 0
 //}
