@@ -40,7 +40,7 @@ class AddWorryViewController: UIViewController {
                 print(data)
             }
         } else {
-            print("asd")
+            print("Error")
         }
         
         guard let title = self.worryTitle.text, let body = self.worryBody.text else {
@@ -48,11 +48,24 @@ class AddWorryViewController: UIViewController {
         }
         
         let worryData: [String: Any] = ["title": title, "body": body]
-        APIRequest().request(url: APIRequest.worryPostUrl, method: "POST", voType: AddWorryResponseVO.self, param: worryData) { success, data in
+        APIRequest().request(url: APIRequest.worryPostUrl, method: "POST", voType: WorryDataVO.self, param: worryData) { success, data in
+            var msg: String = ""
+            
             if success {
-                print(data)
+                msg = "고민 등록 성공"
+            } else {
+                msg = "고민 등록 실패"
+            }
+            
+            DispatchQueue.main.async {
+                let alert = UIAlertController(title: "알림", message: msg, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
+                
+                self.present(alert, animated: true, completion: nil)
             }
         }
+        
+        self.navigationController?.popViewController(animated: true)
     }
     
     override func viewDidLoad() {

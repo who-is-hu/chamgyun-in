@@ -39,21 +39,20 @@ class WorryViewController: UIViewController {
     }
     
     func loadWorryData() {
+        // sample
+//        APIRequest().request(url: "\(APIRequest.worryPostUrl)/my", method: "GET", voType: <#T##(Decodable & Encodable).Protocol#>, param: <#T##[String : Any]?#>, completionHandler: <#T##(Bool, Any) -> Void#>)
+        //
+        
+        
         dataSource.removeAll()
         
         // load my worry boards
         if loadType == .MyWorry {
-            dataSource.append(WorryDataVO(id: 0, title: "MyWorry1", body: "packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)", viewCount: 3, tags: ["a", "b", "c"], viewType: .N))
-            dataSource.append(WorryDataVO(id: 0, title: "MyWorry2", body: "packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)", viewCount: 3, tags: ["a", "b", "c"], viewType: .N))
-            dataSource.append(WorryDataVO(id: 0, title: "MyWorry3", body: "packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)", viewCount: 3, tags: ["a", "b", "c"], viewType: .N))
-            dataSource.append(WorryDataVO(id: 0, title: "MyWorry4", body: "packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)", viewCount: 3, tags: ["a", "b", "c"], viewType: .N))
-            dataSource.append(WorryDataVO(id: 0, title: "MyWorry4", body: "packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)", viewCount: 3, tags: ["a", "b", "c"], viewType: .N))
-            dataSource.append(WorryDataVO(id: 0, title: "MyWorry4", body: "packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)", viewCount: 3, tags: ["a", "b", "c"], viewType: .N))
-            dataSource.append(WorryDataVO(id: 0, title: "MyWorry4", body: "packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)", viewCount: 3, tags: ["a", "b", "c"], viewType: .N))
+
             
         } else {
             // load answer worry boards
-            dataSource.append(WorryDataVO(id: 0, title: "AnsWorry1", body: "packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)", viewCount: 3, tags: ["a", "b", "c"], viewType: .N))
+
         }
         
         worryTableView.reloadData()
@@ -82,9 +81,9 @@ extension WorryViewController: UITableViewDataSource {
         
         cell.titleView.text = dataSource[indexPath.row].title
         cell.bodyView.text = dataSource[indexPath.row].body
-        cell.selectedCountView.text = "조회수 \(dataSource[indexPath.row].viewCount)"
+        cell.selectedCountView.text = "조회수 \(dataSource[indexPath.row].viewCount ?? 0)"
         cell.tagListView.removeAllTags()
-        cell.tagListView.addTags(dataSource[indexPath.row].tags)
+        cell.tagListView.addTags(dataSource[indexPath.row].tags ?? [])
         cell.tagListView.delegate = self
         cell.tagListView.textFont = UIFont.boldSystemFont(ofSize: 13)
         
