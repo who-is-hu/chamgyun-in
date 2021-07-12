@@ -162,7 +162,7 @@ class UserInfoViewController: UIViewController {
                     
                     if let tags = data as? [TagVO] {
                         for tag in tags {
-                            self.tagListView.addTag("#\(tag)")
+                            self.tagListView.addTag("#\(tag.name)")
                         }
                     }
                 }
