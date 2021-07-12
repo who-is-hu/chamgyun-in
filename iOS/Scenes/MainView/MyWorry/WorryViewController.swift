@@ -39,23 +39,29 @@ class WorryViewController: UIViewController {
     }
     
     func loadWorryData() {
-        // sample
-//        APIRequest().request(url: "\(APIRequest.worryPostUrl)/my", method: "GET", voType: <#T##(Decodable & Encodable).Protocol#>, param: <#T##[String : Any]?#>, completionHandler: <#T##(Bool, Any) -> Void#>)
-        //
-        
-        
-        dataSource.removeAll()
-        
         // load my worry boards
+        let display: Int = 10
+        
         if loadType == .MyWorry {
 
+            APIRequest().request(url: "\(APIRequest.worryPostUrl)/my?page=0&size=\(display)", method: "GET", voType: PageableWorryDataVO.self) { success, data in
+                if success {
+                    if let data = data as? PageableWorryDataVO {
+                        self.dataSource = data.content
+                        
+                        DispatchQueue.main.async {
+                            self.worryTableView.reloadData()
+                        }
+                        
+                        print(data)
+                    }
+                }
+            }
             
         } else {
             // load answer worry boards
 
         }
-        
-        worryTableView.reloadData()
     }
 }
 
