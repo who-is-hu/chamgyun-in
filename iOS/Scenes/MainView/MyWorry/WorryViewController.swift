@@ -19,6 +19,9 @@ class WorryViewController: UIViewController {
     // MARK: - Properties
     var loadType: LoadType?
     var dataSource: [WorryDataVO] = []
+    private var lastLoadedPage: Int = 0
+    private var totalPage: Int = 0
+    private let display: Int = 10
     
     // MARK: - IBOutlet
     @IBOutlet weak var worryTableView: UITableView!
@@ -38,16 +41,22 @@ class WorryViewController: UIViewController {
         loadWorryData()
     }
     
-    func loadWorryData() {
+    func loadWorryData(page: Int = 0) {
         // load my worry boards
-        let display: Int = 10
+        lastLoadedPage = page
         
         if loadType == .MyWorry {
 
-            APIRequest().request(url: "\(APIRequest.worryPostUrl)/my?page=0&size=\(display)", method: "GET", voType: PageableWorryDataVO.self) { success, data in
+            APIRequest().request(url: "\(APIRequest.worryPostUrl)/my?page=\(page)&size=\(display)", method: "GET", voType: PageableWorryDataVO.self) { success, data in
                 if success {
-                    if let data = data as? PageableWorryDataVO {
-                        self.dataSource = data.content
+                    if let data = data as?
+                        PageableWorryDataVO {
+                        
+                        self.totalPage = data.totalPages
+                        
+                        for worryVO in data.content {
+                            self.dataSource.append(worryVO)
+                        }
                         
                         DispatchQueue.main.async {
                             self.worryTableView.reloadData()
@@ -83,6 +92,11 @@ extension WorryViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if totalPage > lastLoadedPage && indexPath.row > dataSource.count - (display - 7) {
+            loadWorryData(page: lastLoadedPage+1)
+        }
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WorryTableViewCell.self), for: indexPath) as! WorryTableViewCell
         
         cell.titleView.text = dataSource[indexPath.row].title
@@ -103,4 +117,5 @@ extension WorryViewController: TagListViewDelegate {
         print("tab pressed title : \(title)")
     }
 }
+
 
