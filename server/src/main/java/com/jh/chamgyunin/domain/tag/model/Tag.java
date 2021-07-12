@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @NoArgsConstructor
@@ -29,5 +31,9 @@ public class Tag {
 
     public static Tag of(final String name) {
         return new Tag(name);
+    }
+
+    public static List<Tag> of(final List<String> names) {
+        return names.stream().map(name -> Tag.of(name)).collect(Collectors.toList());
     }
 }

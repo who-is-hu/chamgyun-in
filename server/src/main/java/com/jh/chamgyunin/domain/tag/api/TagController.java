@@ -40,7 +40,7 @@ public class TagController {
     @IsUserLoggedIn
     @PatchMapping("/interest")
     public ResponseEntity<List<Tag>> updateMyInterestTags(@LoginUserId Long userId, @Valid @RequestBody UpdateInterestTagRequest dto) {
-        List<Tag> updatedInterest = tagService.setMyInterestTag(userId, dto.toTags());
+        List<Tag> updatedInterest = tagService.setMyInterestTag(userId, Tag.of(dto.getTagNames()));
         return new ResponseEntity<>(updatedInterest, HttpStatus.OK);
     }
 

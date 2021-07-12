@@ -17,7 +17,7 @@ class UpdateInterestTagRequestTest{
         List<String> tagNames = new ArrayList<>(Arrays.asList("love","work","life","food"));
         UpdateInterestTagRequest dto = new UpdateInterestTagRequest(tagNames);
 
-        List<Tag> tags = dto.toTags();
+        List<Tag> tags = Tag.of(dto.getTagNames());
 
         Assertions.assertThat(tags.size()).isEqualTo(tagNames.size());
         for (int i=0; i<tagNames.size(); i++) {
@@ -30,7 +30,7 @@ class UpdateInterestTagRequestTest{
         List<String> tagNames = new ArrayList<>(Arrays.asList());
         UpdateInterestTagRequest dto = new UpdateInterestTagRequest(tagNames);
 
-        List<Tag> tags = dto.toTags();
+        List<Tag> tags = Tag.of(dto.getTagNames());
 
         Assertions.assertThat(tags.size()).isEqualTo(0);
     }
