@@ -1,15 +1,15 @@
 package com.jh.chamgyunin.domain.post.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.jh.chamgyunin.domain.tag.model.Tag;
 import com.jh.chamgyunin.domain.user.model.User;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -33,6 +33,10 @@ public class Post {
     @JoinColumn(name = "user_id")
     @JsonIgnore
     private User owner;
+
+    @Setter
+    @Column(name = "tag_id")
+    private String tags;
 
     @Column(name="created_at")
     @CreationTimestamp

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @RestController
@@ -47,7 +48,7 @@ public class PostController {
         return new ResponseEntity<>(post, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "내 고민 게시글 목록", notes = "http://host/post?page=0&size=5\n" +
+    @ApiOperation(value = "내 고민 게시글 목록", notes = "http://host/post/my?page=0&size=5\n" +
             "5개씩 잘라서 0번째 페이지")
     @GetMapping("/my")
     @IsUserLoggedIn
@@ -56,5 +57,14 @@ public class PostController {
             @ApiIgnore @PageableDefault(size = 5, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable) {
         Page<Post> myPosts = postService.findAllByOwnerId(userId, pageable);
         return new ResponseEntity<>(myPosts, HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "고민 게시글 태그 조회", notes = "/post?page=0&size=5&tags=tag1,tag2,tag3")
+    @GetMapping
+    public ResponseEntity<Page<Post>> getPosts(
+            @Size(min = 1, max = 5) @ApiParam(value = "태그 목록") @RequestParam(name = "tags") List<String> tags,
+            @ApiIgnore @PageableDefault(size = 5, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable) {
+        Page<Post> posts = postService.findAllByTags(tags, pageable);
+        return new ResponseEntity<>(posts, HttpStatus.OK);
     }
 }

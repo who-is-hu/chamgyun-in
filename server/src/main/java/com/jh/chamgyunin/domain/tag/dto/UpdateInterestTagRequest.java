@@ -22,8 +22,4 @@ public class UpdateInterestTagRequest {
     @NotNull
     @Size(min = 0, max = 5, message = "0~5개 사이의 관심사를 설정해 주세요")
     private List<String> tagNames;
-
-    public List<Tag> toTags() {
-        return tagNames.stream().map((name)->Tag.of(name)).collect(Collectors.toList());
-    }
 }
