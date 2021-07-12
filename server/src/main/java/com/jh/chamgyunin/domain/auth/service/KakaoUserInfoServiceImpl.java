@@ -1,5 +1,6 @@
 package com.jh.chamgyunin.domain.auth.service;
 
+import com.jh.chamgyunin.domain.auth.dto.UserProvider;
 import com.jh.chamgyunin.domain.auth.dto.userinfo.KakaoUserInfo;
 import com.jh.chamgyunin.domain.auth.dto.userinfo.SocialUserInfo;
 import lombok.RequiredArgsConstructor;
@@ -32,6 +33,7 @@ public class KakaoUserInfoServiceImpl implements SocialUserInfoService {
         return SocialUserInfo.builder()
                 .email(userInfo.getKakaoAcount().getEmail())
                 .nickname(userInfo.getKakaoAcount().getProfile().getNickname())
+                .provider(UserProvider.KAKAO)
                 .build();
     }
 }
