@@ -58,7 +58,8 @@ class PostServiceTest extends MockTest {
                 .tagNames(tagNames)
                 .build();
         Post post = dto.toEntity(user);
-        post.setTag(Tag.of(tagNames));
+        post.setTags(String.join(",",tagNames));
+
 
         given(userService.findById(any())).willReturn(user);
         given(tagService.insertTag(any()))

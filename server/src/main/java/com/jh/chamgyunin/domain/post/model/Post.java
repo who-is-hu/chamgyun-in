@@ -35,9 +35,8 @@ public class Post {
     private User owner;
 
     @Setter
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tag_id")
-    private List<Tag> tag = new ArrayList<>();
+    @Column(name = "tag_id")
+    private String tags;
 
     @Column(name="created_at")
     @CreationTimestamp

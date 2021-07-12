@@ -39,7 +39,7 @@ public class PostService {
         for (Tag tag : attachedTags) {
             tag.increaseNumPost();
         }
-        post.setTag(attachedTags);
+        post.setTags(String.join(",", dto.getTagNames()));
 
         return postRepository.save(post);
     }

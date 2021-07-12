@@ -56,9 +56,7 @@ class PostControllerTest extends IntegrationTest {
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(jsonPath("$.title").value(dto.getTitle()))
                 .andExpect(jsonPath("$.body").value(dto.getBody()))
-                .andExpect(jsonPath("$.tag[0].name").value("love"))
-                .andExpect(jsonPath("$.tag[1].name").value("life"))
-                .andExpect(jsonPath("$.tag[2].name").value("work"))
+                .andExpect(jsonPath("$.tags").value("love,life,work"))
         ;
     }
 
@@ -66,23 +64,20 @@ class PostControllerTest extends IntegrationTest {
     void 게시글_생성시_태그의_게시글개수_증가() throws Exception{
         //given
         PostCreateRequest dto = createPostDto("test", "testbody",
-                new ArrayList<>(Arrays.asList("love", "life", "work")));
+                new ArrayList<>(Arrays.asList("life", "love", "food")));
         PostCreateRequest dto2 = createPostDto("test2", "testbody2",
-                new ArrayList<>(Arrays.asList("love", "life", "new")));
+                new ArrayList<>(Arrays.asList("life", "love", "new")));
 
         //when
         ResultActions resultActions1 = requestPostCreate(dto);
         ResultActions resultActions2 = requestPostCreate(dto2);
+        ResultActions queryResultAction = mvc.perform(get("/tag"));
 
         //then
-        resultActions2
+        queryResultAction
                 .andExpect(status().is2xxSuccessful())
-                .andExpect(jsonPath("$.tag[0].name").value("love"))
-                .andExpect(jsonPath("$.tag[0].num_post").value("2"))
-                .andExpect(jsonPath("$.tag[1].name").value("life"))
-                .andExpect(jsonPath("$.tag[1].num_post").value("2"))
-                .andExpect(jsonPath("$.tag[2].name").value("new"))
-                .andExpect(jsonPath("$.tag[2].num_post").value("1"))
+                .andExpect(jsonPath("$.content[0].num_post").value(2))
+                .andExpect(jsonPath("$.content[1].num_post").value(2))
         ;
     }
 
