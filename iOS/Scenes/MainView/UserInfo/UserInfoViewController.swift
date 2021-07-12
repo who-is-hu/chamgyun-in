@@ -64,6 +64,7 @@ class UserInfoViewController: UIViewController {
         
         // load data
         loadWorryData()
+        loadTagData()
     }
 
     // MARK: - IBAction
@@ -108,16 +109,8 @@ class UserInfoViewController: UIViewController {
     /// setup prepare tags
     func setUpPrepareTags() {
         // Todo: Load from server
-        let tags: [String] = ["Saaaaaaaaaaaaaaaaaaaaaaaaaple", "남성", "IT", "음식", "이성"]
-        
-//        tagListView.textFont.bol
         tagListView.delegate = self
         tagListView.textFont = UIFont.boldSystemFont(ofSize: 13)
-        tagListView.removeAllTags()
-        
-        for tag in tags {
-            tagListView.addTag("#\(tag)")
-        }
     }
     
     func setUpUserInfo() {
@@ -157,6 +150,25 @@ class UserInfoViewController: UIViewController {
             }
         }
 
+    }
+    
+    func loadTagData() {
+        APIRequest().request(url: APIRequest.tagGetPatchUrl, method: "GET", voType: [TagVO].self) { success, data in
+            if success {
+                print(data)
+                
+                DispatchQueue.main.async {
+                    self.tagListView.removeAllTags()
+                    
+                    if let tags = data as? [TagVO] {
+                        for tag in tags {
+                            self.tagListView.addTag("#\(tag)")
+                        }
+                    }
+                }
+                
+            }
+        }
     }
 
 }
