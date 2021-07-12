@@ -177,10 +177,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hvS-JR-KUy">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hvS-JR-KUy">
                                 <rect key="frame" x="0.0" y="56" width="414" height="703"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UqR-Zu-Agq" userLabel="ContainerView">
+                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UqR-Zu-Agq" userLabel="ContainerView">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="820"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="crH-i0-Ovg" userLabel="UserSimpleInfoView">
@@ -258,7 +258,7 @@
                                                     <constraint firstAttribute="trailing" secondItem="OJA-mD-d2M" secondAttribute="trailing" constant="15" id="yGJ-0X-k4S"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uwz-4x-2ru" userLabel="TagView">
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Uwz-4x-2ru" userLabel="TagView">
                                                 <rect key="frame" x="15" y="181" width="384" height="100"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="관심 분야" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nnd-Rl-xCL">
@@ -270,7 +270,7 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kac-Zl-0Z6" userLabel="TagListView" customClass="TagListView" customModule="TagListView">
+                                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kac-Zl-0Z6" userLabel="TagListView" customClass="TagListView" customModule="TagListView">
                                                         <rect key="frame" x="8" y="46" width="368" height="46"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="34" id="fK0-5U-flG"/>
@@ -343,7 +343,7 @@
                                                     <constraint firstAttribute="trailing" secondItem="Kac-Zl-0Z6" secondAttribute="trailing" constant="8" id="rR2-NW-R4M"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5SN-I1-zGf" userLabel="MyWorryView">
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5SN-I1-zGf" userLabel="MyWorryView">
                                                 <rect key="frame" x="15" y="300" width="384" height="38"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="내고민" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="leW-Eb-C09">
@@ -375,7 +375,7 @@
                                                     <constraint firstItem="leW-Eb-C09" firstAttribute="top" secondItem="5SN-I1-zGf" secondAttribute="top" constant="8" id="bXg-ks-aEy"/>
                                                 </constraints>
                                             </view>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="VOJ-OO-v5U" userLabel="MyWorryTableView">
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="VOJ-OO-v5U" userLabel="MyWorryTableView">
                                                 <rect key="frame" x="0.0" y="348" width="414" height="200"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
@@ -383,7 +383,7 @@
                                                 </constraints>
                                                 <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                                             </tableView>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g8s-0u-fQX" userLabel="MyWorryView">
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g8s-0u-fQX" userLabel="MyWorryView">
                                                 <rect key="frame" x="15" y="564" width="384" height="38"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="답한 고민" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eGw-JU-ReH">
@@ -416,7 +416,7 @@
                                                     <constraint firstItem="vh7-Jk-Yyv" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="eGw-JU-ReH" secondAttribute="trailing" constant="10" id="qPS-5K-9Xm"/>
                                                 </constraints>
                                             </view>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="KqH-Os-8zX" userLabel="SolveWorryTableView">
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="KqH-Os-8zX" userLabel="SolveWorryTableView">
                                                 <rect key="frame" x="0.0" y="610" width="414" height="200"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
@@ -527,7 +527,7 @@
         <!--내 태그-->
         <scene sceneID="FZt-o7-eC9">
             <objects>
-                <viewController storyboardIdentifier="AttentionViewStoryboard" useStoryboardIdentifierAsRestorationIdentifier="YES" id="pK2-x2-nYV" customClass="AttentionViewController" customModule="iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AttentionViewStoryboard" useStoryboardIdentifierAsRestorationIdentifier="YES" id="pK2-x2-nYV" customClass="InterestViewController" customModule="iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tnr-k6-gHe">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -829,6 +829,7 @@
                                 </constraints>
                             </stackView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="vBH-0H-yjl"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Y0k-TT-pHa" secondAttribute="trailing" id="EsT-Gt-CXa"/>
@@ -864,6 +865,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="wHO-la-C8G"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="bottomMargin" secondItem="BUM-ct-a27" secondAttribute="bottom" id="PnM-ra-4qT"/>
@@ -1039,6 +1041,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="i2r-rV-JPm"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="VFa-MR-u9y" firstAttribute="top" secondItem="1AL-eK-jOd" secondAttribute="top" id="9R9-nu-mJi"/>
@@ -1088,6 +1091,7 @@
                                 </constraints>
                             </stackView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="o7N-ih-RzG"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="bottomMargin" secondItem="CfC-g3-LQb" secondAttribute="bottom" id="64p-rA-fZG"/>
@@ -1181,11 +1185,6 @@
             <point key="canvasLocation" x="5129" y="62"/>
         </scene>
     </scenes>
-    <designables>
-        <designable name="Kac-Zl-0Z6">
-            <size key="intrinsicContentSize" width="368" height="32"/>
-        </designable>
-    </designables>
     <inferredMetricsTieBreakers>
         <segue reference="rEB-NA-FeD"/>
     </inferredMetricsTieBreakers>

@@ -61,6 +61,8 @@ class InterestViewController: UIViewController {
         self.tagTableView.delegate = self
         self.tagTableView.dataSource = self
         
+        self.addTagTextView.delegate = self
+        
         loadTagData()
     }
     
@@ -110,5 +112,12 @@ extension InterestViewController: UITableViewDataSource {
             tags.remove(at: indexPath.row)
             tableView.reloadData()
         }
+    }
+}
+
+// textfield
+extension InterestViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
     }
 }
