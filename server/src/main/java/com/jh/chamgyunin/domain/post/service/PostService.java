@@ -17,7 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Transactional
 @Service
@@ -36,6 +35,9 @@ public class PostService {
         List<Tag> attachedTags = new ArrayList<>();
         for (Tag tag : tags) {
             attachedTags.add(tagService.insertTag(tag));
+        }
+        for (Tag tag : attachedTags) {
+            tag.increaseNumPost();
         }
         post.setTag(attachedTags);
 

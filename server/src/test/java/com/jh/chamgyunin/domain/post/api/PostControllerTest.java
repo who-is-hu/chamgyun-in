@@ -5,6 +5,7 @@ import com.jh.chamgyunin.domain.auth.service.SessionKey;
 import com.jh.chamgyunin.domain.post.dto.PostCreateRequest;
 import com.jh.chamgyunin.domain.post.service.PostService;
 import com.jh.chamgyunin.domain.tag.model.Tag;
+import com.jh.chamgyunin.setup.TagSetUp;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,6 +28,9 @@ class PostControllerTest extends IntegrationTest {
 
     @Autowired
     private PostService postService;
+
+    @Autowired
+    private TagSetUp tagSetUp;
 
     @BeforeEach
     public void setUp() throws Exception {
@@ -57,6 +61,32 @@ class PostControllerTest extends IntegrationTest {
                 .andExpect(jsonPath("$.tag[2].name").value("work"))
         ;
     }
+
+    @Test
+    void 게시글_생성시_태그의_게시글개수_증가() throws Exception{
+        //given
+        PostCreateRequest dto = createPostDto("test", "testbody",
+                new ArrayList<>(Arrays.asList("love", "life", "work")));
+        PostCreateRequest dto2 = createPostDto("test2", "testbody2",
+                new ArrayList<>(Arrays.asList("love", "life", "new")));
+
+        //when
+        ResultActions resultActions1 = requestPostCreate(dto);
+        ResultActions resultActions2 = requestPostCreate(dto2);
+
+        //then
+        resultActions2
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(jsonPath("$.tag[0].name").value("love"))
+                .andExpect(jsonPath("$.tag[0].num_post").value("2"))
+                .andExpect(jsonPath("$.tag[1].name").value("life"))
+                .andExpect(jsonPath("$.tag[1].num_post").value("2"))
+                .andExpect(jsonPath("$.tag[2].name").value("new"))
+                .andExpect(jsonPath("$.tag[2].num_post").value("1"))
+        ;
+    }
+
+
 
     @Test
     void 게시글_생성_실패() throws Exception{
