@@ -55,7 +55,7 @@ class PostControllerTest extends IntegrationTest {
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(jsonPath("$.title").value(dto.getTitle()))
                 .andExpect(jsonPath("$.body").value(dto.getBody()))
-                .andExpect(jsonPath("$.tags").value("love,life,work"))
+                .andExpect(jsonPath("$.tag_names").value("love,life,work"))
         ;
     }
 
