@@ -1,7 +1,7 @@
 package com.jh.chamgyunin.domain.tag.api;
 
 import com.jh.chamgyunin.IntegrationTest;
-import com.jh.chamgyunin.domain.auth.service.SessionKey;
+import com.jh.chamgyunin.global.model.SessionKey;
 import com.jh.chamgyunin.domain.tag.dao.TagRepository;
 import com.jh.chamgyunin.domain.tag.dto.UpdateInterestTagRequest;
 import com.jh.chamgyunin.domain.tag.model.Tag;
@@ -14,7 +14,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Arrays;

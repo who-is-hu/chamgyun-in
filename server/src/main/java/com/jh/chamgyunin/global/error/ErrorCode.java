@@ -1,4 +1,4 @@
-package com.jh.chamgyunin.global.error.exception;
+package com.jh.chamgyunin.global.error;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

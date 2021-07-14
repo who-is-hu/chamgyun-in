@@ -1,7 +1,7 @@
 package com.jh.chamgyunin.domain.post.api;
 
 import com.jh.chamgyunin.IntegrationTest;
-import com.jh.chamgyunin.domain.auth.service.SessionKey;
+import com.jh.chamgyunin.global.model.SessionKey;
 import com.jh.chamgyunin.domain.post.dao.PostRepository;
 import com.jh.chamgyunin.domain.post.dto.PostCreateRequest;
 import com.jh.chamgyunin.domain.post.model.Post;

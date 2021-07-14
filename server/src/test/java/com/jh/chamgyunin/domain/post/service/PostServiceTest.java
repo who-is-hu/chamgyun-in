@@ -1,7 +1,7 @@
 package com.jh.chamgyunin.domain.post.service;
 
 import com.jh.chamgyunin.MockTest;
-import com.jh.chamgyunin.domain.auth.dto.UserProvider;
+import com.jh.chamgyunin.global.model.UserProvider;
 import com.jh.chamgyunin.domain.post.dao.PostRepository;
 import com.jh.chamgyunin.domain.post.dto.PostCreateRequest;
 import com.jh.chamgyunin.domain.post.exception.PostNotFoundException;
@@ -15,7 +15,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;

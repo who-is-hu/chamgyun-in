@@ -1,4 +1,4 @@
-package com.jh.chamgyunin.domain.auth.service;
+package com.jh.chamgyunin.global.model;
 
 import lombok.NoArgsConstructor;
 

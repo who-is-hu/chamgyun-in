@@ -2,7 +2,8 @@ package com.jh.chamgyunin.domain.auth.service;
 
 import com.jh.chamgyunin.MockTest;
 import com.jh.chamgyunin.domain.auth.dto.LoginResponse;
-import com.jh.chamgyunin.domain.auth.dto.UserProvider;
+import com.jh.chamgyunin.domain.auth.service.login.SocialLoginService;
+import com.jh.chamgyunin.global.model.UserProvider;
 import com.jh.chamgyunin.domain.auth.dto.userinfo.SocialUserInfo;
 import com.jh.chamgyunin.domain.user.model.User;
 import com.jh.chamgyunin.domain.user.service.UserService;

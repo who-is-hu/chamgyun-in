@@ -1,6 +1,7 @@
 package com.jh.chamgyunin.domain.auth.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.jh.chamgyunin.global.model.UserProvider;
 import com.jh.chamgyunin.global.validation.SupportedUserProvider;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;

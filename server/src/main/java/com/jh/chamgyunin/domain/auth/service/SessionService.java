@@ -1,6 +1,7 @@
 package com.jh.chamgyunin.domain.auth.service;
 
 import com.jh.chamgyunin.domain.auth.exception.UserIsNotLoggedInException;
+import com.jh.chamgyunin.global.model.SessionKey;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

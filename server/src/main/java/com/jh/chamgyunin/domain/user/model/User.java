@@ -1,6 +1,7 @@
 package com.jh.chamgyunin.domain.user.model;
 
-import com.jh.chamgyunin.domain.auth.dto.UserProvider;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.jh.chamgyunin.global.model.UserProvider;
 import com.jh.chamgyunin.domain.tag.model.Tag;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -22,14 +23,18 @@ public class User {
     @Column(name = "user_id")
     private Long id;
 
-    @Column(name = "email")
+    @Column(name = "email", nullable = false)
     private String email;
+
+    @JsonIgnore
+    @Column(name = "password")
+    private String password;
 
     @Column(name = "nickname")
     private String nickname;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "provider")
+    @Column(name = "provider", nullable = false)
     private UserProvider provider;
 
     @Setter

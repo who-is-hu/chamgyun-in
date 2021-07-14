@@ -1,6 +1,6 @@
 package com.jh.chamgyunin.global.config.resttemplate;
 
-import com.jh.chamgyunin.global.error.RestTemplateResponseErrorHandler;
+import com.jh.chamgyunin.global.error.exception.RestTemplateResponseErrorHandler;
 import com.jh.chamgyunin.global.interceptor.RestTemplateHttpInterceptor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.web.client.RestTemplateBuilder;
