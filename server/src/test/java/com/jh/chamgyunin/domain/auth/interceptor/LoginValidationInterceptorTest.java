@@ -1,7 +1,7 @@
 package com.jh.chamgyunin.domain.auth.interceptor;
 
 import com.jh.chamgyunin.IntegrationTest;
-import com.jh.chamgyunin.domain.auth.service.SessionKey;
+import com.jh.chamgyunin.global.model.SessionKey;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

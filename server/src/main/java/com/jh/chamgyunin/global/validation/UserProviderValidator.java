@@ -1,6 +1,6 @@
 package com.jh.chamgyunin.global.validation;
 
-import com.jh.chamgyunin.domain.auth.dto.UserProvider;
+import com.jh.chamgyunin.global.model.UserProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

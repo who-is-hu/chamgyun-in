@@ -1,7 +1,8 @@
-package com.jh.chamgyunin.domain.auth.service;
+package com.jh.chamgyunin.domain.auth.service.login;
 
 import com.jh.chamgyunin.domain.auth.dto.LoginResponse;
-import com.jh.chamgyunin.domain.auth.dto.UserProvider;
+import com.jh.chamgyunin.global.model.SessionKey;
+import com.jh.chamgyunin.global.model.UserProvider;
 import com.jh.chamgyunin.domain.auth.dto.userinfo.SocialUserInfo;
 import com.jh.chamgyunin.domain.user.dto.SignUpRequest;
 import com.jh.chamgyunin.domain.user.model.User;

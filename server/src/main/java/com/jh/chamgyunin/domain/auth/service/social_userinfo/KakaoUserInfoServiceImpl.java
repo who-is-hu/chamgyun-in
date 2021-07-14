@@ -1,6 +1,6 @@
-package com.jh.chamgyunin.domain.auth.service;
+package com.jh.chamgyunin.domain.auth.service.social_userinfo;
 
-import com.jh.chamgyunin.domain.auth.dto.UserProvider;
+import com.jh.chamgyunin.global.model.UserProvider;
 import com.jh.chamgyunin.domain.auth.dto.userinfo.KakaoUserInfo;
 import com.jh.chamgyunin.domain.auth.dto.userinfo.SocialUserInfo;
 import lombok.RequiredArgsConstructor;

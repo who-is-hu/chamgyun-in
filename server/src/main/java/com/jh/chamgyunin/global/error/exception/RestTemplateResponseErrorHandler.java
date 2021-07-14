@@ -1,4 +1,4 @@
-package com.jh.chamgyunin.global.error;
+package com.jh.chamgyunin.global.error.exception;
 
 import com.jh.chamgyunin.domain.auth.exception.SocialNotRegisteredUserException;
 import lombok.extern.slf4j.Slf4j;

@@ -1,6 +1,6 @@
 package com.jh.chamgyunin.global.argumentresolver;
 
-import com.jh.chamgyunin.domain.auth.service.SessionKey;
+import com.jh.chamgyunin.global.model.SessionKey;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
