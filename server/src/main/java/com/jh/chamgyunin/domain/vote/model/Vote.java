@@ -18,4 +18,8 @@ public class Vote {
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "choice_id")
     private List<Choice> choices;
+
+    @Enumerated
+    @Column(name = "state")
+    private VoteState state;
 }
