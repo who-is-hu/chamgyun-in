@@ -1,4 +1,4 @@
-package com.jh.chamgyunin.global.config.resttemplate;
+package com.jh.chamgyunin.global.interceptor;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpRequest;

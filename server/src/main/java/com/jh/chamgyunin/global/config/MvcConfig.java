@@ -2,6 +2,7 @@ package com.jh.chamgyunin.global.config;
 
 import com.jh.chamgyunin.domain.auth.interceptor.LoginValidationInterceptor;
 import com.jh.chamgyunin.global.argumentresolver.GetLoginUserIdArgumentResolver;
+import com.jh.chamgyunin.global.interceptor.RequestLogger;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
@@ -14,11 +15,16 @@ import java.util.List;
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {
 
+    private final RequestLogger requestLogger;
     private final LoginValidationInterceptor loginValidationInterceptor;
+
     private final GetLoginUserIdArgumentResolver getLoginUserIdArgumentResolver;
+
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(requestLogger)
+                .excludePathPatterns("/swagger-ui/**");
         registry.addInterceptor(loginValidationInterceptor);
     }
 
