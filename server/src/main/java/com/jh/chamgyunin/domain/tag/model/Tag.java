@@ -23,16 +23,15 @@ public class Tag {
     @Column(name = "tag_id")
     private Long id;
 
-    @Column(name = "name", unique = true)
+    @Column(name = "name", unique = true, nullable = false)
     private String name;
 
     @JsonProperty(value = "num_post")
-    @Column(name = "num_post")
-    private Long numPost;
+    @Column(name = "num_post", nullable = false)
+    private Long numPost = 0L;
 
     private Tag(String name) {
         this.name = name;
-        this.numPost = 0L;
     }
 
     public static Tag of(final String name) {
