@@ -12,6 +12,10 @@ class HashGroupWorryViewController: UIViewController {
     // MARK: - Properties
     var dataSource: [WorryDataVO] = []
     var hashText: String? = nil
+    let display: Int = 10
+    var loadedPage: Int = 0
+    var totalPage: Int = 0
+    let refreshControler = UIRefreshControl()
     
     // MARK: - IBOutlet
     @IBOutlet weak var tableView: UITableView!
@@ -26,24 +30,52 @@ class HashGroupWorryViewController: UIViewController {
         self.tableView.estimatedRowHeight = 151
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        
+        refreshControler.attributedTitle = NSAttributedString(string: "당겨서 새로고침")
+        refreshControler.addTarget(self, action: #selector(pullRefresh), for: .valueChanged)
+        tableView.refreshControl = self.refreshControler
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         if let hashText = self.hashText {
             self.title = "#\(hashText)"
+            dataSource.removeAll()
+            tableView.reloadData()
             loadWorryData(text: hashText)
         }
     }
     
-    func loadWorryData(text: String) {
+    func loadWorryData(text: String, page: Int = 0) {
         // load data from server using text
         
-        //
-        dataSource.removeAll()
+        let reqUrl = "\(APIRequest.worryPostUrl)?page=\(page)&size=\(display)&tags=\(text)"
+        APIRequest().request(url: reqUrl, method: "GET", voType: PageableWorryDataVO.self) { success, data in
+            guard success, let data = data as? PageableWorryDataVO else {
+                return
+            }
+            
+            self.totalPage = data.totalPages
+            self.loadedPage = data.pageable.pageNumber
+            
+            self.dataSource.append(contentsOf: data.content)
+            
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+                
+                if self.refreshControler.isRefreshing {
+                    self.refreshControler.endRefreshing()
+                }
+            }
+        }
+    }
+    
+    // MARK: - Objc
+    @objc func pullRefresh(_ sender: UIRefreshControl) {
+        self.dataSource.removeAll()
+        self.tableView.reloadData()
         
-
-        
-        tableView.reloadData()
+        loadWorryData(text: self.hashText!)
     }
 }
 
@@ -82,6 +114,17 @@ extension HashGroupWorryViewController: UITableViewDataSource {
         cell.tagListView.textFont = UIFont.boldSystemFont(ofSize: 13)
         
         return cell
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        
+        if offsetY > contentHeight - scrollView.frame.height {
+            if totalPage-1 > loadedPage {
+                loadWorryData(text: hashText!, page: loadedPage+1)
+            }
+        }
     }
 }
 
