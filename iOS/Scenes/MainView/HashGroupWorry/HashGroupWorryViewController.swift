@@ -15,6 +15,7 @@ class HashGroupWorryViewController: UIViewController {
     let display: Int = 10
     var loadedPage: Int = 0
     var totalPage: Int = 0
+    let refreshControler = UIRefreshControl()
     
     // MARK: - IBOutlet
     @IBOutlet weak var tableView: UITableView!
@@ -29,6 +30,11 @@ class HashGroupWorryViewController: UIViewController {
         self.tableView.estimatedRowHeight = 151
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        
+        refreshControler.attributedTitle = NSAttributedString(string: "당겨서 새로고침")
+        refreshControler.addTarget(self, action: #selector(pullRefresh), for: .valueChanged)
+        tableView.refreshControl = self.refreshControler
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -56,8 +62,20 @@ class HashGroupWorryViewController: UIViewController {
             
             DispatchQueue.main.async {
                 self.tableView.reloadData()
+                
+                if self.refreshControler.isRefreshing {
+                    self.refreshControler.endRefreshing()
+                }
             }
         }
+    }
+    
+    // MARK: - Objc
+    @objc func pullRefresh(_ sender: UIRefreshControl) {
+        self.dataSource.removeAll()
+        self.tableView.reloadData()
+        
+        loadWorryData(text: self.hashText!)
     }
 }
 
