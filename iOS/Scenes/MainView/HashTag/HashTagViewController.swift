@@ -7,19 +7,13 @@
 
 import UIKit
 
-
-struct HashInfoVO {
-    let hashtag: String
-    let boardCnt: Int
-}
-
 class HashTagViewController: UIViewController {
     
     // MARK: - IBOutlet
     @IBOutlet weak var searchView: UISearchBar!
     @IBOutlet weak var hashTableView: UITableView!
     
-    var dataSource: [HashInfoVO] = []
+    var dataSource: [TagVO] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,15 +38,6 @@ class HashTagViewController: UIViewController {
         // sample
         dataSource.removeAll()
         
-        dataSource.append(HashInfoVO(hashtag: "감자", boardCnt: 3))
-        dataSource.append(HashInfoVO(hashtag: "바나나", boardCnt: 1))
-        dataSource.append(HashInfoVO(hashtag: "딸기", boardCnt: 2))
-        dataSource.append(HashInfoVO(hashtag: "자전거", boardCnt: 20))
-        dataSource.append(HashInfoVO(hashtag: "유튜브", boardCnt: 22))
-        dataSource.append(HashInfoVO(hashtag: "자전거", boardCnt: 20))
-        dataSource.append(HashInfoVO(hashtag: "유튜브", boardCnt: 22))
-        dataSource.append(HashInfoVO(hashtag: "자전거", boardCnt: 20))
-        dataSource.append(HashInfoVO(hashtag: "유튜브", boardCnt: 22))
         
         hashTableView.reloadData()
     }
@@ -87,7 +72,7 @@ extension HashTagViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         
         if let hashGroupWorryController = storyboard?.instantiateViewController(identifier: "HashGroupWorryStoryboard") as? HashGroupWorryViewController {
-            hashGroupWorryController.hashText = dataSource[indexPath.row].hashtag
+            hashGroupWorryController.hashText = dataSource[indexPath.row].name
             self.navigationController?.pushViewController(hashGroupWorryController, animated: true)
         }
     }
@@ -101,8 +86,8 @@ extension HashTagViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "hashTagTableViewCellNib") as! HashTagTableViewCell
         
-        cell.hashTitleLabel.text = "\(dataSource[indexPath.row].hashtag)"
-        cell.hashPostCntLabel.text = "고민 개수 : \(dataSource[indexPath.row].boardCnt)"
+        cell.hashTitleLabel.text = "\(dataSource[indexPath.row].name)"
+        cell.hashPostCntLabel.text = "고민 개수 : \(dataSource[indexPath.row].postNumber)"
         
         return cell
     }
