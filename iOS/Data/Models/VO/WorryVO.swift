@@ -9,12 +9,32 @@ import Foundation
 
 struct WorryDataVO : Codable {
     let id: Int?
-    let title: String
-    let body: String
+    let title: String?
+    let body: String?
     let viewCount: Int?
-    let tags: [String]?
+    var tags: String?
     let viewType: WorryViewType?
     let createdAt: String?
+    
+    var splitTags: [String]? {
+        get {
+            return tags?.components(separatedBy: ",")
+        }
+
+        set {
+            self.tags = newValue?.joined(separator: ",")
+        }
+    }
+    
+    private enum CodingKeys: String, CodingKey {
+        case id
+        case title
+        case body
+        case viewCount
+        case tags = "tag_names"
+        case viewType
+        case createdAt
+    }
 }
 
 enum WorryViewType : Int, Codable {
