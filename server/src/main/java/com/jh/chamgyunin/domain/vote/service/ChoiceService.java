@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -22,4 +23,12 @@ public class ChoiceService {
         return choiceRepository.findById(id).orElseThrow(()->new ChoiceNotFoundException(id));
     }
 
+    public void deleteById(final Long id) {
+        Optional<Choice> choice = choiceRepository.findById(id);
+        if (choice.isPresent()) {
+            choiceRepository.delete(choice.get());
+        } else {
+            throw new ChoiceNotFoundException(id);
+        }
+    }
 }
