@@ -1347,6 +1347,11 @@
             <point key="canvasLocation" x="5129" y="62"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="dQz-DA-vaB">
+            <size key="intrinsicContentSize" width="378" height="32"/>
+        </designable>
+    </designables>
     <inferredMetricsTieBreakers>
         <segue reference="rEB-NA-FeD"/>
     </inferredMetricsTieBreakers>

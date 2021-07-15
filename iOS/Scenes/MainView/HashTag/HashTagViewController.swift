@@ -8,6 +8,11 @@
 import UIKit
 
 class HashTagViewController: UIViewController {
+    // MARK: - Properties
+    private var totalDataPageNumber: Int = 0
+    private var loadedPageNumber: Int = 0
+    private let display: Int = 15
+    private let refreshControl: UIRefreshControl = UIRefreshControl()
     
     // MARK: - IBOutlet
     @IBOutlet weak var searchView: UISearchBar!
@@ -28,18 +33,53 @@ class HashTagViewController: UIViewController {
         hashTableView.delegate = self
         hashTableView.dataSource = self
         
-        loadHashTagData()
+        refreshControl.attributedTitle = NSAttributedString(string: "당겨서 새로고침")
+        refreshControl.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
+        hashTableView.refreshControl = refreshControl
+        
+        loadHashTagData(page: 0)
     }
     
     
     /// Search HashTag From Sercer
     /// - Parameter searchText: search string. if it is nil then search all hashtag
-    func loadHashTagData(searchText: String? = nil) {
-        // sample
-        dataSource.removeAll()
+    func loadHashTagData(page: Int, searchText: String? = nil) {
+        let reqUrl: String
         
         
-        hashTableView.reloadData()
+        
+        if let searchText = searchText {
+            
+            reqUrl = "\(APIRequest.tagListGetUrl)?size=\(display)&page=\(page)&key=\(searchText)"
+        } else {
+            reqUrl = "\(APIRequest.tagListGetUrl)?size=\(display)&page=\(page)"
+        }
+        
+        APIRequest().request(url: reqUrl, method: "GET", voType: PageableTagVO.self) { success, data in
+            guard success, let data = data as? PageableTagVO else {
+                self.loadedPageNumber-=1
+                return
+            }
+            
+            self.dataSource.append(contentsOf: data.content)
+            self.totalDataPageNumber = data.totalPages
+            self.loadedPageNumber = data.pageable.pageNumber
+            
+            DispatchQueue.main.async {
+                self.hashTableView.reloadData()
+                if self.refreshControl.isRefreshing {
+                    self.refreshControl.endRefreshing()
+                }
+            }
+        }
+    }
+    
+    // MARK: - Objc
+    @objc func pullToRefresh(_ sender: UIRefreshControl) {
+        self.dataSource.removeAll()
+        self.hashTableView.reloadData()
+        
+        loadHashTagData(page: 0, searchText: self.searchView.text)
     }
 }
 
@@ -57,11 +97,10 @@ extension HashTagViewController: UISearchBarDelegate {
     }
     
     func searchHashTag(text: String) {
-        print("search string : \(text)")
-        // load data from server and apply to table datasource
+        self.dataSource.removeAll()
+        self.hashTableView.reloadData()
         
-        // --
-        loadHashTagData()
+        loadHashTagData(page: 0, searchText: text)
     }
 }
 
@@ -76,6 +115,18 @@ extension HashTagViewController: UITableViewDelegate {
             self.navigationController?.pushViewController(hashGroupWorryController, animated: true)
         }
     }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        
+        if offsetY > contentHeight - scrollView.frame.height {
+            if totalDataPageNumber-1 > loadedPageNumber {
+                loadedPageNumber+=1
+                loadHashTagData(page: loadedPageNumber)
+            }
+        }
+    }
 }
 
 extension HashTagViewController: UITableViewDataSource {
@@ -87,7 +138,7 @@ extension HashTagViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "hashTagTableViewCellNib") as! HashTagTableViewCell
         
         cell.hashTitleLabel.text = "\(dataSource[indexPath.row].name)"
-        cell.hashPostCntLabel.text = "고민 개수 : \(dataSource[indexPath.row].postNumber)"
+        cell.hashPostCntLabel.text = "고민 개수 : \(dataSource[indexPath.row].postNumber ?? 0)"
         
         return cell
     }

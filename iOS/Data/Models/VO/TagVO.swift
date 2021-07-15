@@ -12,6 +12,12 @@ struct TagVO : Codable {
     let name: String
     let postNumber: Int?
     
+    init(id: Int, name: String, postNumber: Int = 0) {
+        self.id = id
+        self.name = name
+        self.postNumber = postNumber
+    }
+    
     enum CodingKeys: String, CodingKey {
         case id
         case name
