@@ -1,8 +1,10 @@
 package com.jh.chamgyunin.domain.vote.model;
 
 import lombok.Getter;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -22,4 +24,8 @@ public class Vote {
     @Enumerated
     @Column(name = "state")
     private VoteState state;
+
+    @Column(name = "created_at")
+    @CreationTimestamp
+    private LocalDateTime created_at;
 }
