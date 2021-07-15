@@ -13,6 +13,8 @@ class APIRequest {
     static let authSignInUrl: String = "/auth/social/login"
     
     static let worryPostUrl: String = "/post"
+    
+    static let tagListGetUrl: String = "/tag"
     static let tagGetPatchUrl: String = "/tag/interest"
     
     func requestGet<T: Codable>(url: String, voType: T.Type, completionHandler: @escaping (Bool, Any) -> Void) {
