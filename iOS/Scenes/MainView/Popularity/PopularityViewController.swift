@@ -69,7 +69,11 @@ extension PopularityViewController: UITableViewDataSource {
         cell.bodyView.text = dataSource[indexPath.row].body
         cell.selectedCountView.text = "조회수 \(dataSource[indexPath.row].viewCount ?? 0)"
         cell.tagListView.removeAllTags()
-        cell.tagListView.addTags(dataSource[indexPath.row].tags ?? [])
+        
+        if let tags = dataSource[indexPath.row].splitTags {
+            cell.tagListView.addTags(tags)
+        }
+        
         cell.tagListView.delegate = self
         cell.tagListView.textFont = UIFont.boldSystemFont(ofSize: 13)
         

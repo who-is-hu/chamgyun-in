@@ -15,6 +15,8 @@ class AddWorryViewController: UIViewController {
     private var oxContainerViewController: OXContainerViewController?
     // placeholder String
     private let placeholder: String = "고민이 뭐에요?"
+    // tag
+    private var tagsData: [String] = []
     
     // MARK: - IBOutlet
     @IBOutlet weak var worryTitle: UITextField!
@@ -32,11 +34,17 @@ class AddWorryViewController: UIViewController {
     }
     
     @IBAction func addTagTouchInside(_ sender: UIButton) {
-        if let text = addTagText.text {
-            if !text.isEmpty {
+        if let text = addTagText.text?.lowercased() {
+            if tagsData.count >= 5 {
+                let alert = UIAlertController(title: "알림", message: "태그는 최대 5개 까지 추가 할 수 있습니다.", preferredStyle: .alert)
+                let defaultAction = UIAlertAction(title: "확인", style: .default, handler: nil)
+                alert.addAction(defaultAction)
+                self.present(alert, animated: true, completion: nil)
+            } else if !text.isEmpty && !tagsData.contains(text) {
                 tagListView.addTag("#\(text)")
-                addTagText.text = nil
+                tagsData.append("\(text)")
             }
+            addTagText.text = nil
         }
         
         self.view.endEditing(true)
@@ -61,12 +69,14 @@ class AddWorryViewController: UIViewController {
             return
         }
         
-        let worryData: [String: Any] = ["title": title, "body": body]
+        let worryData: [String: Any] = ["title": title, "tag_names": tagsData, "body": body]
+        print(worryData)
         APIRequest().request(url: APIRequest.worryPostUrl, method: "POST", voType: WorryDataVO.self, param: worryData) { success, data in
             var msg: String = ""
             
             if success {
                 msg = "고민 등록 성공"
+                print(data)
             } else {
                 msg = "고민 등록 실패"
             }
@@ -155,6 +165,11 @@ extension AddWorryViewController: UITextViewDelegate {
 // taglistview
 extension AddWorryViewController: TagListViewDelegate {
     func tagRemoveButtonPressed(_ title: String, tagView: TagView, sender: TagListView) {
+        let startIndex = title.index(title.startIndex, offsetBy: 1)
+        let findString = title[startIndex...]
+        let index = tagsData.firstIndex(of: String(findString))!
+        tagsData.remove(at: index)
+        
         tagListView.removeTag(title)
     }
 }

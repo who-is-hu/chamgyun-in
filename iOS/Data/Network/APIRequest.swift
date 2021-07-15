@@ -40,6 +40,10 @@ class APIRequest {
                 return
             }
             
+            print(response.debugDescription)
+            let responseData = String(data: data, encoding: String.Encoding.utf8)
+            print(responseData)
+            
             guard let output = try? JSONDecoder().decode(T.self, from: data) else {
                 print("Error: JSON Data Parsing error")
                 return
@@ -83,6 +87,10 @@ class APIRequest {
                 print("Error: HTTP request failed code is \(response.statusCode)")
                 return
             }
+            
+            print(response.debugDescription)
+            let responseData = String(data: data, encoding: String.Encoding.utf8)
+            print(responseData)
             
             guard let output = try? JSONDecoder().decode(voType, from: data) else {
                 print("Error: JSON Data Parsing error")
