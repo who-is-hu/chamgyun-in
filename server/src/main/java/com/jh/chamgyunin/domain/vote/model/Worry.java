@@ -21,9 +21,13 @@ public class Worry {
     @JoinColumn(name = "choice_id")
     private List<Choice> choices;
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     @Column(name = "state")
     private WorryState state;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "type")
+    private WorryType type;
 
     @Column(name = "created_at")
     @CreationTimestamp
