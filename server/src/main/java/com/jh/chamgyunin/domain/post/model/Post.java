@@ -3,6 +3,7 @@ package com.jh.chamgyunin.domain.post.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.jh.chamgyunin.domain.user.model.User;
+import com.jh.chamgyunin.domain.vote.model.Worry;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -21,10 +22,10 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="title")
+    @Column(name="title", nullable = false)
     private String title;
 
-    @Column(name="body")
+    @Column(name="body", nullable = false)
     private String body;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -33,9 +34,14 @@ public class Post {
     private User owner;
 
     @Setter
-    @Column(name = "tag_id")
+    @Column(name = "tag_names")
     @JsonProperty(value = "tag_names")
     private String tags;
+
+    @Setter
+    @OneToOne
+    @JoinColumn(name = "worry_id")
+    private Worry worry;
 
     @Column(name="created_at")
     @CreationTimestamp
