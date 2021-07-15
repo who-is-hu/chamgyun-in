@@ -7,19 +7,18 @@
 
 import UIKit
 
-
-struct HashInfoVO {
-    let hashtag: String
-    let boardCnt: Int
-}
-
 class HashTagViewController: UIViewController {
+    // MARK: - Properties
+    private var totalDataPageNumber: Int = 0
+    private var loadedPageNumber: Int = 0
+    private let display: Int = 15
+    private let refreshControl: UIRefreshControl = UIRefreshControl()
     
     // MARK: - IBOutlet
     @IBOutlet weak var searchView: UISearchBar!
     @IBOutlet weak var hashTableView: UITableView!
     
-    var dataSource: [HashInfoVO] = []
+    var dataSource: [TagVO] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,27 +33,53 @@ class HashTagViewController: UIViewController {
         hashTableView.delegate = self
         hashTableView.dataSource = self
         
-        loadHashTagData()
+        refreshControl.attributedTitle = NSAttributedString(string: "당겨서 새로고침")
+        refreshControl.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
+        hashTableView.refreshControl = refreshControl
+        
+        loadHashTagData(page: 0)
     }
     
     
     /// Search HashTag From Sercer
     /// - Parameter searchText: search string. if it is nil then search all hashtag
-    func loadHashTagData(searchText: String? = nil) {
-        // sample
-        dataSource.removeAll()
+    func loadHashTagData(page: Int, searchText: String? = nil) {
+        let reqUrl: String
         
-        dataSource.append(HashInfoVO(hashtag: "감자", boardCnt: 3))
-        dataSource.append(HashInfoVO(hashtag: "바나나", boardCnt: 1))
-        dataSource.append(HashInfoVO(hashtag: "딸기", boardCnt: 2))
-        dataSource.append(HashInfoVO(hashtag: "자전거", boardCnt: 20))
-        dataSource.append(HashInfoVO(hashtag: "유튜브", boardCnt: 22))
-        dataSource.append(HashInfoVO(hashtag: "자전거", boardCnt: 20))
-        dataSource.append(HashInfoVO(hashtag: "유튜브", boardCnt: 22))
-        dataSource.append(HashInfoVO(hashtag: "자전거", boardCnt: 20))
-        dataSource.append(HashInfoVO(hashtag: "유튜브", boardCnt: 22))
         
-        hashTableView.reloadData()
+        
+        if let searchText = searchText {
+            
+            reqUrl = "\(APIRequest.tagListGetUrl)?size=\(display)&page=\(page)&key=\(searchText)"
+        } else {
+            reqUrl = "\(APIRequest.tagListGetUrl)?size=\(display)&page=\(page)"
+        }
+        
+        APIRequest().request(url: reqUrl, method: "GET", voType: PageableTagVO.self) { success, data in
+            guard success, let data = data as? PageableTagVO else {
+                self.loadedPageNumber-=1
+                return
+            }
+            
+            self.dataSource.append(contentsOf: data.content)
+            self.totalDataPageNumber = data.totalPages
+            self.loadedPageNumber = data.pageable.pageNumber
+            
+            DispatchQueue.main.async {
+                self.hashTableView.reloadData()
+                if self.refreshControl.isRefreshing {
+                    self.refreshControl.endRefreshing()
+                }
+            }
+        }
+    }
+    
+    // MARK: - Objc
+    @objc func pullToRefresh(_ sender: UIRefreshControl) {
+        self.dataSource.removeAll()
+        self.hashTableView.reloadData()
+        
+        loadHashTagData(page: 0, searchText: self.searchView.text)
     }
 }
 
@@ -72,11 +97,10 @@ extension HashTagViewController: UISearchBarDelegate {
     }
     
     func searchHashTag(text: String) {
-        print("search string : \(text)")
-        // load data from server and apply to table datasource
+        self.dataSource.removeAll()
+        self.hashTableView.reloadData()
         
-        // --
-        loadHashTagData()
+        loadHashTagData(page: 0, searchText: text)
     }
 }
 
@@ -87,8 +111,20 @@ extension HashTagViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         
         if let hashGroupWorryController = storyboard?.instantiateViewController(identifier: "HashGroupWorryStoryboard") as? HashGroupWorryViewController {
-            hashGroupWorryController.hashText = dataSource[indexPath.row].hashtag
+            hashGroupWorryController.hashText = dataSource[indexPath.row].name
             self.navigationController?.pushViewController(hashGroupWorryController, animated: true)
+        }
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        
+        if offsetY > contentHeight - scrollView.frame.height {
+            if totalDataPageNumber-1 > loadedPageNumber {
+                loadedPageNumber+=1
+                loadHashTagData(page: loadedPageNumber)
+            }
         }
     }
 }
@@ -101,8 +137,8 @@ extension HashTagViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "hashTagTableViewCellNib") as! HashTagTableViewCell
         
-        cell.hashTitleLabel.text = "\(dataSource[indexPath.row].hashtag)"
-        cell.hashPostCntLabel.text = "고민 개수 : \(dataSource[indexPath.row].boardCnt)"
+        cell.hashTitleLabel.text = "\(dataSource[indexPath.row].name)"
+        cell.hashPostCntLabel.text = "고민 개수 : \(dataSource[indexPath.row].postNumber ?? 0)"
         
         return cell
     }
