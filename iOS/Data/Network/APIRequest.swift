@@ -18,7 +18,10 @@ class APIRequest {
     static let tagGetPatchUrl: String = "/tag/interest"
     
     func requestGet<T: Codable>(url: String, voType: T.Type, completionHandler: @escaping (Bool, Any) -> Void) {
-        guard let url = URL(string: "\(baseUrl)\(url)") else {
+        let urlString = "\(baseUrl)\(url)"
+        let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        
+        guard let url = URL(string: encodedString) else {
             print("Error: cannot create url")
             return
         }
@@ -58,8 +61,10 @@ class APIRequest {
     // with body
     func requestPost<T: Codable>(url: String, method: String, voType: T.Type, param: [String: Any], completionHandler: @escaping (Bool, Any) -> Void) {
         let sendData = try! JSONSerialization.data(withJSONObject: param, options: [])
+        let urlString = "\(baseUrl)\(url)"
+        let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
         
-        guard let url = URL(string: "\(baseUrl)\(url)") else {
+        guard let url = URL(string: encodedString) else {
             print("Error: cannot create url")
             return
         }
