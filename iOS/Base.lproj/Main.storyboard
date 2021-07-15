@@ -193,14 +193,14 @@
                                                             <constraint firstAttribute="height" constant="66" id="aMY-da-XHy"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="example@gmail.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M1A-i0-f3W">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M1A-i0-f3W">
                                                         <rect key="frame" x="91" y="16" width="295" height="21"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="홍길동님" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1RL-H6-Zxb">
-                                                        <rect key="frame" x="91" y="45" width="52" height="18"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1RL-H6-Zxb">
+                                                        <rect key="frame" x="91" y="45" width="4" height="18"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -239,8 +239,8 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1000 P" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OJA-mD-d2M">
-                                                        <rect key="frame" x="305" y="15" width="54" height="21"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 P" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OJA-mD-d2M">
+                                                        <rect key="frame" x="334" y="15" width="25" height="21"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -861,6 +861,7 @@
                         <outlet property="interestNavItem" destination="sSV-En-q6u" id="9NZ-HY-uZL"/>
                         <outlet property="questionContentView" destination="Ulz-YT-qdA" id="KuT-6q-azD"/>
                         <outlet property="questionNContentView" destination="24p-Li-rQy" id="PHp-MT-Wy9"/>
+                        <outlet property="tagListView" destination="dQz-DA-vaB" id="daT-Lv-WRv"/>
                         <outlet property="titleLable" destination="rGS-lP-NZV" id="vxw-iB-0QJ"/>
                     </connections>
                 </viewController>
@@ -1346,11 +1347,6 @@
             <point key="canvasLocation" x="5129" y="62"/>
         </scene>
     </scenes>
-    <designables>
-        <designable name="dQz-DA-vaB">
-            <size key="intrinsicContentSize" width="378" height="32"/>
-        </designable>
-    </designables>
     <inferredMetricsTieBreakers>
         <segue reference="rEB-NA-FeD"/>
     </inferredMetricsTieBreakers>
