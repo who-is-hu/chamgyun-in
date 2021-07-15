@@ -1,36 +1,31 @@
 package com.jh.chamgyunin.domain.vote.model;
 
-import com.jh.chamgyunin.domain.user.model.User;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
-@NoArgsConstructor
-@Table(name = "vote")
-public class Vote {
+@Table(name = "worry")
+@Getter
+public class Worry {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "vote_id")
+    @Column(name = "worry_id")
     private Long id;
 
-    @ManyToOne
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "choice_id")
-    private Choice choiceId;
+    private List<Choice> choices;
 
-    @ManyToOne
-    @JoinColumn(name = "worry_id")
-    private Worry worryId;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @Enumerated
+    @Column(name = "state")
+    private WorryState state;
 
     @Column(name = "created_at")
     @CreationTimestamp
     private LocalDateTime created_at;
-
-
 }

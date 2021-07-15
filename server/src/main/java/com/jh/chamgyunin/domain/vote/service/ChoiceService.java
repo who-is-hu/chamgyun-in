@@ -21,7 +21,5 @@ public class ChoiceService {
     public Choice findById(final Long id) {
         return choiceRepository.findById(id).orElseThrow(()->new ChoiceNotFoundException(id));
     }
-    
-
 
 }

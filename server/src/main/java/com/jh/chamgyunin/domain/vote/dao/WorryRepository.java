@@ -1,9 +1,9 @@
 package com.jh.chamgyunin.domain.vote.dao;
 
-import com.jh.chamgyunin.domain.vote.model.Vote;
+import com.jh.chamgyunin.domain.vote.model.Worry;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 
 @Component
-public interface VoteRepository extends JpaRepository<Vote, Long> {
+public interface WorryRepository extends JpaRepository<Worry, Long> {
 }

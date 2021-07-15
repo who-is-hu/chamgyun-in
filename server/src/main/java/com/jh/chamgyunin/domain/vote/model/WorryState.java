@@ -1,13 +1,13 @@
 package com.jh.chamgyunin.domain.vote.model;
 
-public enum VoteState {
+public enum WorryState {
     IN_PROGRESS("IN_PROGRESS"),
     CLOSE("CLOSE"),
     ;
 
     private String value;
 
-    VoteState(String value) {
+    WorryState(String value) {
         this.value = value;
     }
 }

@@ -21,14 +21,11 @@ public class Choice {
     @Column(name = "choice_id")
     private Long id;
 
-    @Column(name = "num_voter", nullable = false)
-    private Long numVoter = 0L;
+    @Column(name = "num_user", nullable = false)
+    private Long numUser = 0L;
 
     @Column(name = "name", nullable = false)
     private String name;
-
-
-
 
 
     public Choice(String name) {
