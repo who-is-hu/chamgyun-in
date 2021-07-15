@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import TagListView
 
 class WorryDetailViewController: UIViewController {
     // MARK: - Properties
@@ -20,6 +21,7 @@ class WorryDetailViewController: UIViewController {
     @IBOutlet weak var interestNavItem: UIBarButtonItem!
     @IBOutlet weak var questionContentView: UIView!
     @IBOutlet weak var questionNContentView: UIView!
+    @IBOutlet weak var tagListView: TagListView!
     
     
     // MARK: - LifeCycle
@@ -32,6 +34,7 @@ class WorryDetailViewController: UIViewController {
         
         // set current interest state
         interestNavItem.image = tabBarImage[0]
+        setUpTagListView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,6 +49,8 @@ class WorryDetailViewController: UIViewController {
         // update View
         self.titleLable.text = data?.title
         self.bodyLable.text = data?.body
+        
+        loadTagsData()
     }
     
     // MARK: - SetUp
@@ -57,6 +62,11 @@ class WorryDetailViewController: UIViewController {
         self.oxContentViewController?.question = QuestionVO(question: "go mountain")
     }
     
+    func setUpTagListView() {
+        self.tagListView.delegate = self
+        self.tagListView.textFont = UIFont.boldSystemFont(ofSize: 13)
+    }
+    
     /// SetUp Navigation Items
     func setUpNavigationItems() {
         interestNavItem.target = self
@@ -64,6 +74,13 @@ class WorryDetailViewController: UIViewController {
         
         tabBarImage.append(UIImage(systemName: "star")!)
         tabBarImage.append(UIImage(systemName: "star.fill")!)
+    }
+    
+    func loadTagsData() {
+        self.tagListView.removeAllTags()
+        if let tags = self.data?.splitTags {
+            self.tagListView.addTags(tags)
+        }
     }
     
     // MARK: Selector
@@ -93,7 +110,7 @@ class WorryDetailViewController: UIViewController {
 
 }
 
-
+// MARK: - Extension And Delegate
 extension WorryDetailViewController {
     func loadQuestionTypeView(type: WorryViewType) {
         if type == .OX {
@@ -103,5 +120,12 @@ extension WorryDetailViewController {
             questionContentView.isHidden = true
             questionNContentView.isHidden = false
         }
+    }
+}
+
+// TagListView
+extension WorryDetailViewController: TagListViewDelegate {
+    func tagPressed(_ title: String, tagView: TagView, sender: TagListView) {
+        print("\(title) selected")
     }
 }
