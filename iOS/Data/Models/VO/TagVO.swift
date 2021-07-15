@@ -10,6 +10,13 @@ import Foundation
 struct TagVO : Codable {
     let id: Int
     let name: String
+    let postNumber: Int?
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case name
+        case postNumber = "num_post"
+    }
 }
 
 struct PageableTagVO: Codable {
