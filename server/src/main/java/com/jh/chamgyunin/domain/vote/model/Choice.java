@@ -22,8 +22,20 @@ public class Choice {
     private Long id;
 
     @Column(name = "num_voter", nullable = false)
-    private Long numVoter;
+    private Long numVoter = 0L;
 
     @Column(name = "name", nullable = false)
     private String name;
+
+
+
+
+
+    public Choice(String name) {
+        this.name = name;
+    }
+
+    public static Choice of(final String name) {
+        return new Choice(name);
+    }
 }
