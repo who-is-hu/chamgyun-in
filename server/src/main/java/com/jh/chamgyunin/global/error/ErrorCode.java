@@ -10,6 +10,8 @@ public enum ErrorCode {
 
     CHOICE_NOT_FOUND(404, "존재하지 않는 선택지에요"),
 
+    INVALID_WORRY_TYPE(400, "잘못된 형태의 고민이에요"),
+
     INVALID_INPUT_VALUE(400,"잘못된 입력이에요"),
 
     USER_ALREADY_EXIST(400,"이미 존재하는 이메일이에요"),
