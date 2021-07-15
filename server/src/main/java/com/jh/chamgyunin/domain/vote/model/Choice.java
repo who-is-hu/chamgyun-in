@@ -35,4 +35,8 @@ public class Choice {
     public static Choice of(final String name) {
         return new Choice(name);
     }
+
+    public void increaseNumUser() {
+        this.numUser++;
+    }
 }
