@@ -15,7 +15,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class OXWorryService implements WorryService {
+public class MultipleChoiceWorryService implements WorryService {
 
     private final WorryRepository worryRepository;
 

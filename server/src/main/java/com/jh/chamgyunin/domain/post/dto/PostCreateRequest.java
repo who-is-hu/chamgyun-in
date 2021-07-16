@@ -5,6 +5,7 @@ import com.jh.chamgyunin.domain.post.model.Post;
 import com.jh.chamgyunin.domain.tag.model.Tag;
 import com.jh.chamgyunin.domain.user.model.User;
 import com.jh.chamgyunin.domain.vote.model.WorryType;
+import io.swagger.annotations.ApiParam;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -32,6 +33,7 @@ public class PostCreateRequest {
     private List<String> tagNames;
 
     @JsonProperty(value = "worry_type")
+    @ApiParam(example = "{OX_CHOICES_WORRY | MULTIPLE_CHOICES_WORRY}")
     @NotNull
     private WorryType worryType;
 
