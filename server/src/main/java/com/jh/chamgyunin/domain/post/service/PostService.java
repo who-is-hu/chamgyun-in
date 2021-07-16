@@ -49,9 +49,6 @@ public class PostService {
         }
         post.setTags(String.join(",", dto.getTagNames()));
 
-        // set choices to worry(dirty check)
-        worry.setChoices(Choice.of(dto.getChoiceNames()));
-
         // set worry to post
         post.setWorry(worry);
 

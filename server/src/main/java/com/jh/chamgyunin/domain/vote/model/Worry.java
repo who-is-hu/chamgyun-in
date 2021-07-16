@@ -45,12 +45,4 @@ public class Worry {
     public static Worry of(WorryType worryType) {
        return new Worry(worryType);
     }
-
-    public void addChoice(Choice choice) {
-        this.choices.add(choice);
-    }
-
-    public void removeChoice(Choice choice) {
-        this.choices.remove(choice);
-    }
 }

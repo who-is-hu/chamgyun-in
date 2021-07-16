@@ -40,7 +40,7 @@ public class PostController {
     public ResponseEntity<Post> create(
             @Valid @RequestBody PostCreateRequest dto, @LoginUserId Long userId) {
         WorryService worryService = worryServiceFactory.createWorryService(dto.getWorryType());
-        Worry worry = worryService.open();
+        Worry worry = worryService.open(dto.getChoiceNames());
         Post post = postService.create(userId, dto, worry);
         return new ResponseEntity<>(post, HttpStatus.CREATED);
     }
