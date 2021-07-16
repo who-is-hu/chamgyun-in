@@ -9,6 +9,10 @@ import com.jh.chamgyunin.domain.tag.model.Tag;
 import com.jh.chamgyunin.domain.tag.service.TagService;
 import com.jh.chamgyunin.domain.user.model.User;
 import com.jh.chamgyunin.domain.user.service.UserService;
+import com.jh.chamgyunin.domain.vote.model.Choice;
+import com.jh.chamgyunin.domain.vote.model.Worry;
+import com.jh.chamgyunin.domain.vote.service.WorryService;
+import com.jh.chamgyunin.domain.vote.service.factory.WorryServiceFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -30,10 +34,11 @@ public class PostService {
     private final UserService userService;
     private final TagService tagService;
 
-    public Post create(final Long userId, final PostCreateRequest dto){
+    public Post create(final Long userId, final PostCreateRequest dto, Worry worry){
         User user = userService.findById(userId);
         Post post = dto.toEntity(user);
 
+        // set tags to post
         List<Tag> tags = Tag.of(dto.getTagNames());
         List<Tag> attachedTags = new ArrayList<>();
         for (Tag tag : tags) {
@@ -43,6 +48,12 @@ public class PostService {
             tag.increaseNumPost();
         }
         post.setTags(String.join(",", dto.getTagNames()));
+
+        // set choices to worry(dirty check)
+        worry.setChoices(Choice.of(dto.getChoiceNames()));
+
+        // set worry to post
+        post.setWorry(worry);
 
         return postRepository.save(post);
     }

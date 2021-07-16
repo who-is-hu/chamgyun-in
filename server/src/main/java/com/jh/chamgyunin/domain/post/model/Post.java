@@ -39,7 +39,7 @@ public class Post {
     private String tags;
 
     @Setter
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST, orphanRemoval = true)
     @JoinColumn(name = "worry_id")
     private Worry worry;
 

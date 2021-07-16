@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.jh.chamgyunin.domain.post.model.Post;
 import com.jh.chamgyunin.domain.tag.model.Tag;
 import com.jh.chamgyunin.domain.user.model.User;
+import com.jh.chamgyunin.domain.vote.model.WorryType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -29,6 +30,14 @@ public class PostCreateRequest {
     @NotNull
     @Size(min=1, max = 5, message = "1~5개 사이의 태그를 추가해주세요")
     private List<String> tagNames;
+
+    @JsonProperty(value = "worry_type")
+    @NotNull
+    private WorryType worryType;
+
+    @JsonProperty(value = "choice_names")
+    @Size(min = 1)
+    private List<String> choiceNames;
 
     public Post toEntity(final User user) {
         Post post = Post.builder()
