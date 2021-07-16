@@ -35,13 +35,13 @@ public class VoteController {
     @ApiOperation(value = "투표 기능")
     @PostMapping
     @IsUserLoggedIn
-    public ResponseEntity<Vote> vote(@LoginUserId Long userId, @Valid @RequestBody VoteRequest dto) {
+    public ResponseEntity vote(@LoginUserId Long userId, @Valid @RequestBody VoteRequest dto) {
         Post post = postService.findById(dto.getPostId());
         Choice choice = choiceService.findById(dto.getChoiceId());
 
         VoteService voteService = voteServiceFactory.createVoteService(post.getVoteType());
-        Vote vote = voteService.vote(userId, post, choice);
+        voteService.vote(userId, post, choice);
 
-        return new ResponseEntity<>(vote, HttpStatus.OK);
+        return new ResponseEntity(HttpStatus.CREATED);
     }
 }

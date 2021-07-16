@@ -3,6 +3,7 @@ package com.jh.chamgyunin.domain.vote.model;
 import com.jh.chamgyunin.domain.post.model.Post;
 import com.jh.chamgyunin.domain.user.model.User;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -12,6 +13,7 @@ import java.time.LocalDateTime;
 @Entity
 @NoArgsConstructor
 @Table(name = "vote")
+@Getter
 public class Vote {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
