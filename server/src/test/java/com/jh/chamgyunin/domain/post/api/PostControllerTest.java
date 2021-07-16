@@ -1,6 +1,8 @@
 package com.jh.chamgyunin.domain.post.api;
 
 import com.jh.chamgyunin.IntegrationTest;
+import com.jh.chamgyunin.domain.vote.model.Worry;
+import com.jh.chamgyunin.domain.vote.model.WorryType;
 import com.jh.chamgyunin.global.model.SessionKey;
 import com.jh.chamgyunin.domain.post.dao.PostRepository;
 import com.jh.chamgyunin.domain.post.dto.PostCreateRequest;
@@ -100,9 +102,10 @@ class PostControllerTest extends IntegrationTest {
     @Test
     void 내_게시글_조회_성공() throws Exception {
         //given
+        Worry worry = Worry.of(WorryType.OX_CHOICES_WORRY);
         for (int i = 1; i <= 10; i++) {
             PostCreateRequest dto = createPostDto("title" + i, "body" + i, new ArrayList<>());
-            postService.create(2L,dto);
+            postService.create(2L,dto,worry);
         }
 
         //when

@@ -7,13 +7,11 @@ import java.util.List;
 
 public interface WorryService {
 
-    Worry open(Post post);
+    Worry open();
 
     void close(Long worryId);
 
     List<Worry> getMyWorries();
 
     Worry findWorryById(Long worryId);
-
-    void addChoice(Long choiceId);
 }

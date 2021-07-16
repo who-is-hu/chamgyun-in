@@ -1,9 +1,8 @@
 package com.jh.chamgyunin.domain.vote.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.jh.chamgyunin.domain.post.model.Post;
-import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -14,6 +13,7 @@ import java.util.List;
 @Entity
 @Table(name = "worry")
 @Getter
+@NoArgsConstructor
 public class Worry {
 
     @Id
@@ -21,8 +21,9 @@ public class Worry {
     @Column(name = "worry_id")
     private Long id;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "choice_id", nullable = false)
+    @Setter
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, orphanRemoval = true)
+    @JoinColumn(name = "worry_id", nullable = false)
     private List<Choice> choices = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
@@ -33,20 +34,16 @@ public class Worry {
     @Column(name = "type", nullable = false)
     private WorryType type;
 
-    @JsonIgnore
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "post_id")
-    private Post post;
-
     @Column(name = "created_at")
     @CreationTimestamp
     private LocalDateTime created_at;
 
-    @Builder
-    public Worry(WorryState state, WorryType type, Post post) {
-        this.state = state;
+    private Worry(WorryType type) {
         this.type = type;
-        this.post = post;
+    }
+
+    public static Worry of(WorryType worryType) {
+       return new Worry(worryType);
     }
 
     public void addChoice(Choice choice) {

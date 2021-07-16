@@ -19,13 +19,8 @@ public class OXWorryService implements WorryService {
     private final WorryRepository worryRepository;
 
     @Override
-    public Worry open(Post post) {
-        Worry worry = Worry.builder()
-                .post(post)
-                .state(WorryState.IN_PROGRESS)
-                .type(WorryType.OX_CHOICES_WORRY)
-                .build();
-        return worryRepository.save(worry);
+    public Worry open() {
+        return Worry.of(WorryType.OX_CHOICES_WORRY);
     }
 
     @Override
@@ -43,8 +38,4 @@ public class OXWorryService implements WorryService {
         return null;
     }
 
-    @Override
-    public void addChoice(Long choiceId) {
-
-    }
 }
