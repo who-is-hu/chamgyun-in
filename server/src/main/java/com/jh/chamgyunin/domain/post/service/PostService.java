@@ -3,6 +3,7 @@ package com.jh.chamgyunin.domain.post.service;
 import com.jh.chamgyunin.domain.post.dao.PostRepository;
 import com.jh.chamgyunin.domain.post.dao.PostSpecification;
 import com.jh.chamgyunin.domain.post.dto.PostCreateRequest;
+import com.jh.chamgyunin.domain.post.dto.PostDto;
 import com.jh.chamgyunin.domain.post.dto.SimplePostDto;
 import com.jh.chamgyunin.domain.post.exception.PostNotFoundException;
 import com.jh.chamgyunin.domain.post.model.Post;
@@ -57,9 +58,15 @@ public class PostService {
         return postRepository.save(post);
     }
 
-    public Post findById(final Long id) {
-        Optional<Post> post = postRepository.findById(id);
-        return post.orElseThrow(() -> new PostNotFoundException(id));
+    public Post findById(final Long postId) {
+        return postRepository.findById(postId).orElseThrow(()->new PostNotFoundException(postId));
+    }
+
+    public PostDto getPostDtoById(final Long userId, final Long postId) {
+        Optional<Post> post = postRepository.findById(postId);
+        return PostDto.of(
+                post.orElseThrow(() -> new PostNotFoundException(postId)),
+                voteFindService.isUserVoted(userId, postId));
     }
 
     public Page<SimplePostDto> findAllByOwnerId(final Long userId, final Pageable pageable) {

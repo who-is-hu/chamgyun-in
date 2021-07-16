@@ -2,6 +2,7 @@ package com.jh.chamgyunin.domain.post.api;
 
 import com.jh.chamgyunin.domain.auth.interceptor.IsUserLoggedIn;
 import com.jh.chamgyunin.domain.post.dto.PostCreateRequest;
+import com.jh.chamgyunin.domain.post.dto.PostDto;
 import com.jh.chamgyunin.domain.post.dto.SimplePostDto;
 import com.jh.chamgyunin.domain.post.model.Post;
 import com.jh.chamgyunin.domain.post.service.PostService;
@@ -42,10 +43,12 @@ public class PostController {
 
     @ApiOperation(value = "고민 게시글 조회")
     @GetMapping("/{postId}")
-    public ResponseEntity<Post> getPost(
+    @IsUserLoggedIn
+    public ResponseEntity<PostDto> getPost(
+            @LoginUserId Long userId,
             @ApiParam(value = "조회할 게시글 id", required = true)
             @Valid @PathVariable(name = "postId") Long postId) {
-        Post post = postService.findById(postId);
+        PostDto post = postService.getPostDtoById(userId, postId);
         return new ResponseEntity<>(post, HttpStatus.OK);
     }
 
