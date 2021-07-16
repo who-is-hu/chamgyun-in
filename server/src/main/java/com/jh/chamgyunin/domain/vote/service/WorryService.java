@@ -9,8 +9,4 @@ public interface WorryService {
     Worry open(List<String> choice_names);
 
     void close(Long worryId);
-
-    List<Worry> getMyWorries();
-
-    Worry findWorryById(Long worryId);
 }
