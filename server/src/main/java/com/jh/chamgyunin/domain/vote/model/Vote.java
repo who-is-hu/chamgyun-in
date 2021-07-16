@@ -1,5 +1,6 @@
 package com.jh.chamgyunin.domain.vote.model;
 
+import com.jh.chamgyunin.domain.post.model.Post;
 import com.jh.chamgyunin.domain.user.model.User;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
@@ -22,8 +23,8 @@ public class Vote {
     private Choice choice;
 
     @ManyToOne
-    @JoinColumn(name = "worry_id")
-    private Worry worry;
+    @JoinColumn(name = "post_id")
+    private Post post;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -34,9 +35,9 @@ public class Vote {
     private LocalDateTime created_at;
 
     @Builder
-    public Vote(Choice choice, Worry worry, User user) {
+    public Vote(Choice choice, Post post, User user) {
         this.choice = choice;
-        this.worry = worry;
+        this.post = post;
         this.user = user;
     }
 }

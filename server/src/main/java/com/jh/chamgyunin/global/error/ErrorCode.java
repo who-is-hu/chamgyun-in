@@ -7,10 +7,11 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum ErrorCode {
     POST_NOT_FOUND(404,"존재하지 않는 고민이에요"),
+    INVALID_WORRY_TYPE(400, "잘못된 형태의 고민이에요"),
 
     CHOICE_NOT_FOUND(404, "존재하지 않는 선택지에요"),
 
-    INVALID_WORRY_TYPE(400, "잘못된 형태의 고민이에요"),
+    INVALID_VOTE_TYPE(400, "잘못된 형태의 투표에요"),
 
     INVALID_INPUT_VALUE(400,"잘못된 입력이에요"),
 

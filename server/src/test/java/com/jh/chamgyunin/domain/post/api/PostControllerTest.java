@@ -1,6 +1,7 @@
 package com.jh.chamgyunin.domain.post.api;
 
 import com.jh.chamgyunin.IntegrationTest;
+import com.jh.chamgyunin.domain.vote.model.VoteType;
 import com.jh.chamgyunin.domain.vote.model.WorryState;
 import com.jh.chamgyunin.domain.vote.model.WorryType;
 import com.jh.chamgyunin.global.model.SessionKey;
@@ -52,6 +53,7 @@ class PostControllerTest extends IntegrationTest {
                 .choiceNames(Arrays.asList("option1", "option2", "option3"))
                 .tagNames(Arrays.asList("love","life","work"))
                 .worryType(WorryType.OX_CHOICES_WORRY)
+                .voteType(VoteType.SELECT_ONE)
                 .build();
 
         //when
@@ -64,7 +66,7 @@ class PostControllerTest extends IntegrationTest {
                 .andExpect(jsonPath("$.body").value(dto.getBody()))
                 .andExpect(jsonPath("$.tag_names").value("love,life,work"))
                 .andExpect(jsonPath("$.state").value(WorryState.IN_PROGRESS.name()))
-                .andExpect(jsonPath("$.type").value(WorryType.OX_CHOICES_WORRY.name()))
+                .andExpect(jsonPath("$.worry_type").value(WorryType.OX_CHOICES_WORRY.name()))
                 .andExpect(jsonPath("$.choices", hasSize(3)))
         ;
     }
@@ -78,6 +80,7 @@ class PostControllerTest extends IntegrationTest {
                 .choiceNames(Arrays.asList("option1", "option2", "option3"))
                 .tagNames(Arrays.asList("love","life","work"))
                 .worryType(WorryType.OX_CHOICES_WORRY)
+                .voteType(VoteType.SELECT_ONE)
                 .build();
         PostCreateRequest dto2 = PostCreateRequest.builder()
                 .title("test title2")
@@ -85,6 +88,7 @@ class PostControllerTest extends IntegrationTest {
                 .choiceNames(Arrays.asList("option1", "option2", "option3"))
                 .tagNames(Arrays.asList("love","life","new"))
                 .worryType(WorryType.OX_CHOICES_WORRY)
+                .voteType(VoteType.SELECT_ONE)
                 .build();
 
         //when

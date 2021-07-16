@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.jh.chamgyunin.domain.post.model.Post;
 import com.jh.chamgyunin.domain.tag.model.Tag;
 import com.jh.chamgyunin.domain.user.model.User;
+import com.jh.chamgyunin.domain.vote.model.VoteType;
 import com.jh.chamgyunin.domain.vote.model.WorryType;
 import io.swagger.annotations.ApiParam;
 import lombok.AllArgsConstructor;
@@ -36,6 +37,11 @@ public class PostCreateRequest {
     @ApiParam(example = "{OX_CHOICES_WORRY | MULTIPLE_CHOICES_WORRY}")
     @NotNull
     private WorryType worryType;
+
+    @JsonProperty(value = "vote_type")
+    @ApiParam(example = "{SELECT_ONE | SELECT_MULTIPLE}")
+    @NotNull
+    private VoteType voteType;
 
     @JsonProperty(value = "choice_names")
     @Size(min = 1)

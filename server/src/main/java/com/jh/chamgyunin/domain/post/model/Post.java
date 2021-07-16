@@ -3,9 +3,7 @@ package com.jh.chamgyunin.domain.post.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.jh.chamgyunin.domain.user.model.User;
-import com.jh.chamgyunin.domain.vote.model.Choice;
-import com.jh.chamgyunin.domain.vote.model.WorryState;
-import com.jh.chamgyunin.domain.vote.model.WorryType;
+import com.jh.chamgyunin.domain.vote.model.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -52,8 +50,14 @@ public class Post {
     private WorryState state = WorryState.IN_PROGRESS;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "type", nullable = false)
-    private WorryType type;
+    @JsonProperty(value = "worry_type")
+    @Column(name = "worry_type", nullable = false)
+    private WorryType worryType;
+
+    @JsonProperty(value = "vote_type")
+    @Enumerated(EnumType.STRING)
+    @Column(name = "vote_type", nullable = false)
+    private VoteType voteType = VoteType.SELECT_ONE;
 
     @Column(name="created_at")
     @CreationTimestamp
@@ -64,6 +68,6 @@ public class Post {
         this.title = title;
         this.body = body;
         this.owner = owner;
-        this.type = worryType;
+        this.worryType = worryType;
     }
 }
