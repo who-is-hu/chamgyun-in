@@ -1,6 +1,7 @@
 package com.jh.chamgyunin.domain.vote.model;
 
 import com.jh.chamgyunin.domain.user.model.User;
+import lombok.Builder;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -18,11 +19,11 @@ public class Vote {
 
     @ManyToOne
     @JoinColumn(name = "choice_id")
-    private Choice choiceId;
+    private Choice choice;
 
     @ManyToOne
     @JoinColumn(name = "worry_id")
-    private Worry worryId;
+    private Worry worry;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -32,5 +33,10 @@ public class Vote {
     @CreationTimestamp
     private LocalDateTime created_at;
 
-
+    @Builder
+    public Vote(Choice choice, Worry worry, User user) {
+        this.choice = choice;
+        this.worry = worry;
+        this.user = user;
+    }
 }
