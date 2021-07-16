@@ -4,6 +4,9 @@ import com.jh.chamgyunin.domain.auth.interceptor.IsUserLoggedIn;
 import com.jh.chamgyunin.domain.post.dto.PostCreateRequest;
 import com.jh.chamgyunin.domain.post.model.Post;
 import com.jh.chamgyunin.domain.post.service.PostService;
+import com.jh.chamgyunin.domain.vote.model.Worry;
+import com.jh.chamgyunin.domain.vote.service.WorryService;
+import com.jh.chamgyunin.domain.vote.service.factory.WorryServiceFactory;
 import com.jh.chamgyunin.global.argumentresolver.LoginUserId;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -29,13 +32,16 @@ import java.util.List;
 public class PostController {
 
     private final PostService postService;
+    private final WorryServiceFactory worryServiceFactory;
 
     @ApiOperation(value = "고민 게시글 작성")
     @PostMapping
     @IsUserLoggedIn
     public ResponseEntity<Post> create(
             @Valid @RequestBody PostCreateRequest dto, @LoginUserId Long userId) {
-        Post post = postService.create(userId, dto);
+        WorryService worryService = worryServiceFactory.createWorryService(dto.getWorryType());
+        Worry worry = worryService.open();
+        Post post = postService.create(userId, dto, worry);
         return new ResponseEntity<>(post, HttpStatus.CREATED);
     }
 

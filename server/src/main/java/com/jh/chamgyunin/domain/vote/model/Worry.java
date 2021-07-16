@@ -28,7 +28,7 @@ public class Worry {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "state", nullable = false)
-    private WorryState state;
+    private WorryState state = WorryState.IN_PROGRESS;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "type", nullable = false)
