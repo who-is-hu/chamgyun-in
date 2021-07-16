@@ -46,6 +46,7 @@ public class PostCreateRequest {
                 .title(this.title)
                 .body(this.body)
                 .owner(user)
+                .worryType(worryType)
                 .build();
         return post;
     }

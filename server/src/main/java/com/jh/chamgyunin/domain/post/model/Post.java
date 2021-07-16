@@ -3,12 +3,16 @@ package com.jh.chamgyunin.domain.post.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.jh.chamgyunin.domain.user.model.User;
-import com.jh.chamgyunin.domain.vote.model.Worry;
+import com.jh.chamgyunin.domain.vote.model.Choice;
+import com.jh.chamgyunin.domain.vote.model.WorryState;
+import com.jh.chamgyunin.domain.vote.model.WorryType;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -39,18 +43,27 @@ public class Post {
     private String tags;
 
     @Setter
-    @OneToOne(cascade = CascadeType.PERSIST, orphanRemoval = true)
-    @JoinColumn(name = "worry_id")
-    private Worry worry;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, orphanRemoval = true)
+    @JoinColumn(name = "post_id", nullable = false)
+    private List<Choice> choices = new ArrayList<>();
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "state", nullable = false)
+    private WorryState state = WorryState.IN_PROGRESS;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "type", nullable = false)
+    private WorryType type;
 
     @Column(name="created_at")
     @CreationTimestamp
     private LocalDateTime createdAt;
 
     @Builder
-    public Post(String title, String body, User owner) {
+    public Post(String title, String body, User owner, WorryType worryType) {
         this.title = title;
         this.body = body;
         this.owner = owner;
+        this.type = worryType;
     }
 }

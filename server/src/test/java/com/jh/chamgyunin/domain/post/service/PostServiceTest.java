@@ -1,11 +1,8 @@
 package com.jh.chamgyunin.domain.post.service;
 
 import com.jh.chamgyunin.MockTest;
-import com.jh.chamgyunin.domain.vote.dao.WorryRepository;
-import com.jh.chamgyunin.domain.vote.model.Worry;
+import com.jh.chamgyunin.domain.vote.model.Choice;
 import com.jh.chamgyunin.domain.vote.model.WorryType;
-import com.jh.chamgyunin.domain.vote.service.WorryService;
-import com.jh.chamgyunin.domain.vote.service.factory.WorryServiceFactory;
 import com.jh.chamgyunin.global.model.UserProvider;
 import com.jh.chamgyunin.domain.post.dao.PostRepository;
 import com.jh.chamgyunin.domain.post.dto.PostCreateRequest;
@@ -58,17 +55,18 @@ class PostServiceTest extends MockTest {
         List<String> tagNames = Arrays.asList("love", "life", "work");
         final String tagString = String.join(",", tagNames);
         List<String> choiceNames = Arrays.asList("option1", "option2", "option3");
-        Worry worry = Worry.of(WorryType.OX_CHOICES_WORRY);
 
         PostCreateRequest dto = PostCreateRequest.builder()
                 .title("test worry post title")
                 .body("test post body")
                 .tagNames(tagNames)
+                .worryType(WorryType.OX_CHOICES_WORRY)
                 .choiceNames(choiceNames)
                 .build();
         Post post = dto.toEntity(user);
         post.setTags(tagString);
-        post.setWorry(worry);
+        post.setChoices(Choice.of(choiceNames));
+
 
         given(userService.findById(any())).willReturn(user);
         given(tagService.insertTag(any()))
@@ -78,14 +76,14 @@ class PostServiceTest extends MockTest {
         given(postRepository.save(any())).willReturn(post);
 
         //when
-        Post result = postService.create(user.getId(), dto, worry);
+        Post result = postService.create(user.getId(), dto);
 
         //then
         Assertions.assertThat(result.getTitle()).isEqualTo(post.getTitle());
         Assertions.assertThat(result.getBody()).isEqualTo(post.getBody());
         Assertions.assertThat(result.getOwner().getEmail()).isEqualTo(user.getEmail());
         Assertions.assertThat(result.getTags()).isEqualTo(tagString);
-        Assertions.assertThat(result.getWorry()).isEqualTo(worry);
+        Assertions.assertThat(result.getChoices().size()).isEqualTo(choiceNames.size());
     }
 
     @Test
@@ -128,7 +126,7 @@ class PostServiceTest extends MockTest {
     public List<Post> makePosts(final User user) {
         List<Post> posts = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
-            posts.add(new Post("title" + i, "body" + i, user));
+            posts.add(new Post("title" + i, "body" + i, user, WorryType.OX_CHOICES_WORRY));
         }
         return posts;
     }

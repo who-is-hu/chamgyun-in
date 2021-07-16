@@ -1,7 +1,6 @@
 package com.jh.chamgyunin.domain.post.api;
 
 import com.jh.chamgyunin.IntegrationTest;
-import com.jh.chamgyunin.domain.vote.model.Worry;
 import com.jh.chamgyunin.domain.vote.model.WorryState;
 import com.jh.chamgyunin.domain.vote.model.WorryType;
 import com.jh.chamgyunin.global.model.SessionKey;
@@ -9,7 +8,6 @@ import com.jh.chamgyunin.domain.post.dao.PostRepository;
 import com.jh.chamgyunin.domain.post.dto.PostCreateRequest;
 import com.jh.chamgyunin.domain.post.model.Post;
 import com.jh.chamgyunin.domain.post.service.PostService;
-import lombok.val;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -65,9 +63,9 @@ class PostControllerTest extends IntegrationTest {
                 .andExpect(jsonPath("$.title").value(dto.getTitle()))
                 .andExpect(jsonPath("$.body").value(dto.getBody()))
                 .andExpect(jsonPath("$.tag_names").value("love,life,work"))
-                .andExpect(jsonPath("$.worry.state").value(WorryState.IN_PROGRESS.name()))
-                .andExpect(jsonPath("$.worry.type").value(WorryType.OX_CHOICES_WORRY.name()))
-                .andExpect(jsonPath("$.worry.choices", hasSize(3)))
+                .andExpect(jsonPath("$.state").value(WorryState.IN_PROGRESS.name()))
+                .andExpect(jsonPath("$.type").value(WorryType.OX_CHOICES_WORRY.name()))
+                .andExpect(jsonPath("$.choices", hasSize(3)))
         ;
     }
 
@@ -128,8 +126,7 @@ class PostControllerTest extends IntegrationTest {
                     .tagNames(Arrays.asList("love","life","work"))
                     .worryType(WorryType.OX_CHOICES_WORRY)
                     .build();
-            Worry worry = Worry.of(WorryType.OX_CHOICES_WORRY);
-            postService.create(2L,dto,worry);
+            postService.create(2L,dto);
         }
 
         //when
@@ -155,6 +152,7 @@ class PostControllerTest extends IntegrationTest {
             Post post = Post.builder()
                     .title("title" + i)
                     .body("body"+i)
+                    .worryType(WorryType.OX_CHOICES_WORRY)
                     .build();
             posts.add(post);
         }
