@@ -2,6 +2,8 @@ package com.jh.chamgyunin.domain.post.api;
 
 import com.jh.chamgyunin.domain.auth.interceptor.IsUserLoggedIn;
 import com.jh.chamgyunin.domain.post.dto.PostCreateRequest;
+import com.jh.chamgyunin.domain.post.dto.PostDto;
+import com.jh.chamgyunin.domain.post.dto.SimplePostDto;
 import com.jh.chamgyunin.domain.post.model.Post;
 import com.jh.chamgyunin.domain.post.service.PostService;
 import com.jh.chamgyunin.global.argumentresolver.LoginUserId;
@@ -41,10 +43,12 @@ public class PostController {
 
     @ApiOperation(value = "고민 게시글 조회")
     @GetMapping("/{postId}")
-    public ResponseEntity<Post> getPost(
+    @IsUserLoggedIn
+    public ResponseEntity<PostDto> getPost(
+            @LoginUserId Long userId,
             @ApiParam(value = "조회할 게시글 id", required = true)
             @Valid @PathVariable(name = "postId") Long postId) {
-        Post post = postService.findById(postId);
+        PostDto post = postService.getPostDtoById(userId, postId);
         return new ResponseEntity<>(post, HttpStatus.OK);
     }
 
@@ -52,19 +56,21 @@ public class PostController {
             "5개씩 잘라서 0번째 페이지")
     @GetMapping("/my")
     @IsUserLoggedIn
-    public ResponseEntity<Page<Post>> getMyPosts(
+    public ResponseEntity<Page<SimplePostDto>> getMyPosts(
             @LoginUserId Long userId,
             @ApiIgnore @PageableDefault(size = 5, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable) {
-        Page<Post> myPosts = postService.findAllByOwnerId(userId, pageable);
+        Page<SimplePostDto> myPosts = postService.findAllByOwnerId(userId, pageable);
         return new ResponseEntity<>(myPosts, HttpStatus.OK);
     }
 
     @ApiOperation(value = "고민 게시글 태그 조회", notes = "/post?page=0&size=5&tags=tag1,tag2,tag3")
     @GetMapping
-    public ResponseEntity<Page<Post>> getPosts(
+    @IsUserLoggedIn
+    public ResponseEntity<Page<SimplePostDto>> getPosts(
+            @LoginUserId Long userId,
             @Size(min = 1, max = 5) @ApiParam(value = "태그 목록") @RequestParam(name = "tags") List<String> tags,
             @ApiIgnore @PageableDefault(size = 5, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable) {
-        Page<Post> posts = postService.findAllByTags(tags, pageable);
+        Page<SimplePostDto> posts = postService.findAllByTags(userId, tags, pageable);
         return new ResponseEntity<>(posts, HttpStatus.OK);
     }
 }

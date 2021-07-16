@@ -3,6 +3,8 @@ package com.jh.chamgyunin.domain.post.service;
 import com.jh.chamgyunin.domain.post.dao.PostRepository;
 import com.jh.chamgyunin.domain.post.dao.PostSpecification;
 import com.jh.chamgyunin.domain.post.dto.PostCreateRequest;
+import com.jh.chamgyunin.domain.post.dto.PostDto;
+import com.jh.chamgyunin.domain.post.dto.SimplePostDto;
 import com.jh.chamgyunin.domain.post.exception.PostNotFoundException;
 import com.jh.chamgyunin.domain.post.model.Post;
 import com.jh.chamgyunin.domain.tag.model.Tag;
@@ -10,6 +12,8 @@ import com.jh.chamgyunin.domain.tag.service.TagService;
 import com.jh.chamgyunin.domain.user.model.User;
 import com.jh.chamgyunin.domain.user.service.UserService;
 import com.jh.chamgyunin.domain.vote.model.Choice;
+import com.jh.chamgyunin.domain.vote.service.VoteFindService;
+import com.jh.chamgyunin.domain.vote.service.VoteService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -21,6 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Transactional
 @Service
@@ -30,6 +35,7 @@ public class PostService {
     private final PostRepository postRepository;
     private final UserService userService;
     private final TagService tagService;
+    private final VoteFindService voteFindService;
 
     public Post create(final Long userId, final PostCreateRequest dto){
         User user = userService.findById(userId);
@@ -52,24 +58,31 @@ public class PostService {
         return postRepository.save(post);
     }
 
-    public Post findById(final Long id) {
-        Optional<Post> post = postRepository.findById(id);
-        return post.orElseThrow(() -> new PostNotFoundException(id));
+    public Post findById(final Long postId) {
+        return postRepository.findById(postId).orElseThrow(()->new PostNotFoundException(postId));
     }
 
-    public Page<Post> findAllByOwnerId(final Long id, final Pageable pageable) {
-        return postRepository.findAllByOwnerId(id, pageable);
+    public PostDto getPostDtoById(final Long userId, final Long postId) {
+        Optional<Post> post = postRepository.findById(postId);
+        return PostDto.of(
+                post.orElseThrow(() -> new PostNotFoundException(postId)),
+                voteFindService.isUserVoted(userId, postId));
     }
 
-    public Page<Post> findAllByOwner(final User user, final Pageable pageable) {
-        return postRepository.findAllByOwner(user, pageable);
+    public Page<SimplePostDto> findAllByOwnerId(final Long userId, final Pageable pageable) {
+        List<SimplePostDto> posts = postRepository.findAllByOwnerId(userId, pageable).stream()
+                .map(post -> SimplePostDto.of(post, voteFindService.isUserVoted(userId, post.getId())))
+                .collect(Collectors.toList());
+        return new PageImpl<SimplePostDto>(posts, pageable, posts.size());
     }
 
-    public Page<Post> findAllByTags(final List<String> tags, final Pageable pageable) {
+    public Page<SimplePostDto> findAllByTags(final Long userId, final List<String> tags, final Pageable pageable) {
         Specification<Post> spec = PostSpecification.containTags(tags);
         List<Post> satisfying = postRepository.findAll(spec);
+        List<SimplePostDto> dtoList = satisfying.stream()
+                .map(post -> SimplePostDto.of(post, voteFindService.isUserVoted(userId, post.getId())))
+                .collect(Collectors.toList());
 
-        PageImpl<Post> page = new PageImpl<>(satisfying, pageable, satisfying.size());
-        return page;
+        return  new PageImpl<SimplePostDto>(dtoList, pageable, satisfying.size());
     }
 }

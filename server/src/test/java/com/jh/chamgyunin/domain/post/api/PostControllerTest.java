@@ -170,6 +170,7 @@ class PostControllerTest extends IntegrationTest {
 
         //when
         ResultActions resultActions = mvc.perform(get("/post")
+                .session(session)
                 .param("tags", searchTags))
                 .andDo(print());
 

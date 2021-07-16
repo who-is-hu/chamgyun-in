@@ -1,8 +1,10 @@
 package com.jh.chamgyunin.domain.post.service;
 
 import com.jh.chamgyunin.MockTest;
+import com.jh.chamgyunin.domain.post.dto.SimplePostDto;
 import com.jh.chamgyunin.domain.vote.model.Choice;
 import com.jh.chamgyunin.domain.vote.model.WorryType;
+import com.jh.chamgyunin.domain.vote.service.VoteFindService;
 import com.jh.chamgyunin.global.model.UserProvider;
 import com.jh.chamgyunin.domain.post.dao.PostRepository;
 import com.jh.chamgyunin.domain.post.dto.PostCreateRequest;
@@ -41,6 +43,8 @@ class PostServiceTest extends MockTest {
     private UserService userService;
     @Mock
     private TagService tagService;
+    @Mock
+    private VoteFindService voteFindService;
 
     private User user;
 
@@ -98,26 +102,11 @@ class PostServiceTest extends MockTest {
         List<Post> posts = makePosts(user);
         PageImpl<Post> postPage = new PageImpl<>(posts, PageRequest.of(0,10), posts.size());
         given(postRepository.findAllByOwnerId(any(),any())).willReturn(postPage);
+        given(voteFindService.isUserVoted(any(),any())).willReturn(true);
 
         //when
         Pageable page = PageRequest.of(0, 5);
-        Page<Post> finds = postService.findAllByOwnerId(user.getId(), page);
-
-        //then
-        Assertions.assertThat(finds.getNumberOfElements()).isEqualTo(posts.size());
-    }
-
-    @Test
-    public void 고민게시글_유저오브젝트_조회() {
-        //given
-        List<Post> posts = makePosts(user);
-        PageImpl<Post> postPage = new PageImpl<>(posts, PageRequest.of(0,10), posts.size());
-
-        given(postRepository.findAllByOwner(eq(user), any())).willReturn(postPage);
-
-        //when
-        Pageable page = PageRequest.of(0, 5);
-        Page<Post> finds = postService.findAllByOwner(user, page);
+        Page<SimplePostDto> finds = postService.findAllByOwnerId(user.getId(), page);
 
         //then
         Assertions.assertThat(finds.getNumberOfElements()).isEqualTo(posts.size());

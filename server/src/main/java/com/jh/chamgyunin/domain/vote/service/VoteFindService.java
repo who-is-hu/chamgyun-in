@@ -8,9 +8,9 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class VoteFindService {
 
-    private VoteRepository voteRepository;
+    private final VoteRepository voteRepository;
 
-    public boolean isUserVoted(final Long userId, final Long voteId) {
-        return !voteRepository.findAllByUserIdAndVoteId(userId, voteId).isEmpty();
+    public boolean isUserVoted(final Long userId, final Long postId) {
+        return !voteRepository.findAllByUserIdAndPostId(userId, postId).isEmpty();
     }
 }
