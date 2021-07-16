@@ -1,6 +1,9 @@
 package com.jh.chamgyunin.domain.post.api;
 
 import com.jh.chamgyunin.IntegrationTest;
+import com.jh.chamgyunin.domain.vote.model.VoteType;
+import com.jh.chamgyunin.domain.vote.model.WorryState;
+import com.jh.chamgyunin.domain.vote.model.WorryType;
 import com.jh.chamgyunin.global.model.SessionKey;
 import com.jh.chamgyunin.domain.post.dao.PostRepository;
 import com.jh.chamgyunin.domain.post.dto.PostCreateRequest;
@@ -42,10 +45,16 @@ class PostControllerTest extends IntegrationTest {
     }
 
     @Test
-    void 게시글_생성_성공() throws Exception{
+    void OX고민_게시글_생성_성공() throws Exception{
         //given
-        PostCreateRequest dto = createPostDto("test", "testbody",
-                new ArrayList<>(Arrays.asList("love", "life", "work")));
+        PostCreateRequest dto = PostCreateRequest.builder()
+                .title("test title")
+                .body("test body")
+                .choiceNames(Arrays.asList("option1", "option2", "option3"))
+                .tagNames(Arrays.asList("love","life","work"))
+                .worryType(WorryType.OX_CHOICES_WORRY)
+                .voteType(VoteType.SELECT_ONE)
+                .build();
 
         //when
         ResultActions resultActions = requestPostCreate(dto);
@@ -56,16 +65,31 @@ class PostControllerTest extends IntegrationTest {
                 .andExpect(jsonPath("$.title").value(dto.getTitle()))
                 .andExpect(jsonPath("$.body").value(dto.getBody()))
                 .andExpect(jsonPath("$.tag_names").value("love,life,work"))
+                .andExpect(jsonPath("$.state").value(WorryState.IN_PROGRESS.name()))
+                .andExpect(jsonPath("$.worry_type").value(WorryType.OX_CHOICES_WORRY.name()))
+                .andExpect(jsonPath("$.choices", hasSize(3)))
         ;
     }
 
     @Test
     void 게시글_생성시_태그의_게시글개수_증가() throws Exception{
         //given
-        PostCreateRequest dto = createPostDto("test", "testbody",
-                new ArrayList<>(Arrays.asList("life", "love", "food")));
-        PostCreateRequest dto2 = createPostDto("test2", "testbody2",
-                new ArrayList<>(Arrays.asList("life", "love", "new")));
+        PostCreateRequest dto = PostCreateRequest.builder()
+                .title("test title")
+                .body("test body")
+                .choiceNames(Arrays.asList("option1", "option2", "option3"))
+                .tagNames(Arrays.asList("love","life","work"))
+                .worryType(WorryType.OX_CHOICES_WORRY)
+                .voteType(VoteType.SELECT_ONE)
+                .build();
+        PostCreateRequest dto2 = PostCreateRequest.builder()
+                .title("test title2")
+                .body("test body2")
+                .choiceNames(Arrays.asList("option1", "option2", "option3"))
+                .tagNames(Arrays.asList("love","life","new"))
+                .worryType(WorryType.OX_CHOICES_WORRY)
+                .voteType(VoteType.SELECT_ONE)
+                .build();
 
         //when
         ResultActions resultActions1 = requestPostCreate(dto);
@@ -79,8 +103,6 @@ class PostControllerTest extends IntegrationTest {
                 .andExpect(jsonPath("$.content[1].num_post").value(2))
         ;
     }
-
-
 
     @Test
     void 게시글_생성_실패() throws Exception{
@@ -101,7 +123,13 @@ class PostControllerTest extends IntegrationTest {
     void 내_게시글_조회_성공() throws Exception {
         //given
         for (int i = 1; i <= 10; i++) {
-            PostCreateRequest dto = createPostDto("title" + i, "body" + i, new ArrayList<>());
+            PostCreateRequest dto = PostCreateRequest.builder()
+                    .title("test title" + i)
+                    .body("test body" + i)
+                    .choiceNames(Arrays.asList("option1", "option2", "option3"))
+                    .tagNames(Arrays.asList("love","life","work"))
+                    .worryType(WorryType.OX_CHOICES_WORRY)
+                    .build();
             postService.create(2L,dto);
         }
 
@@ -128,6 +156,7 @@ class PostControllerTest extends IntegrationTest {
             Post post = Post.builder()
                     .title("title" + i)
                     .body("body"+i)
+                    .worryType(WorryType.OX_CHOICES_WORRY)
                     .build();
             posts.add(post);
         }

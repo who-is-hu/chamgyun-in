@@ -1,6 +1,8 @@
 package com.jh.chamgyunin.domain.post.service;
 
 import com.jh.chamgyunin.MockTest;
+import com.jh.chamgyunin.domain.vote.model.Choice;
+import com.jh.chamgyunin.domain.vote.model.WorryType;
 import com.jh.chamgyunin.global.model.UserProvider;
 import com.jh.chamgyunin.domain.post.dao.PostRepository;
 import com.jh.chamgyunin.domain.post.dto.PostCreateRequest;
@@ -50,14 +52,20 @@ class PostServiceTest extends MockTest {
     @Test
     public void 고민게시글_게시_성공(){
         //given
-        List<String> tagNames = new ArrayList<>(Arrays.asList("love", "life", "work"));
+        List<String> tagNames = Arrays.asList("love", "life", "work");
+        final String tagString = String.join(",", tagNames);
+        List<String> choiceNames = Arrays.asList("option1", "option2", "option3");
+
         PostCreateRequest dto = PostCreateRequest.builder()
                 .title("test worry post title")
                 .body("test post body")
                 .tagNames(tagNames)
+                .worryType(WorryType.OX_CHOICES_WORRY)
+                .choiceNames(choiceNames)
                 .build();
         Post post = dto.toEntity(user);
-        post.setTags(String.join(",",tagNames));
+        post.setTags(tagString);
+        post.setChoices(Choice.of(choiceNames));
 
 
         given(userService.findById(any())).willReturn(user);
@@ -74,6 +82,8 @@ class PostServiceTest extends MockTest {
         Assertions.assertThat(result.getTitle()).isEqualTo(post.getTitle());
         Assertions.assertThat(result.getBody()).isEqualTo(post.getBody());
         Assertions.assertThat(result.getOwner().getEmail()).isEqualTo(user.getEmail());
+        Assertions.assertThat(result.getTags()).isEqualTo(tagString);
+        Assertions.assertThat(result.getChoices().size()).isEqualTo(choiceNames.size());
     }
 
     @Test
@@ -116,7 +126,7 @@ class PostServiceTest extends MockTest {
     public List<Post> makePosts(final User user) {
         List<Post> posts = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
-            posts.add(new Post("title" + i, "body" + i, user));
+            posts.add(new Post("title" + i, "body" + i, user, WorryType.OX_CHOICES_WORRY));
         }
         return posts;
     }
