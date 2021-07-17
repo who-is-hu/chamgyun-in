@@ -106,12 +106,86 @@ class APIRequest {
             let responseData = String(data: data, encoding: String.Encoding.utf8)
             print(responseData ?? "")
             
+
             guard let output = try? JSONDecoder().decode(voType, from: data) else {
                 print("Error: JSON Data Parsing error")
                 return
             }
-            
             completionHandler(true, output)
+
+            
+        }.resume()
+    }
+    
+    func requestGet(url: String, completionHandler: @escaping (Bool) -> Void) {
+        let urlString = "\(baseUrl)\(url)"
+        let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        
+        guard let url = URL(string: encodedString) else {
+            print("Error: cannot create url")
+            return
+        }
+        
+        var request: URLRequest = URLRequest(url: url)
+        request.httpMethod = "GET"
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            guard error == nil else {
+                print("Error: with \(error.debugDescription)")
+                return
+            }
+
+            guard let response = response as? HTTPURLResponse else {
+                print("Error: HTTP request failed")
+                return
+            }
+            
+            guard (200..<300) ~= response.statusCode else {
+                print("Error: HTTP request failed code is \(response.statusCode)")
+                return
+            }
+            
+            print(response.debugDescription)
+
+            completionHandler(true)
+        }.resume()
+    }
+    
+    // with body
+    func requestPost(url: String, method: String, param: [String: Any], completionHandler: @escaping (Bool) -> Void) {
+        let sendData = try! JSONSerialization.data(withJSONObject: param, options: [])
+        let urlString = "\(baseUrl)\(url)"
+        let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        
+        guard let url = URL(string: encodedString) else {
+            print("Error: cannot create url")
+            return
+        }
+        
+        var request: URLRequest = URLRequest(url: url)
+        request.httpMethod = method
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = sendData
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            guard error == nil else {
+                print("Error: with \(error!)")
+                return
+            }
+
+            guard let response = response as? HTTPURLResponse else {
+                print("Error: HTTP request failed")
+                return
+            }
+            
+            guard (200..<300) ~= response.statusCode else {
+                print("Error: HTTP request failed code is \(response.statusCode)")
+                return
+            }
+            
+            print(response.debugDescription)
+
+            completionHandler(true)
         }.resume()
     }
     
@@ -123,6 +197,18 @@ class APIRequest {
         } else {
             requestPost(url: url, method: method, voType: voType, param: param!) { (success, data) in
                 completionHandler(success, data)
+            }
+        }
+    }
+    
+    func request(url: String, method: String, param: [String: Any]? = nil, completionHandler: @escaping (Bool) -> Void) {
+        if method == "GET" {
+            requestGet(url: url) { (success) in
+                completionHandler(success)
+            }
+        } else {
+            requestPost(url: url, method: method, param: param!) { (success) in
+                completionHandler(success)
             }
         }
     }
