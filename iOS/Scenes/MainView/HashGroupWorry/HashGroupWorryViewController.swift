@@ -87,7 +87,7 @@ extension HashGroupWorryViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         
         if let worryViewController = storyboard?.instantiateViewController(identifier: "WorryDetailStoryboard") as? WorryDetailViewController {
-            worryViewController.data = dataSource[indexPath.row]
+            worryViewController.postId = dataSource[indexPath.row].id
             self.navigationController?.pushViewController(worryViewController, animated: true)
         }
     }
@@ -105,13 +105,17 @@ extension HashGroupWorryViewController: UITableViewDataSource {
         
         cell.titleView.text = data.title
         cell.bodyView.text = data.body
-        cell.selectedCountView.text = "조회수 \(dataSource[indexPath.row].viewCount ?? 0)"
+//        cell.selectedCountView.text = "조회수 \(dataSource[indexPath.row].viewCount ?? 0)"
         cell.tagListView.removeAllTags()
         if let tags = dataSource[indexPath.row].splitTags {
             cell.tagListView.addTags(tags)
         }
         cell.tagListView.delegate = self
         cell.tagListView.textFont = UIFont.boldSystemFont(ofSize: 13)
+        
+        if let isVoted = data.voted, isVoted {
+            cell.ansStateButton.isHidden = false
+        }
         
         return cell
     }

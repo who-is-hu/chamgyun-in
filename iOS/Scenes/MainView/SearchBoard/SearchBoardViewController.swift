@@ -61,7 +61,7 @@ extension SearchBoardViewController: UITableViewDelegate {
         boardTableView.deselectRow(at: indexPath, animated: true)
         
         if let worryViewController = storyboard?.instantiateViewController(identifier: "WorryDetailStoryboard") as? WorryDetailViewController {
-            worryViewController.data = dataSource[indexPath.row]
+            worryViewController.postId = dataSource[indexPath.row].id
             self.navigationController?.pushViewController(worryViewController, animated: true)
         }
     }
@@ -78,12 +78,16 @@ extension SearchBoardViewController: UITableViewDataSource {
         
         cell.titleView.text = data.title
         cell.bodyView.text = data.body
-        cell.selectedCountView.text = "조회수 \(dataSource[indexPath.row].viewCount ?? 0)"
+//        cell.selectedCountView.text = "조회수 \(dataSource[indexPath.row].viewCount ?? 0)"
         cell.tagListView.removeAllTags()
         
         if let tags = dataSource[indexPath.row].tags, let splitTags = tags.split(separator: ",") as? [String] {
             
             cell.tagListView.addTags(splitTags)
+        }
+        
+        if let isVoted = data.voted, isVoted {
+            cell.ansStateButton.isHidden = false
         }
         
         cell.tagListView.delegate = self

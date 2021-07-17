@@ -12,8 +12,6 @@ struct QuestionVO {
 }
 
 class ChooseWorryOXContentViewController: UIViewController {
-    
-    @IBOutlet weak var questionLabelView: UILabel!
     @IBOutlet weak var positiveButton: UIButton!
     @IBOutlet weak var negativeButton: UIButton!
     
@@ -23,15 +21,4 @@ class ChooseWorryOXContentViewController: UIViewController {
         super.viewDidLoad()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        updateView()
-    }
-    
-    func updateView() {
-        guard let question = question else {
-            return
-        }
-        
-        questionLabelView.text = question.question
-    }
 }
