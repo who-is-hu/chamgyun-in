@@ -17,6 +17,8 @@ class APIRequest {
     static let tagListGetUrl: String = "/tag"
     static let tagGetPatchUrl: String = "/tag/interest"
     
+    static let votePostUrl: String = "/vote"
+    
     func requestGet<T: Codable>(url: String, voType: T.Type, completionHandler: @escaping (Bool, Any) -> Void) {
         let urlString = "\(baseUrl)\(url)"
         let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
