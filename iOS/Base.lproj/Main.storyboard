@@ -939,16 +939,26 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="BUM-ct-a27">
-                                <rect key="frame" x="20" y="44" width="374" height="256"/>
+                                <rect key="frame" x="20" y="44" width="374" height="206"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4yw-Mv-kBP">
+                                <rect key="frame" x="10" y="260" width="394" height="30"/>
+                                <state key="normal" title="제출"/>
+                                <connections>
+                                    <action selector="submitButtonTouchInside:" destination="X3n-lP-XAu" eventType="touchUpInside" id="P2H-Uq-QOM"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="wHO-la-C8G"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="bottomMargin" secondItem="BUM-ct-a27" secondAttribute="bottom" id="PnM-ra-4qT"/>
+                            <constraint firstItem="4yw-Mv-kBP" firstAttribute="top" secondItem="BUM-ct-a27" secondAttribute="bottom" constant="10" id="CpK-sO-IUo"/>
+                            <constraint firstItem="4yw-Mv-kBP" firstAttribute="leading" secondItem="wHO-la-C8G" secondAttribute="leading" constant="10" id="hsg-Dw-9mx"/>
+                            <constraint firstItem="wHO-la-C8G" firstAttribute="bottom" secondItem="4yw-Mv-kBP" secondAttribute="bottom" constant="10" id="j1h-dF-leY"/>
                             <constraint firstItem="BUM-ct-a27" firstAttribute="leading" secondItem="8wo-ZZ-Nab" secondAttribute="leadingMargin" id="nbZ-7H-Ui4"/>
                             <constraint firstAttribute="trailingMargin" secondItem="BUM-ct-a27" secondAttribute="trailing" id="qvb-y7-O9D"/>
+                            <constraint firstItem="wHO-la-C8G" firstAttribute="trailing" secondItem="4yw-Mv-kBP" secondAttribute="trailing" constant="10" id="rhJ-v8-TZ3"/>
                             <constraint firstItem="BUM-ct-a27" firstAttribute="top" secondItem="8wo-ZZ-Nab" secondAttribute="topMargin" id="thZ-Mb-55Y"/>
                         </constraints>
                     </view>
@@ -959,7 +969,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FIu-ac-NBe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8022" y="291"/>
+            <point key="canvasLocation" x="8021.739130434783" y="290.625"/>
         </scene>
         <!--고민생성-->
         <scene sceneID="Ia9-oH-Lsj">
