@@ -7,40 +7,96 @@
 
 import Foundation
 
-struct WorryDataVO : Codable {
+struct WorryDataDetailVO : Codable {
     let id: Int?
+    let owner: Int?
     let title: String?
     let body: String?
-    let viewCount: Int?
-    var tags: String?
-    let viewType: WorryViewType?
+    let tags: String?
+    let choices: [WorryChooseItem]?
+    let state: String?
+    let voteType: String?
+    let worryType: String?
+    let voted: Bool?
     let createdAt: String?
     
     var splitTags: [String]? {
         get {
             return tags?.components(separatedBy: ",")
         }
-
-        set {
-            self.tags = newValue?.joined(separator: ",")
+    }
+    
+    var worryEnumType: WorryViewType? {
+        get {
+            guard let worryType = self.worryType else {
+                return nil
+            }
+            
+            
+            if worryType == "MULTIPLE_CHOICES_WORRY" {
+                return .N
+            } else {
+                return .OX
+            }
         }
     }
     
     private enum CodingKeys: String, CodingKey {
         case id
+        case owner
         case title
         case body
-        case viewCount
         case tags = "tag_names"
-        case viewType
+        case choices
+        case state
+        case voteType = "vote_type"
+        case worryType = "worry_type"
+        case voted = "is_voted"
         case createdAt
     }
 }
 
-enum WorryViewType : Int, Codable {
+enum WorryViewType {
     case OX
     case N
 }
+
+struct WorryChooseItem: Codable {
+    let id: Int?
+    let name: String?
+    let votedNumber: Int?
+    
+    private enum CodingKeys: String, CodingKey {
+        case id
+        case name
+        case votedNumber = "numUser"
+    }
+}
+
+struct WorryDataVO : Codable {
+    let id: Int?
+    let owner: Int?
+    let title: String?
+    let body: String?
+    let tags: String?
+    let voted: Bool?
+    
+    var splitTags: [String]? {
+        get {
+            return tags?.components(separatedBy: ",")
+        }
+    }
+    
+    private enum CodingKeys: String, CodingKey {
+        case id
+        case owner
+        case title
+        case body
+        case tags = "tag_names"
+        case voted = "is_voted"
+    }
+}
+
 
 struct PageableWorryDataVO: Codable {
     let content: [WorryDataVO]
@@ -55,24 +111,3 @@ struct PageableWorryDataVO: Codable {
     let totalElements: Int
     let totalPages: Int
 }
-
-//{
-//  "content": [
-//    {
-//      "body": "string",
-//      "createdAt": "2021-07-11T10:54:24.507Z",
-//      "id": 0,
-//      "title": "string"
-//    }
-//  ],
-//  "empty": true,
-//  "first": true,
-//  "last": true,
-//  "number": 0,
-//  "numberOfElements": 0,
-//  "pageable":
-//  "size": 0
-//  "sort":
-//  "totalElements": 0,
-//  "totalPages": 0
-//}
