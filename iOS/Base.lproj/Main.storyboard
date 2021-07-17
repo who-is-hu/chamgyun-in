@@ -898,6 +898,9 @@
                                         <rect key="frame" x="0.0" y="0.0" width="207" height="30"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
                                         <state key="normal" title="O"/>
+                                        <connections>
+                                            <action selector="OButtonTouchInside:" destination="tcB-zi-Xcp" eventType="touchUpInside" id="quM-d0-QvZ"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8ee-MT-eoJ">
                                         <rect key="frame" x="207" y="0.0" width="207" height="30"/>
@@ -905,6 +908,9 @@
                                         <state key="normal" title="X">
                                             <color key="titleColor" systemColor="systemRedColor"/>
                                         </state>
+                                        <connections>
+                                            <action selector="XButtonTouchInside:" destination="tcB-zi-Xcp" eventType="touchUpInside" id="cq5-CR-1zL"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -921,10 +927,6 @@
                         </constraints>
                     </view>
                     <size key="freeformSize" width="414" height="100"/>
-                    <connections>
-                        <outlet property="negativeButton" destination="8ee-MT-eoJ" id="sIN-za-bhk"/>
-                        <outlet property="positiveButton" destination="2Zb-zT-4mb" id="pZ5-w1-61t"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h09-Lb-gLE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
