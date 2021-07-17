@@ -1,5 +1,6 @@
 package com.jh.chamgyunin.domain.vote.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -22,6 +23,7 @@ public class Choice {
     @Column(name = "choice_id")
     private Long id;
 
+    @JsonProperty(value = "num_user")
     @Column(name = "num_user", nullable = false)
     private Long numUser = 0L;
 
