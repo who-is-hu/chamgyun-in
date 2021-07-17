@@ -12,7 +12,6 @@ class AddWorryViewController: UIViewController {
 
     // MARK: - Properties
     private var nQueryContainerViewController: NQueryContainerViewController?
-    private var oxContainerViewController: OXContainerViewController?
     // placeholder String
     private let placeholder: String = "고민이 뭐에요?"
     // tag
@@ -22,10 +21,10 @@ class AddWorryViewController: UIViewController {
     @IBOutlet weak var worryTitle: UITextField!
     @IBOutlet weak var worryBody: UITextView!
     @IBOutlet weak var segControlView: UISegmentedControl!
-    @IBOutlet weak var oxQuestionContainer: UIView!
     @IBOutlet weak var nQuestionContaioner: UIView!
     @IBOutlet weak var tagListView: TagListView!
     @IBOutlet weak var addTagText: UITextField!
+    @IBOutlet weak var containerScrollView: UIScrollView!
     
     // MARk: - IBAction
     @IBAction func cancel(_ sender: UIButton) {
@@ -51,26 +50,43 @@ class AddWorryViewController: UIViewController {
     }
     
     @IBAction func addWorry(_ sender: UIButton) {
+        let worryType: WorryViewType
+        let voteType: VoteType = .ONE
+        var chooseItems: [String] = []
+        
+        // worry type
         if segControlView.selectedSegmentIndex == 0 {
             // OX
-            if let text = oxContainerViewController?.queryTextView.text {
-                print(text)
-            }
+            worryType = .OX
+            chooseItems.append(contentsOf: ["O", "X"])
         } else if segControlView.selectedSegmentIndex == 1 {
             // N
-            if let data = nQueryContainerViewController?.dataSource {
-                print(data)
+            worryType = .N
+            if let items = nQueryContainerViewController?.dataSource {
+                chooseItems = items
             }
         } else {
             print("Error")
+            return
         }
         
         guard let title = self.worryTitle.text, let body = self.worryBody.text else {
             return
         }
         
-        let worryData: [String: Any] = ["title": title, "tag_names": tagsData, "body": body]
+        var worryData: [String: Any] =
+            ["title": title,
+             "tag_names": tagsData,
+             "body": body,
+             "vote_type": voteType.rawValue,
+             "worry_type": worryType.rawValue]
+        
+//        if let chooseItems = chooseItems {
+            worryData["choice_names"] = chooseItems
+//        }
+        
         print(worryData)
+        
         APIRequest().request(url: APIRequest.worryPostUrl, method: "POST", voType: WorryDataVO.self, param: worryData) { success, data in
             var msg: String = ""
             
@@ -94,7 +110,10 @@ class AddWorryViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        // hide NQuestions
+        nQuestionContaioner.isHidden = true
+        containerScrollView.delegate = self
+        
         setUpWorryBody()
         segControlView.addTarget(self, action: #selector(segValueChange(_:)), for: .valueChanged)
         
@@ -109,10 +128,7 @@ class AddWorryViewController: UIViewController {
     //   In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destination = segue.destination
-        if let oxContainerViewController = destination as? OXContainerViewController {
-            self.oxContainerViewController = oxContainerViewController
-            oxContainerViewController.view.translatesAutoresizingMaskIntoConstraints = false
-        } else if let nQueryContainerViewController = destination as? NQueryContainerViewController {
+        if let nQueryContainerViewController = destination as? NQueryContainerViewController {
             self.nQueryContainerViewController = nQueryContainerViewController
             nQueryContainerViewController.view.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -134,10 +150,8 @@ class AddWorryViewController: UIViewController {
     // MARK: - Objc
     @objc func segValueChange(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
-            oxQuestionContainer.isHidden = false
             nQuestionContaioner.isHidden = true
         } else {
-            oxQuestionContainer.isHidden = true
             nQuestionContaioner.isHidden = false
         }
 
@@ -171,5 +185,12 @@ extension AddWorryViewController: TagListViewDelegate {
         tagsData.remove(at: index)
         
         tagListView.removeTag(title)
+    }
+}
+
+// scrollview
+extension AddWorryViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        self.view.endEditing(true)
     }
 }

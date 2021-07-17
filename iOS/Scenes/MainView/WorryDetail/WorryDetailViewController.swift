@@ -13,6 +13,7 @@ class WorryDetailViewController: UIViewController {
     private var oxContentViewController: ChooseWorryOXContentViewController?
     private var nContentViewController: ChooseWorryNViewController?
     private var tabBarImage: [UIImage] = []
+    var postId: Int?
     var data: WorryDataVO?
     
     // MARK: - IBOutlet
@@ -30,7 +31,7 @@ class WorryDetailViewController: UIViewController {
         setUpNavigationItems()
         
         // add question controller
-        loadQuestionTypeView(type: data?.viewType ?? .OX)
+        loadWorryDetailData()
         
         // set current interest state
         interestNavItem.image = tabBarImage[0]
@@ -39,27 +40,14 @@ class WorryDetailViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        if questionContentView.isHidden {
-            setUpNData()
-        } else {
-            setUpOXData()
-        }
-        
-        // update View
-        self.titleLable.text = data?.title
-        self.bodyLable.text = data?.body
-        
-        loadTagsData()
     }
     
     // MARK: - SetUp
-    func setUpNData() {
-        self.nContentViewController?.question = NQuestionVO(queries: ["a", "B", "c", "d", "e"], values: [true, false, false, false, false])
-    }
-    
-    func setUpOXData() {
-        self.oxContentViewController?.question = QuestionVO(question: "go mountain")
+    func setUpNData(queries: [String]) {
+        let check: [Bool] = Array(repeating: false, count: queries.count)
+        
+        self.nContentViewController?.question = NQuestionVO(queries: queries, values: check)
+        self.nContentViewController?.queryTableView.reloadData()
     }
     
     func setUpTagListView() {
@@ -76,9 +64,48 @@ class WorryDetailViewController: UIViewController {
         tabBarImage.append(UIImage(systemName: "star.fill")!)
     }
     
-    func loadTagsData() {
+    func loadWorryDetailData() {
+        guard let postId = self.postId else {
+            return
+        }
+        
+        let url: String = "\(APIRequest.worryPostUrl)/\(postId)"
+        APIRequest().request(url: url, method: "GET", voType: WorryDataDetailVO.self) { success, data in
+            guard success else {
+                print("Error: \(url) request")
+                return
+            }
+            
+            if let data = data as? WorryDataDetailVO {
+                DispatchQueue.main.async {
+                    
+                    self.titleLable.text = data.title
+                    self.bodyLable.text = data.body
+                    self.loadTagsData(tags: data.splitTags)
+                    
+                    if data.worryType! == WorryViewType.OX.rawValue {
+                        self.loadQuestionTypeView(type: .OX)
+                    } else {
+                        self.loadQuestionTypeView(type: .N)
+                        
+                        if let choices = data.choices {
+                            let queries: [String] = choices.map({ $0.name! })
+                            print(queries)
+                            self.setUpNData(queries: queries)
+                        }
+                    }
+                    
+                    
+                }
+            }
+            
+            
+        }
+    }
+    
+    func loadTagsData(tags: [String]?) {
         self.tagListView.removeAllTags()
-        if let tags = self.data?.splitTags {
+        if let tags = tags {
             self.tagListView.addTags(tags)
         }
     }

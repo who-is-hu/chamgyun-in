@@ -14,7 +14,7 @@ class WorryTableViewCell: UITableViewCell {
     @IBOutlet weak var titleView: UILabel!
     @IBOutlet weak var bodyView: UILabel!
     @IBOutlet weak var tagListView: TagListView!
-    @IBOutlet weak var selectedCountView: UILabel!
+    @IBOutlet weak var ansStateButton: UIButton!
     
     // MARK: - Lifecycle Method
     override class func awakeFromNib() {
