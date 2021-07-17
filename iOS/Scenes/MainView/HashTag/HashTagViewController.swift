@@ -29,7 +29,7 @@ class HashTagViewController: UIViewController {
         let hashTagTableViewCellNib: UINib = UINib(nibName: String(describing: HashTagTableViewCell.self), bundle: nil)
         hashTableView.register(hashTagTableViewCellNib, forCellReuseIdentifier: "hashTagTableViewCellNib")
         hashTableView.rowHeight = UITableView.automaticDimension
-        hashTableView.estimatedRowHeight = 57
+//        hashTableView.estimatedRowHeight = 60
         hashTableView.delegate = self
         hashTableView.dataSource = self
         

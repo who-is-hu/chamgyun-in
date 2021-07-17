@@ -91,6 +91,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kUQ-fk-fsP">
                                 <rect key="frame" x="0.0" y="107" width="414" height="652"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <inset key="separatorInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                             </tableView>
                             <searchBar contentMode="redraw" placeholder="해시태그 검색" translatesAutoresizingMaskIntoConstraints="NO" id="2FI-IA-Cry">
                                 <rect key="frame" x="0.0" y="56" width="414" height="51"/>
@@ -1348,12 +1349,12 @@
         </scene>
     </scenes>
     <designables>
-        <designable name="dQz-DA-vaB">
-            <size key="intrinsicContentSize" width="378" height="32"/>
+        <designable name="NwE-J6-KS7">
+            <size key="intrinsicContentSize" width="394" height="55"/>
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="rEB-NA-FeD"/>
+        <segue reference="mxL-3H-COY"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="appleid_button" width="300" height="45"/>
