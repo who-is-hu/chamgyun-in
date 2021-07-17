@@ -86,8 +86,14 @@ extension SearchBoardViewController: UITableViewDataSource {
             cell.tagListView.addTags(splitTags)
         }
         
-        if let isVoted = data.voted, isVoted {
-            cell.ansStateButton.isHidden = false
+        if let isVoted = dataSource[indexPath.row].voted, isVoted {
+            cell.ansStateButton.setImage(UIImage(systemName: "checkmark.square.fill"), for: .normal)
+            cell.ansStateButton.setTitleColor(UIColor.red, for: .normal)
+            cell.ansStateButton.tintColor = UIColor.red
+        } else {
+            cell.ansStateButton.setImage(UIImage(systemName: "square"), for: .normal)
+            cell.ansStateButton.setTitleColor(UIColor.lightGray, for: .normal)
+            cell.ansStateButton.tintColor = UIColor.lightGray
         }
         
         cell.tagListView.delegate = self
