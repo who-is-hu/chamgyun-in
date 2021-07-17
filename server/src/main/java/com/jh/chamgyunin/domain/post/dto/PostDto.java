@@ -59,6 +59,7 @@ public class PostDto {
                 .owner(post.getOwner().getId())
                 .createdAt(post.getCreatedAt())
                 .isVoted(isVoted)
+                .state(post.getState())
                 .build();
     }
 }
