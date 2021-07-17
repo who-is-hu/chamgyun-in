@@ -13,6 +13,10 @@ class InterestListViewController: UIViewController {
     // MARK: - Properties
     var dataSource: [WorryDataVO] = []
     let display: Int = 10
+    let refreshControl: UIRefreshControl = UIRefreshControl()
+    
+    private var totalDataPageNumber: Int = 0
+    private var loadedPageNumber: Int = 0
     
     // MARK: - IBOutlet
     @IBOutlet weak var tableView: UITableView!
@@ -32,6 +36,10 @@ class InterestListViewController: UIViewController {
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        
+        self.refreshControl.attributedTitle = NSAttributedString(string: "당겨서 새로고침")
+        self.refreshControl.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
+        self.tableView.refreshControl = self.refreshControl
         
         loadWorryData()
     }
@@ -62,15 +70,31 @@ class InterestListViewController: UIViewController {
                     return
                 }
                 
-                self.dataSource.removeAll()
+                self.loadedPageNumber = data.pageable.pageNumber
+                self.totalDataPageNumber = data.totalPages
+                
                 self.dataSource.append(contentsOf: data.content)
                 
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
+                    
+                    if self.refreshControl.isRefreshing {
+                        self.refreshControl.endRefreshing()
+                    }
                 }
             }
         }
     }
+    
+    
+    // MARK: - objc
+    @objc func pullToRefresh(_ sender: UIRefreshControl) {
+        self.dataSource.removeAll()
+        self.tableView.reloadData()
+        
+        loadWorryData()
+    }
+    
 }
 
 // MARK: - Delegate
@@ -86,6 +110,18 @@ extension InterestListViewController: UITableViewDelegate {
         }
         
     }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        
+        if offsetY > contentHeight - scrollView.frame.height {
+            if totalDataPageNumber - 1 > loadedPageNumber {
+                loadWorryData(page: loadedPageNumber+1)
+            }
+        }
+    }
+    
 }
 
 

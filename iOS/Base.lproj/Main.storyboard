@@ -122,10 +122,10 @@
             </objects>
             <point key="canvasLocation" x="4211.594202898551" y="61.607142857142854"/>
         </scene>
-        <!--인기-->
+        <!--관심태그-->
         <scene sceneID="BhQ-3d-aYf">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="YEC-Bo-3o9" customClass="PopularityViewController" customModule="iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="YEC-Bo-3o9" customClass="InterestListViewController" customModule="iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="z5l-zK-SLR">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -144,10 +144,10 @@
                             <constraint firstItem="gta-cG-wFG" firstAttribute="leading" secondItem="ReZ-vT-xkm" secondAttribute="leading" id="QS3-NG-YMB"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="인기" image="star.fill" catalog="system" id="bIH-cz-f8v">
+                    <tabBarItem key="tabBarItem" title="관심태그" image="star.fill" catalog="system" id="bIH-cz-f8v">
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
                     </tabBarItem>
-                    <navigationItem key="navigationItem" title="인기" id="5Ja-7g-ZD8">
+                    <navigationItem key="navigationItem" title="관심태그" id="5Ja-7g-ZD8">
                         <rightBarButtonItems>
                             <barButtonItem systemItem="add" id="TT1-xN-1mP">
                                 <connections>
@@ -1307,7 +1307,7 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="mkX-5h-zWB"/>
+        <segue reference="mxL-3H-COY"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="appleid_button" width="300" height="45"/>
