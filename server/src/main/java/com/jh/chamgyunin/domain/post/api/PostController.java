@@ -35,9 +35,9 @@ public class PostController {
     @ApiOperation(value = "고민 게시글 작성")
     @PostMapping
     @IsUserLoggedIn
-    public ResponseEntity<Post> create(
+    public ResponseEntity<PostDto> create(
             @Valid @RequestBody PostCreateRequest dto, @LoginUserId Long userId) {
-        Post post = postService.create(userId, dto);
+        PostDto post = postService.create(userId, dto);
         return new ResponseEntity<>(post, HttpStatus.CREATED);
     }
 

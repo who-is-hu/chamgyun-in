@@ -32,12 +32,10 @@ public class Post {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    @JsonIgnore
     private User owner;
 
     @Setter
     @Column(name = "tag_names")
-    @JsonProperty(value = "tag_names")
     private String tags;
 
     @Setter
@@ -50,11 +48,9 @@ public class Post {
     private WorryState state = WorryState.IN_PROGRESS;
 
     @Enumerated(EnumType.STRING)
-    @JsonProperty(value = "worry_type")
     @Column(name = "worry_type", nullable = false)
     private WorryType worryType;
 
-    @JsonProperty(value = "vote_type")
     @Enumerated(EnumType.STRING)
     @Column(name = "vote_type", nullable = false)
     private VoteType voteType = VoteType.SELECT_ONE;

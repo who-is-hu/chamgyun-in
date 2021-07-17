@@ -1,6 +1,8 @@
 package com.jh.chamgyunin.domain.post.api;
 
 import com.jh.chamgyunin.IntegrationTest;
+import com.jh.chamgyunin.domain.user.model.User;
+import com.jh.chamgyunin.domain.user.service.UserService;
 import com.jh.chamgyunin.domain.vote.model.VoteType;
 import com.jh.chamgyunin.domain.vote.model.WorryState;
 import com.jh.chamgyunin.domain.vote.model.WorryType;
@@ -33,6 +35,8 @@ class PostControllerTest extends IntegrationTest {
     private PostService postService;
     @Autowired
     private PostRepository postRepository;
+    @Autowired
+    private UserService userService;
 
     @BeforeEach
     public void setUp() throws Exception {
@@ -47,6 +51,7 @@ class PostControllerTest extends IntegrationTest {
     @Test
     void OX고민_게시글_생성_성공() throws Exception{
         //given
+        User user = userService.findById(2L);
         PostCreateRequest dto = PostCreateRequest.builder()
                 .title("test title")
                 .body("test body")
@@ -150,6 +155,7 @@ class PostControllerTest extends IntegrationTest {
     @Test
     void 태그로_게시글_조회() throws Exception {
         //given
+        User user = userService.findById(2L);
         String searchTags = "love,life,food";
         ArrayList<Post> posts = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
@@ -157,6 +163,7 @@ class PostControllerTest extends IntegrationTest {
                     .title("title" + i)
                     .body("body"+i)
                     .worryType(WorryType.OX_CHOICES_WORRY)
+                    .owner(user)
                     .build();
             posts.add(post);
         }

@@ -27,6 +27,8 @@ public class PostDto {
 
     private String body;
 
+    private Long owner;
+
     @JsonProperty(value = "tag_names")
     private String tags;
 
@@ -42,10 +44,10 @@ public class PostDto {
 
     private LocalDateTime createdAt;
 
-    @JsonProperty(value = "is_user_voted")
-    private boolean isUserVoted;
+    @JsonProperty(value = "is_voted")
+    private boolean isVoted;
 
-    public static PostDto of(Post post, boolean isUserVoted) {
+    public static PostDto of(Post post, boolean isVoted) {
         return PostDto.builder()
                 .id(post.getId())
                 .title(post.getTitle())
@@ -54,8 +56,9 @@ public class PostDto {
                 .tags(post.getTags())
                 .worryType(post.getWorryType())
                 .voteType(post.getVoteType())
+                .owner(post.getOwner().getId())
                 .createdAt(post.getCreatedAt())
-                .isUserVoted(isUserVoted)
+                .isVoted(isVoted)
                 .build();
     }
 }

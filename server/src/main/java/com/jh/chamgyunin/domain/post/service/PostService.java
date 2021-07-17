@@ -37,7 +37,7 @@ public class PostService {
     private final TagService tagService;
     private final VoteFindService voteFindService;
 
-    public Post create(final Long userId, final PostCreateRequest dto){
+    public PostDto create(final Long userId, final PostCreateRequest dto){
         User user = userService.findById(userId);
         Post post = dto.toEntity(user);
 
@@ -55,7 +55,7 @@ public class PostService {
         // set choices
         post.setChoices(Choice.of(dto.getChoiceNames()));
 
-        return postRepository.save(post);
+        return PostDto.of(postRepository.save(post),false);
     }
 
     public Post findById(final Long postId) {

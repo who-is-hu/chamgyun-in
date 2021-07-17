@@ -1,6 +1,7 @@
 package com.jh.chamgyunin.domain.post.service;
 
 import com.jh.chamgyunin.MockTest;
+import com.jh.chamgyunin.domain.post.dto.PostDto;
 import com.jh.chamgyunin.domain.post.dto.SimplePostDto;
 import com.jh.chamgyunin.domain.vote.model.Choice;
 import com.jh.chamgyunin.domain.vote.model.WorryType;
@@ -80,12 +81,12 @@ class PostServiceTest extends MockTest {
         given(postRepository.save(any())).willReturn(post);
 
         //when
-        Post result = postService.create(user.getId(), dto);
+        PostDto result = postService.create(user.getId(), dto);
 
         //then
         Assertions.assertThat(result.getTitle()).isEqualTo(post.getTitle());
         Assertions.assertThat(result.getBody()).isEqualTo(post.getBody());
-        Assertions.assertThat(result.getOwner().getEmail()).isEqualTo(user.getEmail());
+        Assertions.assertThat(result.getOwner()).isEqualTo(user.getId());
         Assertions.assertThat(result.getTags()).isEqualTo(tagString);
         Assertions.assertThat(result.getChoices().size()).isEqualTo(choiceNames.size());
     }
