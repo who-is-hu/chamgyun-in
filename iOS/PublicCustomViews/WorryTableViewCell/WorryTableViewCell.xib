@@ -35,7 +35,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c5S-rL-BY1" userLabel="TagListView" customClass="TagListView" customModule="TagListView">
-                        <rect key="frame" x="20" y="76" width="374" height="28.5"/>
+                        <rect key="frame" x="20" y="76" width="374" height="47"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="paddingY">
                                 <real key="value" value="10"/>
@@ -80,7 +80,7 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="O7V-9K-1TQ">
-                        <rect key="frame" x="394" y="112.5" width="0.0" height="18.5"/>
+                        <rect key="frame" x="394" y="131" width="0.0" height="0.0"/>
                         <subviews>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tFc-mM-Rhv">
                                 <rect key="frame" x="0.0" y="0.0" width="0.0" height="18.5"/>
@@ -91,9 +91,6 @@
                                 </state>
                             </button>
                         </subviews>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="18.5" id="h0t-ay-AQH"/>
-                        </constraints>
                     </stackView>
                 </subviews>
                 <constraints>

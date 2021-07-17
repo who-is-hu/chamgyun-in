@@ -191,7 +191,7 @@ extension UserInfoViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         
         if let worryDetailViewController = storyboard?.instantiateViewController(identifier: "WorryDetailStoryboard") as? WorryDetailViewController {
-            worryDetailViewController.data = selectedVO
+            worryDetailViewController.postId = selectedVO.id
             self.navigationController?.pushViewController(worryDetailViewController, animated: true)
         }
     }
