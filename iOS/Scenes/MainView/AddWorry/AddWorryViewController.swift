@@ -74,6 +74,11 @@ class AddWorryViewController: UIViewController {
             return
         }
         
+        // Tags Default Value is Worry
+        if tagsData.count == 0 {
+            tagsData.append("고민")
+        }
+        
         var worryData: [String: Any] =
             ["title": title,
              "tag_names": tagsData,
