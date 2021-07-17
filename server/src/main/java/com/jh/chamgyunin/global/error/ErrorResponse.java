@@ -1,7 +1,6 @@
 package com.jh.chamgyunin.global.error;
 
 
-import com.jh.chamgyunin.global.error.exception.ErrorCode;
 import lombok.Getter;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
@@ -43,6 +42,7 @@ public class ErrorResponse {
         return new ErrorResponse(errorCode, FieldError.of(bindingResult));
     }
 
+    @Getter
     public static class FieldError {
         private String field;
         private String rejectedValue;

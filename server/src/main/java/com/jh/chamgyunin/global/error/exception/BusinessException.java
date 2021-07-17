@@ -1,5 +1,6 @@
 package com.jh.chamgyunin.global.error.exception;
 
+import com.jh.chamgyunin.global.error.ErrorCode;
 import lombok.Getter;
 
 @Getter

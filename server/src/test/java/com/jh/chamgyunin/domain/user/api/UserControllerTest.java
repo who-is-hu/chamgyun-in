@@ -1,7 +1,7 @@
 package com.jh.chamgyunin.domain.user.api;
 
-import com.jh.chamgyunin.IntergrationTest;
-import com.jh.chamgyunin.domain.login.dto.UserProvider;
+import com.jh.chamgyunin.IntegrationTest;
+import com.jh.chamgyunin.global.model.UserProvider;
 import com.jh.chamgyunin.domain.user.dao.UserRepository;
 import com.jh.chamgyunin.domain.user.dto.SignUpRequest;
 import com.jh.chamgyunin.domain.user.model.User;
@@ -17,7 +17,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
-class UserControllerTest extends IntergrationTest {
+class UserControllerTest extends IntegrationTest {
 
     @Autowired
     private UserSetUp userSetUp;

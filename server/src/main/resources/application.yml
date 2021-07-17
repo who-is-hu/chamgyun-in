@@ -1,7 +1,8 @@
 spring:
-  h2:
-    console:
-      enabled: true
-  jpa:
-    hibernate:
-      ddl-auto: create
+  profiles:
+    active: local
+
+server:
+  port: 8888
+
+

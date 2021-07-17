@@ -1,11 +1,15 @@
 package com.jh.chamgyunin.domain.user.model;
 
-import com.jh.chamgyunin.domain.login.dto.UserProvider;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.jh.chamgyunin.global.model.UserProvider;
+import com.jh.chamgyunin.domain.tag.model.Tag;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Entity
@@ -16,16 +20,27 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
     private Long id;
 
-    @Column(name = "email")
+    @Column(name = "email", nullable = false)
     private String email;
+
+    @JsonIgnore
+    @Column(name = "password")
+    private String password;
 
     @Column(name = "nickname")
     private String nickname;
 
-    @Column(name = "provider")
+    @Enumerated(EnumType.STRING)
+    @Column(name = "provider", nullable = false)
     private UserProvider provider;
+
+    @Setter
+    @JoinColumn(name = "tag_id")
+    @ManyToMany
+    private List<Tag> interestTags = new ArrayList<>();
 
     @Column(name = "created_at")
     @CreationTimestamp
