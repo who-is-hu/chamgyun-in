@@ -56,9 +56,9 @@ struct WorryDataDetailVO : Codable {
     }
 }
 
-enum WorryViewType {
-    case OX
-    case N
+enum WorryViewType: String {
+    case OX = "OX_CHOICES_WORRY"
+    case N = "MULTIPLE_CHOICES_WORRY"
 }
 
 struct WorryChooseItem: Codable {
