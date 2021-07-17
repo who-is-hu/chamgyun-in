@@ -8,9 +8,11 @@
 import UIKit
 import TagListView
 
-class PopularityViewController: UIViewController {
+class InterestListViewController: UIViewController {
     
+    // MARK: - Properties
     var dataSource: [WorryDataVO] = []
+    let display: Int = 10
     
     // MARK: - IBOutlet
     @IBOutlet weak var tableView: UITableView!
@@ -34,16 +36,46 @@ class PopularityViewController: UIViewController {
         loadWorryData()
     }
     
-    func loadWorryData() {
-        dataSource.removeAll()
-
-        tableView.reloadData()
+    func loadWorryData(page: Int = 0) {
+        // load interest tags
+        APIRequest().request(url: "\(APIRequest.tagGetPatchUrl)", method: "GET", voType: [TagVO].self) { success, data in
+            guard success, let data = data as? [TagVO] else {
+                print("failed load my interest tag")
+                return
+            }
+            
+            let tags = data.map { $0.name }
+            let url: String
+            
+            guard tags.count > 0 else {
+                // plz add interest
+                return
+            }
+            
+            url = "\(APIRequest.worryPostUrl)?page=\(page)&size=\(self.display)&tags=\(tags.joined(separator: ","))"
+            
+            print(url)
+            
+            APIRequest().request(url: url, method: "GET", voType: PageableWorryDataVO.self) { success, data in
+                guard success, let data = data as? PageableWorryDataVO else {
+                    print("failed load worry data")
+                    return
+                }
+                
+                self.dataSource.removeAll()
+                self.dataSource.append(contentsOf: data.content)
+                
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            }
+        }
     }
 }
 
 // MARK: - Delegate
 // MARK: TableView
-extension PopularityViewController: UITableViewDelegate {
+extension InterestListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         print("\(indexPath.row)")
@@ -57,7 +89,7 @@ extension PopularityViewController: UITableViewDelegate {
 }
 
 
-extension PopularityViewController: UITableViewDataSource {
+extension InterestListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataSource.count
     }
@@ -85,7 +117,7 @@ extension PopularityViewController: UITableViewDataSource {
     }
 }
 
-extension PopularityViewController: TagListViewDelegate {
+extension InterestListViewController: TagListViewDelegate {
     func tagPressed(_ title: String, tagView: TagView, sender: TagListView) {
         print("tab pressed title : \(title)")
     }
