@@ -14,7 +14,7 @@ class WorryDetailViewController: UIViewController {
     private var nContentViewController: ChooseWorryNViewController?
     private var tabBarImage: [UIImage] = []
     var postId: Int?
-    var data: WorryDataVO?
+    var data: WorryDataDetailVO?
     
     // MARK: - IBOutlet
     @IBOutlet weak var titleLable: UILabel!
@@ -77,6 +77,8 @@ class WorryDetailViewController: UIViewController {
             }
             
             if let data = data as? WorryDataDetailVO {
+                self.data = data
+                
                 DispatchQueue.main.async {
                     
                     self.titleLable.text = data.title
