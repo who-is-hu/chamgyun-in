@@ -61,6 +61,11 @@ enum WorryViewType: String {
     case N = "MULTIPLE_CHOICES_WORRY"
 }
 
+enum VoteType: String {
+    case ONE = "SELECT_ONE"
+    case MILTIPLE = "SELECT_MULTIPLE"
+}
+
 struct WorryChooseItem: Codable {
     let id: Int?
     let name: String?
