@@ -1,6 +1,7 @@
 package com.jh.chamgyunin.domain.user.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.jh.chamgyunin.domain.user.exception.LackOfBalanceException;
 import com.jh.chamgyunin.global.model.UserProvider;
 import com.jh.chamgyunin.domain.tag.model.Tag;
 import lombok.*;
@@ -42,6 +43,9 @@ public class User {
     @ManyToMany
     private List<Tag> interestTags = new ArrayList<>();
 
+    @Column(name = "point", nullable = false)
+    private Integer point = 0;
+
     @Column(name = "created_at")
     @CreationTimestamp
     private LocalDateTime created_at;
@@ -52,5 +56,20 @@ public class User {
         this.email = email;
         this.nickname = nickname;
         this.provider = provider;
+    }
+
+    public void increasePoint(final Integer point) {
+        this.point += point;
+    }
+
+    public void decreasePoint(final Integer point) {
+        validateBalance(point);
+        this.point -= point;
+    }
+
+    public void validateBalance(final Integer point) {
+        if (this.point < point) {
+            throw new LackOfBalanceException();
+        }
     }
 }

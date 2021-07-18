@@ -40,6 +40,10 @@ public class UserService {
         }
     }
 
+    public Integer getUserPoint(final Long userId) {
+        return findById(userId).getPoint();
+    }
+
     public User findById(final Long id) {
         Optional<User> user = userRepository.findById(id);
         return user.orElseThrow(()->new UserNotFoundException(id));
