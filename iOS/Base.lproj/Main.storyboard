@@ -887,6 +887,7 @@
                         <outlet property="questionContentView" destination="Ulz-YT-qdA" id="KuT-6q-azD"/>
                         <outlet property="questionNContentView" destination="24p-Li-rQy" id="PHp-MT-Wy9"/>
                         <outlet property="reportLabel" destination="Ugh-bV-Mrr" id="e85-4f-4nt"/>
+                        <outlet property="scrollView" destination="Niz-cx-R6C" id="XqQ-st-pFZ"/>
                         <outlet property="tagListView" destination="dQz-DA-vaB" id="daT-Lv-WRv"/>
                         <outlet property="titleLable" destination="rGS-lP-NZV" id="vxw-iB-0QJ"/>
                     </connections>
