@@ -1,26 +1,43 @@
 package com.jh.chamgyunin.domain.user.api;
 
 import com.jh.chamgyunin.IntegrationTest;
+import com.jh.chamgyunin.domain.user.service.UserService;
+import com.jh.chamgyunin.global.model.SessionKey;
 import com.jh.chamgyunin.global.model.UserProvider;
 import com.jh.chamgyunin.domain.user.dao.UserRepository;
 import com.jh.chamgyunin.domain.user.dto.SignUpRequest;
 import com.jh.chamgyunin.domain.user.model.User;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.test.web.servlet.ResultActions;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
 class UserControllerTest extends IntegrationTest {
 
     @Autowired
     private UserSetUp userSetUp;
+
+    @Autowired
+    private UserService userService;
+
+    @BeforeEach
+    public void sessionSetUp() {
+        session.setAttribute(SessionKey.LOGIN_USER_ID, 2L);
+    }
+
+    @AfterEach
+    public void cleanUp() {
+        session.clearAttributes();
+    }
 
     public ResultActions requestSignUp(SignUpRequest dto) throws Exception {
         return mvc.perform(post("/user")
@@ -84,6 +101,24 @@ class UserControllerTest extends IntegrationTest {
         resultActions
                 .andExpect(status().is4xxClientError())
         ;
+    }
+
+    @Test
+    void 포인트_조회() throws Exception{
+        //given
+        User user = userService.findById(2L);
+        user.increasePoint(100);
+
+        //when
+        ResultActions resultActions = mvc.perform(get("/user/point")
+                .session(session))
+                .andDo(print());
+
+        //then
+        resultActions
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(content().string("100"))
+                ;
     }
 }
 

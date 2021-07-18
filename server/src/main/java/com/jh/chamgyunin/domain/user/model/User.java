@@ -43,8 +43,8 @@ public class User {
     @ManyToMany
     private List<Tag> interestTags = new ArrayList<>();
 
-    @Column(name = "point")
-    private int point = 0;
+    @Column(name = "point", nullable = false)
+    private Integer point = 0;
 
     @Column(name = "created_at")
     @CreationTimestamp
@@ -58,16 +58,16 @@ public class User {
         this.provider = provider;
     }
 
-    public void increasePoint(final int point) {
+    public void increasePoint(final Integer point) {
         this.point += point;
     }
 
-    public void decreasePoint(final int point) {
+    public void decreasePoint(final Integer point) {
         validateBalance(point);
         this.point -= point;
     }
 
-    public void validateBalance(final int point) {
+    public void validateBalance(final Integer point) {
         if (this.point < point) {
             throw new LackOfBalanceException();
         }

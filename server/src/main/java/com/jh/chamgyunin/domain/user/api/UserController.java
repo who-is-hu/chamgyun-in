@@ -1,17 +1,16 @@
 package com.jh.chamgyunin.domain.user.api;
 
+import com.jh.chamgyunin.domain.auth.interceptor.IsUserLoggedIn;
 import com.jh.chamgyunin.domain.user.dto.SignUpRequest;
 import com.jh.chamgyunin.domain.user.dto.SignUpResponse;
 import com.jh.chamgyunin.domain.user.service.UserService;
+import com.jh.chamgyunin.global.argumentresolver.LoginUserId;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -28,5 +27,13 @@ public class UserController {
     public ResponseEntity<SignUpResponse> signUp(@Valid @RequestBody SignUpRequest dto){
         SignUpResponse signUpResponse = userService.insertUser(dto);
         return new ResponseEntity(signUpResponse, HttpStatus.CREATED);
+    }
+
+    @ApiOperation(value = "내 포인트 조회")
+    @GetMapping("/point")
+    @IsUserLoggedIn
+    public ResponseEntity<Integer> getMyPoint(@LoginUserId Long userId) {
+        Integer point = userService.getUserPoint(userId);
+        return new ResponseEntity<>(point, HttpStatus.OK);
     }
 }
