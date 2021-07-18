@@ -73,16 +73,16 @@ public class PostService {
         List<SimplePostDto> posts = postRepository.findAllByOwnerId(userId, pageable).stream()
                 .map(post -> SimplePostDto.of(post, voteFindService.isUserVoted(userId, post.getId())))
                 .collect(Collectors.toList());
-        return new PageImpl<SimplePostDto>(posts, pageable, posts.size());
+        return new PageImpl<>(posts, pageable, posts.size());
     }
 
     public Page<SimplePostDto> findAllByTags(final Long userId, final List<String> tags, final Pageable pageable) {
         Specification<Post> spec = PostSpecification.containTags(tags);
-        List<Post> satisfying = postRepository.findAll(spec);
-        List<SimplePostDto> dtoList = satisfying.stream()
+        List<SimplePostDto> dtoList = postRepository.findAll(spec, pageable)
+                .stream()
                 .map(post -> SimplePostDto.of(post, voteFindService.isUserVoted(userId, post.getId())))
                 .collect(Collectors.toList());
 
-        return new PageImpl<SimplePostDto>(dtoList, pageable, satisfying.size());
+        return new PageImpl<>(dtoList, pageable, dtoList.size());
     }
 }

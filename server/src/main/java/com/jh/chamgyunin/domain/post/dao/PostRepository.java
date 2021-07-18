@@ -12,6 +12,4 @@ import java.util.List;
 
 public interface PostRepository extends JpaRepository<Post, Long>, JpaSpecificationExecutor<Post> {
     Page<Post> findAllByOwnerId(Long userId, Pageable pageable);
-    Page<Post> findAllByOwner(User user, Pageable pageable);
-
 }
