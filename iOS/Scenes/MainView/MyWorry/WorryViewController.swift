@@ -22,6 +22,7 @@ class WorryViewController: UIViewController {
     private var lastLoadedPage: Int = 0
     private var totalPage: Int = 0
     private let display: Int = 10
+    let refreshControl: UIRefreshControl = UIRefreshControl()
     
     // MARK: - IBOutlet
     @IBOutlet weak var worryTableView: UITableView!
@@ -34,6 +35,11 @@ class WorryViewController: UIViewController {
         worryTableView.register(nib, forCellReuseIdentifier: nibName)
         worryTableView.rowHeight = UITableView.automaticDimension
         worryTableView.estimatedRowHeight = 151
+        
+        refreshControl.attributedTitle = NSAttributedString(string: "당겨서 새로고침")
+        refreshControl.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
+        
+        worryTableView.refreshControl = refreshControl
         
         worryTableView.delegate = self
         worryTableView.dataSource = self
@@ -60,6 +66,10 @@ class WorryViewController: UIViewController {
                         
                         DispatchQueue.main.async {
                             self.worryTableView.reloadData()
+                            
+                            if self.refreshControl.isRefreshing {
+                                self.refreshControl.endRefreshing()
+                            }
                         }
                         
                         print(data)
@@ -72,6 +82,15 @@ class WorryViewController: UIViewController {
 
         }
     }
+    
+    // MARK: - objc
+    @objc func pullToRefresh(_ sender: UIRefreshControl) {
+        self.dataSource.removeAll()
+        self.worryTableView.reloadData()
+        
+        self.loadWorryData()
+    }
+    
 }
 
 // MARK: - Extension and Delegate
