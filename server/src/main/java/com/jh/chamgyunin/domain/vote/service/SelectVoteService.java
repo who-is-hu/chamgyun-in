@@ -19,6 +19,7 @@ public class SelectVoteService implements VoteService {
 
     @Override
     public Vote vote(final Long userId, Post post, Choice choice) {
+        choice.increaseNumUser();
         Vote vote = Vote.builder()
                 .post(post)
                 .choice(choice)
