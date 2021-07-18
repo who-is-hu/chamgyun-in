@@ -84,6 +84,8 @@ class VoteControllerTest extends IntegrationTest {
         //then
         resultActions
                 .andExpect(status().is2xxSuccessful())
+                .andExpect(jsonPath("$[0].id").value(post.getChoices().get(0).getId()))
+                .andExpect(jsonPath("$[0].name").value(post.getChoices().get(0).getName()))
                 ;
     }
 
