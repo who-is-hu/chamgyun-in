@@ -100,6 +100,28 @@ class WorryDetailViewController: UIViewController {
                             self.reportLabel.text = "요약"
                             self.chartView.isHidden = false
                             
+                            // get voted item
+                            APIRequest().request(url: "\(APIRequest.votePostUrl)/\(postId)/my-choices", method: "GET", voType: [WorryChooseItem].self) { success, data in
+                                guard success, let data = data as? [WorryChooseItem] else {
+                                    print("ERROR : load voted item")
+                                    return
+                                }
+                                
+                                if let choices = self.data?.choices {
+                                    for worryItem in data {
+                                        for (index, choice) in choices.enumerated() {
+                                            if choice.id! == worryItem.id {
+                                                print("voted index = \(index)")
+                                                self.worryChartViewController?.votedQuestionIndex = index
+                                                DispatchQueue.main.async {
+                                                    self.worryChartViewController?.tableView.reloadData()
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            
                             
                             if let choices = self.data?.choices  {
                                 print(choices)
