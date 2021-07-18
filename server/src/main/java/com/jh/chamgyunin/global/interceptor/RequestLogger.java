@@ -30,10 +30,10 @@ public class RequestLogger implements HandlerInterceptor {
         log.info("==========request==========");
         log.info("URI    : {}", cachingRequest.getRequestURI());
         log.info("Method : {}", cachingRequest.getMethod());
+        log.info("query  : {}", cachingRequest.getQueryString());
         if (cachingRequest.getContentType() != null && cachingRequest.getContentType() == "application/json") {
             log.info("Body   : {}", new String(cachingRequest.getContentAsByteArray(), Charset.defaultCharset()));
         }
-        log.info("===========================");
     }
 
     private void logResponse(HttpServletResponse response){
@@ -43,6 +43,5 @@ public class RequestLogger implements HandlerInterceptor {
         if (cachingResponse.getContentAsByteArray() != null) {
             log.info("Body   : {}", new String(cachingResponse.getContentAsByteArray(), Charset.defaultCharset()));
         }
-        log.info("============================");
     }
 }

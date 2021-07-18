@@ -26,8 +26,8 @@ public class VoteFindService {
     }
 
     public Page<SimplePostDto> getMyParticipatedPosts(final Long userId, final Pageable pageable) {
-        List<Vote> votes = voteRepository.findAllByUserId(userId);
-        List<SimplePostDto> posts = votes.stream()
+        List<SimplePostDto> posts = voteRepository.findAllByUserId(userId, pageable)
+                .stream()
                 .map(vote -> SimplePostDto.of(vote.getPost(), true))
                 .collect(Collectors.toList());
         return new PageImpl<>(posts, pageable, posts.size());

@@ -1,7 +1,8 @@
 package com.jh.chamgyunin.global.model;
 
 public enum UserProvider {
-    KAKAO("kakao"),
+    KAKAO("KAKAO"),
+    LOCAL("LOCAL"),
     ;
 
     private String value;
