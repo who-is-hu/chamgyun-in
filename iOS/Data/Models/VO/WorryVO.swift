@@ -74,7 +74,7 @@ struct WorryChooseItem: Codable {
     private enum CodingKeys: String, CodingKey {
         case id
         case name
-        case votedNumber = "numUser"
+        case votedNumber = "num_user"
     }
 }
 
