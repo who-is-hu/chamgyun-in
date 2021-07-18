@@ -14,8 +14,11 @@ struct NQuestionVO {
 }
 
 class ChooseWorryNViewController: UIViewController {
+    // MARK: - Properties
     var question: NQuestionVO?
+    var selectedItem: Int = -1
     
+    // MARK: - IBOutlet
     @IBOutlet weak var queryTableView: UITableView!
     
     override func viewDidLoad() {
@@ -33,23 +36,60 @@ class ChooseWorryNViewController: UIViewController {
         
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        guard let question = question else {
+    // MARK: - IBAction
+    @IBAction func submitButtonTouchInside(_ sender: UIButton) {
+        guard selectedItem >= 0 else {
+            let alert: UIAlertController = UIAlertController(title: "알림", message: "질문에 답해주세요.", preferredStyle: .alert)
+            let alertAction: UIAlertAction = UIAlertAction(title: "확인", style: .default, handler: nil)
+            alert.addAction(alertAction)
+            self.present(alert, animated: true, completion: nil)
+
             return
         }
         
-        print(question.queries)
+        guard let worryDetailViewController = self.parent as? WorryDetailViewController else {
+            return
+        }
         
+        guard let worryDetailData = worryDetailViewController.data else {
+            return
+        }
+        
+        guard let selectItemId = worryDetailData.choices?[selectedItem].id, let postId = worryDetailData.id else {
+            return
+        }
+        
+        let param: [String:Any] = ["post_id": postId, "choice_id": selectItemId]
+        
+        let alert: UIAlertController = UIAlertController(title: "알림", message: "투표하시겠습니까?", preferredStyle: .alert)
+        let alertDefaultAction: UIAlertAction = UIAlertAction(title: "확인", style: .default) { alert in
+            APIRequest().request(url: APIRequest.votePostUrl, method: "POST", param: param) { success in
+                guard success else {
+                    print("ERROR: vote")
+                    return
+                }
+                
+                // ui 작업
+                worryDetailViewController.loadWorryDetailData()
+            }
+        }
+        alert.addAction(alertDefaultAction)
+        let alertCancelAction: UIAlertAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        alert.addAction(alertCancelAction)
+        self.present(alert, animated: true, completion: nil)
     }
+    
     
 }
 
+// MARK: - Extension and Delegate
 extension ChooseWorryNViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath.row)
         tableView.deselectRow(at: indexPath, animated: true)
         
         self.question?.values[indexPath.row].toggle()
+        selectedItem = indexPath.row
         updateViewValues(row: indexPath.row)
     }
     

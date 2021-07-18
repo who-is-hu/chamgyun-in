@@ -110,7 +110,13 @@ extension WorryViewController: UITableViewDataSource {
         cell.tagListView.textFont = UIFont.boldSystemFont(ofSize: 13)
         
         if let isVoted = dataSource[indexPath.row].voted, isVoted {
-            cell.ansStateButton.isHidden = false
+            cell.ansStateButton.setImage(UIImage(systemName: "checkmark.square.fill"), for: .normal)
+            cell.ansStateButton.setTitleColor(UIColor.red, for: .normal)
+            cell.ansStateButton.tintColor = UIColor.red
+        } else {
+            cell.ansStateButton.setImage(UIImage(systemName: "square"), for: .normal)
+            cell.ansStateButton.setTitleColor(UIColor.lightGray, for: .normal)
+            cell.ansStateButton.tintColor = UIColor.lightGray
         }
         
         return cell
