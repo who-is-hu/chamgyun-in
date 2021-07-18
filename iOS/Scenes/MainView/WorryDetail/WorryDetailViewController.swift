@@ -12,6 +12,7 @@ class WorryDetailViewController: UIViewController {
     // MARK: - Properties
     private var oxContentViewController: ChooseWorryOXContentViewController?
     private var nContentViewController: ChooseWorryNViewController?
+    private var worryChartViewController: WorryChartViewController?
     private var tabBarImage: [UIImage] = []
     var postId: Int?
     var data: WorryDataDetailVO?
@@ -22,16 +23,15 @@ class WorryDetailViewController: UIViewController {
     @IBOutlet weak var interestNavItem: UIBarButtonItem!
     @IBOutlet weak var questionContentView: UIView!
     @IBOutlet weak var questionNContentView: UIView!
+    @IBOutlet weak var chartView: UIView!
     @IBOutlet weak var tagListView: TagListView!
+    @IBOutlet weak var reportLabel: UILabel!
     
     
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpNavigationItems()
-        
-        // add question controller
-        loadWorryDetailData()
         
         // set current interest state
         interestNavItem.image = tabBarImage[0]
@@ -40,6 +40,9 @@ class WorryDetailViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        // add question controller
+        loadWorryDetailData()
     }
     
     // MARK: - SetUp
@@ -85,16 +88,50 @@ class WorryDetailViewController: UIViewController {
                     self.bodyLable.text = data.body
                     self.loadTagsData(tags: data.splitTags)
                     
-                    if data.worryType! == WorryViewType.OX.rawValue {
-                        self.loadQuestionTypeView(type: .OX)
-                    } else {
-                        self.loadQuestionTypeView(type: .N)
+                    if let voted = data.voted {
                         
-                        if let choices = data.choices {
-                            let queries: [String] = choices.map({ $0.name! })
-                            print(queries)
-                            self.setUpNData(queries: queries)
+                        if voted {
+                            self.reportLabel.text = "요약"
+                            
+                            if let choices = self.data?.choices  {
+                                let totalVoteNumber = choices.reduce(0) { res, next in
+                                    return res + next.votedNumber!
+                                }
+                                
+                                print(totalVoteNumber)
+                                var voteLabels: [String] = []
+                                var voteValues: [Double] = []
+                                print(choices)
+                                for choice in choices {
+                                    if let number = choice.votedNumber {
+                                        print(Double(number) / Double(totalVoteNumber) * 100.0)
+                                        let percent = Double(number) / Double(totalVoteNumber) * 100.0
+                                        voteLabels.append(String(format: "%.2f%%", percent))
+                                        voteValues.append(Double(number))
+                                    }
+                                }
+                                
+                                self.worryChartViewController?.customizeChart(dataPoints: voteLabels, values: voteValues)
+                            }
+                            
+                            self.questionContentView.isHidden = true
+                            self.questionNContentView.isHidden = true
+                        } else {
+                            self.reportLabel.text = "질문"
+                            self.chartView.isHidden = true
+                            if data.worryType! == WorryViewType.OX.rawValue {
+                               self.loadQuestionTypeView(type: .OX)
+                           } else {
+                               self.loadQuestionTypeView(type: .N)
+                               
+                               if let choices = data.choices {
+                                   let queries: [String] = choices.map({ $0.name! })
+                                   print(queries)
+                                   self.setUpNData(queries: queries)
+                               }
+                           }
                         }
+                        
                     }
                     
                     
@@ -133,6 +170,9 @@ class WorryDetailViewController: UIViewController {
         } else if let nContentViewController = destination as? ChooseWorryNViewController {
             self.nContentViewController = nContentViewController
             nContentViewController.view.translatesAutoresizingMaskIntoConstraints = false
+        } else if let worryChartViewController = destination as? WorryChartViewController {
+            self.worryChartViewController = worryChartViewController
+            worryChartViewController.view.translatesAutoresizingMaskIntoConstraints = false
         }
     }
     
