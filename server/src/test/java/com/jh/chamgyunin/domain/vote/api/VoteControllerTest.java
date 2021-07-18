@@ -52,17 +52,7 @@ class VoteControllerTest extends IntegrationTest {
     @Test
     void 내가_참여한_고민게시글_조회() throws Exception{
         //given
-        PostCreateRequest dto = PostCreateRequest.builder()
-                .title("test")
-                .body("body")
-                .voteType(VoteType.SELECT_ONE)
-                .worryType(WorryType.OX_CHOICES_WORRY)
-                .tagNames(Arrays.asList("tt"))
-                .choiceNames(Arrays.asList("O","X"))
-                .build();
-        PostDto postDto = postService.create(2L, dto);
-        Post post = postService.findById(postDto.getId());
-
+        Post post = creatPost();
         voteService.vote(2L, post, post.getChoices().get(0)); // Vote To 'O'
 
         //when
@@ -74,8 +64,41 @@ class VoteControllerTest extends IntegrationTest {
         resultActions
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(jsonPath("$.content[0].id").value(post.getId()))
-                .andExpect(jsonPath("$.content[0].title").value(dto.getTitle()))
-                .andExpect(jsonPath("$.content[0].body").value(dto.getBody()))
+                .andExpect(jsonPath("$.content[0].title").value(post.getTitle()))
+                .andExpect(jsonPath("$.content[0].body").value(post.getBody()))
         ;
+    }
+
+    @Test
+    void 내가_선택한_선택지_조회() throws Exception{
+        //given
+        Post post = creatPost();
+        User user = userService.findById(2L);
+        voteService.vote(2L, post, post.getChoices().get(0)); // Vote To 'O'
+
+        //when
+        ResultActions resultActions = mvc.perform(get("/vote/" + post.getId() + "/my-choices")
+                .session(session))
+                .andDo(print());
+
+        //then
+        resultActions
+                .andExpect(status().is2xxSuccessful())
+                ;
+    }
+
+    private Post creatPost() {
+        PostCreateRequest dto = PostCreateRequest.builder()
+                .title("test")
+                .body("body")
+                .voteType(VoteType.SELECT_ONE)
+                .worryType(WorryType.OX_CHOICES_WORRY)
+                .tagNames(Arrays.asList("tt"))
+                .choiceNames(Arrays.asList("O","X"))
+                .build();
+        PostDto postDto = postService.create(2L, dto);
+        Post post = postService.findById(postDto.getId());
+
+        return post;
     }
 }
