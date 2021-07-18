@@ -83,6 +83,6 @@ public class PostService {
                 .map(post -> SimplePostDto.of(post, voteFindService.isUserVoted(userId, post.getId())))
                 .collect(Collectors.toList());
 
-        return  new PageImpl<SimplePostDto>(dtoList, pageable, satisfying.size());
+        return new PageImpl<SimplePostDto>(dtoList, pageable, satisfying.size());
     }
 }
