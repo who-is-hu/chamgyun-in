@@ -56,6 +56,7 @@ class ChooseWorryOXContentViewController: UIViewController {
                 }
                 
                 // ui 작업
+                worryDetailViewController.loadWorryDetailData()
             }
         }
         alert.addAction(alertDefaultAction)

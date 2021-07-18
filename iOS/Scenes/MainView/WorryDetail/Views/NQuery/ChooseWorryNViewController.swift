@@ -70,6 +70,7 @@ class ChooseWorryNViewController: UIViewController {
                 }
                 
                 // ui 작업
+                worryDetailViewController.loadWorryDetailData()
             }
         }
         alert.addAction(alertDefaultAction)

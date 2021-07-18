@@ -9,18 +9,34 @@ import UIKit
 import Charts
 
 class WorryChartViewController: UIViewController {
+    // MARK: - Properties
+    private var dataSource: [Legend] = []
+    
+    private struct Legend {
+        let color: UIColor
+        let text: String
+    }
+    
     // MARK: - IBOutlet
     @IBOutlet weak var chartView: PieChartView!
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let nibId = String(describing: ChartLegendTableViewCell.self)
+        let nib = UINib(nibName: nibId, bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: nibId)
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 44
+        tableView.delegate = self
+        tableView.dataSource = self
+        
     }
     
     
     // MARK: - Function
-    func customizeChart(dataPoints: [String], values: [Double]) {
-        // 1. Set ChartDataEntry
+    func customizeChart(dataPoints: [String], values: [Double], questions: [String]) {
         var dataEntries: [ChartDataEntry] = []
         for i in 0..<dataPoints.count {
           let dataEntry = PieChartDataEntry(value: values[i], label: dataPoints[i], data: dataPoints[i] as AnyObject)
@@ -37,10 +53,20 @@ class WorryChartViewController: UIViewController {
         let formatter = DefaultValueFormatter(formatter: format)
         pieChartData.setValueFormatter(formatter)
         
+        loadLegend(colors: pieChartDataSet.colors, texts: questions)
+        
         chartView.data = pieChartData
         chartView.legend.enabled = false
         chartView.rotationEnabled = false
-        
+    }
+    
+    private func loadLegend(colors: [UIColor], texts: [String]) {
+        dataSource.removeAll()
+        for i in 0..<colors.count {
+            dataSource.append(Legend(color: colors[i], text: texts[i]))
+        }
+        print(dataSource)
+        tableView.reloadData()
     }
     
     private func colorsOfCharts(numbersOfColor: Int) -> [UIColor] {
@@ -98,11 +124,17 @@ extension WorryChartViewController: UITableViewDelegate {
 
 extension WorryChartViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return dataSource.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ChartLegendTableViewCell.self)) as! ChartLegendTableViewCell
+        let data = self.dataSource[indexPath.row]
+        
+        cell.legendColorButton.tintColor = data.color
+        cell.legendLabel.text = data.text
+        
+        return cell
     }
     
     

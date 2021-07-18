@@ -92,26 +92,31 @@ class WorryDetailViewController: UIViewController {
                         
                         if voted {
                             self.reportLabel.text = "요약"
+                            self.chartView.isHidden = false
+                            
                             
                             if let choices = self.data?.choices  {
+                                print(choices)
+                                
                                 let totalVoteNumber = choices.reduce(0) { res, next in
                                     return res + next.votedNumber!
                                 }
                                 
-                                print(totalVoteNumber)
                                 var voteLabels: [String] = []
                                 var voteValues: [Double] = []
-                                print(choices)
+                                var voteQuestions: [String] = []
+                                
                                 for choice in choices {
-                                    if let number = choice.votedNumber {
+                                    if let number = choice.votedNumber, let question = choice.name {
                                         print(Double(number) / Double(totalVoteNumber) * 100.0)
                                         let percent = Double(number) / Double(totalVoteNumber) * 100.0
                                         voteLabels.append(String(format: "%.2f%%", percent))
                                         voteValues.append(Double(number))
+                                        voteQuestions.append("참여수 : \(number) - \(question)")
                                     }
                                 }
                                 
-                                self.worryChartViewController?.customizeChart(dataPoints: voteLabels, values: voteValues)
+                                self.worryChartViewController?.customizeChart(dataPoints: voteLabels, values: voteValues, questions: voteQuestions)
                             }
                             
                             self.questionContentView.isHidden = true
@@ -119,6 +124,7 @@ class WorryDetailViewController: UIViewController {
                         } else {
                             self.reportLabel.text = "질문"
                             self.chartView.isHidden = true
+                            
                             if data.worryType! == WorryViewType.OX.rawValue {
                                self.loadQuestionTypeView(type: .OX)
                            } else {
