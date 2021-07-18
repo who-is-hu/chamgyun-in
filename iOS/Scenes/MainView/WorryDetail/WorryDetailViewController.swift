@@ -16,6 +16,7 @@ class WorryDetailViewController: UIViewController {
     private var tabBarImage: [UIImage] = []
     var postId: Int?
     var data: WorryDataDetailVO?
+    let refreshControl: UIRefreshControl = UIRefreshControl()
     
     // MARK: - IBOutlet
     @IBOutlet weak var titleLable: UILabel!
@@ -26,12 +27,17 @@ class WorryDetailViewController: UIViewController {
     @IBOutlet weak var chartView: UIView!
     @IBOutlet weak var tagListView: TagListView!
     @IBOutlet weak var reportLabel: UILabel!
+    @IBOutlet weak var scrollView: UIScrollView!
     
     
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpNavigationItems()
+        
+        refreshControl.attributedTitle = NSAttributedString(string: "당겨서 새로고침")
+        refreshControl.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
+        scrollView.refreshControl = refreshControl
         
         // set current interest state
         interestNavItem.image = tabBarImage[0]
@@ -138,9 +144,13 @@ class WorryDetailViewController: UIViewController {
                            }
                         }
                         
+                        
+                        
                     }
                     
-                    
+                    if self.refreshControl.isRefreshing {
+                        self.refreshControl.endRefreshing()
+                    }
                 }
             }
             
@@ -155,7 +165,7 @@ class WorryDetailViewController: UIViewController {
         }
     }
     
-    // MARK: Selector
+    // MARK: objc
     @objc func interestNavItemTouch(_ sender: UINavigationItem) {
         // update insterest info to server
         if interestNavItem.image == tabBarImage[0] {
@@ -164,6 +174,10 @@ class WorryDetailViewController: UIViewController {
             interestNavItem.image = tabBarImage[0]
         }
         
+    }
+    
+    @objc func pullToRefresh(_ sender: UIRefreshControl) {
+        self.loadWorryDetailData()
     }
     
     // MARK: - Navigation
