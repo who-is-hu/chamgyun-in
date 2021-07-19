@@ -71,21 +71,21 @@ class WorryChartViewController: UIViewController {
     }
     
     private func colorsOfCharts(numbersOfColor: Int) -> [UIColor] {
-        var colorString: [String] = ["#93b327", "#f55354", "#f59b25", "#7fc638", "#754100", "#ffcc00"]
+        let colorString: [String] = ["#f55354", "#f59b25", "#ffcc00", "#7fc638", "#586fab", "#93b3b7"]
         var colors: [UIColor] = []
-        
+
         guard numbersOfColor < colorString.count else {
             print("Overflow color")
             return []
         }
-        
-        for _ in 0..<numbersOfColor {
-            let colorStr = colorString.randomElement()!
-            if let idx = colorString.firstIndex(of: colorStr) {
-                colorString.remove(at: idx)
-                colors.append(UIColor(hexString: colorStr)!)
-            }
+
+        for i in 0..<numbersOfColor {
+
+            let colorStr = colorString[i]
+            colors.append(UIColor(hexString: colorStr)!)
+
         }
+
         return colors
     }
     
