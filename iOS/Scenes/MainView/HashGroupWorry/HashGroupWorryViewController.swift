@@ -132,7 +132,8 @@ extension HashGroupWorryViewController: UITableViewDataSource {
         
         if offsetY > contentHeight - scrollView.frame.height {
             if totalPage-1 > loadedPage {
-                loadWorryData(text: hashText!, page: loadedPage+1)
+                loadedPage += 1
+                loadWorryData(text: hashText!, page: loadedPage)
             }
         }
     }

@@ -113,7 +113,8 @@ extension WorryViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if totalPage > lastLoadedPage && indexPath.row > dataSource.count - (display - 7) {
-            loadWorryData(page: lastLoadedPage+1)
+            lastLoadedPage += 1
+            loadWorryData(page: lastLoadedPage)
         }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WorryTableViewCell.self), for: indexPath) as! WorryTableViewCell
