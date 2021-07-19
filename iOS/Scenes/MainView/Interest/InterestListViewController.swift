@@ -117,7 +117,8 @@ extension InterestListViewController: UITableViewDelegate {
         
         if offsetY > contentHeight - scrollView.frame.height {
             if totalDataPageNumber - 1 > loadedPageNumber {
-                loadWorryData(page: loadedPageNumber+1)
+                loadedPageNumber += 1
+                loadWorryData(page: loadedPageNumber)
             }
         }
     }

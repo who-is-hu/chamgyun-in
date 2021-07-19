@@ -11,6 +11,7 @@ import Charts
 class WorryChartViewController: UIViewController {
     // MARK: - Properties
     private var dataSource: [Legend] = []
+    var votedQuestionIndex: Int = -1
     
     private struct Legend {
         let color: UIColor
@@ -132,6 +133,11 @@ extension WorryChartViewController: UITableViewDataSource {
         let data = self.dataSource[indexPath.row]
         
         cell.legendColorButton.tintColor = data.color
+        if indexPath.row == self.votedQuestionIndex {
+            cell.legendLabel.textColor = UIColor.red
+        } else {
+            cell.legendLabel.textColor = UIColor.black
+        }
         cell.legendLabel.text = data.text
         
         return cell

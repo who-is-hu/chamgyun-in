@@ -50,36 +50,36 @@ class WorryViewController: UIViewController {
     func loadWorryData(page: Int = 0) {
         // load my worry boards
         lastLoadedPage = page
-        
+        let url: String
         if loadType == .MyWorry {
-
-            APIRequest().request(url: "\(APIRequest.worryPostUrl)/my?page=\(page)&size=\(display)", method: "GET", voType: PageableWorryDataVO.self) { success, data in
-                if success {
-                    if let data = data as?
-                        PageableWorryDataVO {
-                        
-                        self.totalPage = data.totalPages
-                        
-                        for worryVO in data.content {
-                            self.dataSource.append(worryVO)
-                        }
-                        
-                        DispatchQueue.main.async {
-                            self.worryTableView.reloadData()
-                            
-                            if self.refreshControl.isRefreshing {
-                                self.refreshControl.endRefreshing()
-                            }
-                        }
-                        
-                        print(data)
-                    }
-                }
-            }
-            
+            url = "\(APIRequest.worryPostUrl)/my?page=\(page)&size=\(display)"
         } else {
             // load answer worry boards
-
+            url = "\(APIRequest.votePostUrl)/participate-post?page=\(page)&size=\(display)"
+        }
+        
+        APIRequest().request(url: url, method: "GET", voType: PageableWorryDataVO.self) { success, data in
+            if success {
+                if let data = data as?
+                    PageableWorryDataVO {
+                    
+                    self.totalPage = data.totalPages
+                    
+                    for worryVO in data.content {
+                        self.dataSource.append(worryVO)
+                    }
+                    
+                    DispatchQueue.main.async {
+                        self.worryTableView.reloadData()
+                        
+                        if self.refreshControl.isRefreshing {
+                            self.refreshControl.endRefreshing()
+                        }
+                    }
+                    
+                    print(data)
+                }
+            }
         }
     }
     
@@ -113,7 +113,8 @@ extension WorryViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if totalPage > lastLoadedPage && indexPath.row > dataSource.count - (display - 7) {
-            loadWorryData(page: lastLoadedPage+1)
+            lastLoadedPage += 1
+            loadWorryData(page: lastLoadedPage)
         }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WorryTableViewCell.self), for: indexPath) as! WorryTableViewCell

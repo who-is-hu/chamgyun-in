@@ -965,6 +965,7 @@
                                 </connections>
                             </button>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="rng-b6-dq8"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="4yw-Mv-kBP" firstAttribute="top" secondItem="BUM-ct-a27" secondAttribute="bottom" constant="10" id="CpK-sO-IUo"/>
@@ -1347,6 +1348,7 @@
                                 </constraints>
                             </tableView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="sXf-i7-Oe7"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="6tQ-hh-soe" secondAttribute="bottom" constant="10" id="4pR-X3-5Tg"/>
