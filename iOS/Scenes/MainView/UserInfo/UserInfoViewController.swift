@@ -63,7 +63,8 @@ class UserInfoViewController: UIViewController {
         setUpPrepareTags()
         
         // load data
-        loadWorryData()
+        loadMyWorryData()
+        loadAnsWorryData()
         loadTagData()
     }
 
@@ -133,7 +134,7 @@ class UserInfoViewController: UIViewController {
         }
     }
     
-    func loadWorryData() {
+    func loadMyWorryData() {
         let display: Int = 10
 
         APIRequest().request(url: "\(APIRequest.worryPostUrl)/my?page=0&size=\(display)", method: "GET", voType: PageableWorryDataVO.self) { success, data in
@@ -143,6 +144,25 @@ class UserInfoViewController: UIViewController {
                     
                     DispatchQueue.main.async {
                         self.myWorryTableView.reloadData()
+                    }
+                    
+                    print(data)
+                }
+            }
+        }
+
+    }
+    
+    func loadAnsWorryData() {
+        let display: Int = 10
+
+        APIRequest().request(url: "\(APIRequest.votePostUrl)/participate-post?page=0&size=\(display)", method: "GET", voType: PageableWorryDataVO.self) { success, data in
+            if success {
+                if let data = data as? PageableWorryDataVO {
+                    self.ansWorryDataSource = data.content
+                    
+                    DispatchQueue.main.async {
+                        self.ansWorryTableView.reloadData()
                     }
                     
                     print(data)
