@@ -22,6 +22,8 @@ public enum ErrorCode {
     USER_NOT_FOUND(400, "존재하지 않는 유저에요."),
     LACK_OF_BALANCE(400, "잔여 포인트가 부족해요"),
 
+    ACCESS_DENIED(401, "자신의 고민만 종료할 수 있습니다."),
+
     INTERNAL_SERVER_ERROR(500, "관리자에게 문의해주세요"),
     ;
 
