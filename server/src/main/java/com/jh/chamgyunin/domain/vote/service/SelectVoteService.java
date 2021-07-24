@@ -36,7 +36,7 @@ public class SelectVoteService implements VoteService {
 
     @Override
     public void close(Long userId, Post post, List<Long> choiceIdList) {
-        if (!post.getOwner().equals(userId)){
+        if (!post.getOwner().getId().equals(userId)){
             throw new AccessDeniedException(userId, post.getId());
         }
         post.setState(WorryState.CLOSE);

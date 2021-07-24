@@ -6,6 +6,7 @@ import com.jh.chamgyunin.domain.post.model.Post;
 import com.jh.chamgyunin.domain.post.service.PostService;
 import com.jh.chamgyunin.domain.user.model.User;
 import com.jh.chamgyunin.domain.user.service.UserService;
+import com.jh.chamgyunin.domain.vote.dto.VoteCloseRequest;
 import com.jh.chamgyunin.domain.vote.dto.VoteRequest;
 import com.jh.chamgyunin.domain.vote.model.Choice;
 import com.jh.chamgyunin.domain.vote.model.Vote;
@@ -74,5 +75,18 @@ public class VoteController {
         User user = userService.findById(userId);
         List<Choice> choices = voteFindService.getMySelection(user, post);
         return new ResponseEntity<>(choices, HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "고민게시글 투표를 마감하고 보상을 지급")
+    @PatchMapping("/{post-id}/close")
+    @IsUserLoggedIn
+    public ResponseEntity close(
+            @LoginUserId Long userId,
+            @ApiParam(value = "고민 게시글 id") @PathVariable(value = "post-id") Long postId,
+            @Valid @RequestBody VoteCloseRequest dto) {
+        Post post = postService.findById(postId);
+        VoteService voteService = voteServiceFactory.createVoteService(post.getVoteType());
+        voteService.close(userId, post, dto.getChoiceIdList());
+        return new ResponseEntity(HttpStatus.OK);
     }
 }

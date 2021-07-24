@@ -8,19 +8,24 @@ import com.jh.chamgyunin.domain.post.model.Post;
 import com.jh.chamgyunin.domain.post.service.PostService;
 import com.jh.chamgyunin.domain.user.model.User;
 import com.jh.chamgyunin.domain.user.service.UserService;
+import com.jh.chamgyunin.domain.vote.dto.VoteCloseRequest;
 import com.jh.chamgyunin.domain.vote.model.VoteType;
+import com.jh.chamgyunin.domain.vote.model.WorryState;
 import com.jh.chamgyunin.domain.vote.model.WorryType;
 import com.jh.chamgyunin.domain.vote.service.VoteService;
 import com.jh.chamgyunin.global.model.SessionKey;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
 
 import java.util.Arrays;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -90,7 +95,28 @@ class VoteControllerTest extends IntegrationTest {
     }
 
     @Test
-    void 고민게시글_마감() {
+    void 고민게시글_마감() throws Exception {
+        //given
+        Post post = creatPost();
+        voteService.vote(3L, post, post.getChoices().get(0));
+        voteService.vote(4L, post, post.getChoices().get(0));
+        voteService.vote(5L, post, post.getChoices().get(1)); // receive reward
+        VoteCloseRequest dto = VoteCloseRequest.builder()
+                .choiceIdList(Arrays.asList(post.getChoices().get(1).getId()))
+                .build();
+
+        //when
+        ResultActions resultActions = mvc.perform(patch("/vote/" + post.getId() + "/close")
+                .session(session)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(dto)))
+                .andDo(print());
+
+        //then
+        Assertions.assertThat(userService.findById(3L).getPoint()).isEqualTo(0);
+        Assertions.assertThat(userService.findById(4L).getPoint()).isEqualTo(0);
+        Assertions.assertThat(userService.findById(5L).getPoint()).isEqualTo(100);
+        Assertions.assertThat(post.getState()).isEqualTo(WorryState.CLOSE);
 
     }
 
