@@ -89,6 +89,11 @@ class VoteControllerTest extends IntegrationTest {
                 ;
     }
 
+    @Test
+    void 고민게시글_마감() {
+
+    }
+
     private Post creatPost() {
         PostCreateRequest dto = PostCreateRequest.builder()
                 .title("test")

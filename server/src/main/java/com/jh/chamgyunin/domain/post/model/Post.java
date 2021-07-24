@@ -43,6 +43,7 @@ public class Post {
     @JoinColumn(name = "post_id", nullable = false)
     private List<Choice> choices = new ArrayList<>();
 
+    @Setter
     @Enumerated(EnumType.STRING)
     @Column(name = "state", nullable = false)
     private WorryState state = WorryState.IN_PROGRESS;
