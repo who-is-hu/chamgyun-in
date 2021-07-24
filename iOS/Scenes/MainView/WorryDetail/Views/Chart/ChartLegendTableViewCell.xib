@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="ChartLegendTableViewCell" customModule="iOS" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="in0-Mz-EeO">
+                        <rect key="frame" x="0.0" y="5" width="320" height="34"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wcz-rb-uo1">
+                                <rect key="frame" x="0.0" y="0.0" width="19.5" height="34"/>
+                                <state key="normal" image="square.fill" catalog="system"/>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ldD-US-7xT">
+                                <rect key="frame" x="27.5" y="0.0" width="292.5" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="in0-Mz-EeO" secondAttribute="trailing" id="1GA-re-VNq"/>
+                    <constraint firstItem="in0-Mz-EeO" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="2Rd-wK-AzH"/>
+                    <constraint firstAttribute="bottom" secondItem="in0-Mz-EeO" secondAttribute="bottom" constant="5" id="KcP-EL-r4i"/>
+                    <constraint firstItem="in0-Mz-EeO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="KeZ-2y-CnG"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="legendColorButton" destination="Wcz-rb-uo1" id="Ivs-hU-7hB"/>
+                <outlet property="legendLabel" destination="ldD-US-7xT" id="8Wz-7d-0Ht"/>
+            </connections>
+            <point key="canvasLocation" x="132" y="132"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="square.fill" catalog="system" width="128" height="114"/>
+    </resources>
+</document>

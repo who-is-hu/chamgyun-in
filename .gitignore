@@ -1,0 +1,20 @@
+## Xcode Patch
+*.xcodeproj/*
+!*.xcodeproj/project.pbxproj
+!*.xcodeproj/xcshareddata/
+!*.xcworkspace/contents.xcworkspacedata
+/*.gcno
+
+### Xcode Patch ###
+**/xcshareddata/WorkspaceSettings.xcsettings
+
+./.DS_Store
+.DS_Store
+
+iOS.xcodeproj/
+
+Podfile.lock
+
+iOS.xcworkspace/
+
+Pods/
