@@ -90,6 +90,14 @@
                                     <color key="titleColor" systemColor="systemRedColor"/>
                                 </state>
                             </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A67-Ho-Adf">
+                                <rect key="frame" x="68.5" y="0.0" width="0.0" height="18.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="tintColor" systemColor="systemIndigoColor"/>
+                                <state key="normal" title="해결완료" image="checkmark.square.fill" catalog="system">
+                                    <color key="titleColor" systemColor="systemIndigoColor"/>
+                                </state>
+                            </button>
                         </subviews>
                     </stackView>
                 </subviews>
@@ -112,16 +120,26 @@
             <connections>
                 <outlet property="ansStateButton" destination="tFc-mM-Rhv" id="Hot-Nq-Yub"/>
                 <outlet property="bodyView" destination="0OA-io-PBa" id="Cd1-jH-olR"/>
+                <outlet property="endVotedButton" destination="A67-Ho-Adf" id="vDq-FA-eyl"/>
                 <outlet property="tagListView" destination="c5S-rL-BY1" id="172-CN-jnq"/>
                 <outlet property="titleView" destination="ZyR-3M-qnJ" id="Lvz-ZE-Ms8"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="82.700892857142847"/>
         </tableViewCell>
     </objects>
+    <designables>
+        <designable name="c5S-rL-BY1">
+            <size key="intrinsicContentSize" width="374" height="32"/>
+        </designable>
+    </designables>
     <resources>
+        <image name="checkmark.square.fill" catalog="system" width="128" height="114"/>
         <image name="square" catalog="system" width="128" height="114"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemIndigoColor">
+            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
