@@ -485,6 +485,7 @@
                         <outlet property="userEmailView" destination="M1A-i0-f3W" id="Bv3-9z-xJQ"/>
                         <outlet property="userNameView" destination="1RL-H6-Zxb" id="0iY-kz-HFB"/>
                         <outlet property="userProfileImageView" destination="4f7-U8-BEZ" id="ffG-nA-7d6"/>
+                        <outlet property="worryPointLabel" destination="OJA-mD-d2M" id="scl-Km-J5e"/>
                         <segue destination="BE8-Jd-gvF" kind="show" id="rEB-NA-FeD"/>
                         <segue destination="Pxr-uB-snB" kind="show" id="nM2-df-ze0"/>
                     </connections>
@@ -1413,7 +1414,7 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="mxL-3H-COY"/>
+        <segue reference="rEB-NA-FeD"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="appleid_button" width="300" height="45"/>
