@@ -868,6 +868,9 @@
                             </scrollView>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VOX-oh-8p6">
                                 <rect key="frame" x="20" y="714" width="374" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="VFU-pd-LzE"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="고민 선택 하기"/>
                                 <connections>
@@ -896,6 +899,7 @@
                         <outlet property="bodyLable" destination="YAi-if-WxZ" id="6gv-Al-hiW"/>
                         <outlet property="chartView" destination="aa2-nU-4fJ" id="ldB-2Q-n2a"/>
                         <outlet property="endWorryVote" destination="VOX-oh-8p6" id="4gc-We-BQj"/>
+                        <outlet property="endWorryVoteHeightConstraint" destination="VFU-pd-LzE" id="AQv-Bv-TCX"/>
                         <outlet property="interestNavItem" destination="sSV-En-q6u" id="9NZ-HY-uZL"/>
                         <outlet property="questionContentView" destination="Ulz-YT-qdA" id="KuT-6q-azD"/>
                         <outlet property="questionNContentView" destination="24p-Li-rQy" id="PHp-MT-Wy9"/>

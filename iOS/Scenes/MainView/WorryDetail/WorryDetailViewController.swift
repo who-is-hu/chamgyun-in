@@ -29,6 +29,7 @@ class WorryDetailViewController: UIViewController {
     @IBOutlet weak var reportLabel: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var endWorryVote: UIButton!
+    @IBOutlet weak var endWorryVoteHeightConstraint: NSLayoutConstraint!
     
     // MARK: - IBAction
     @IBAction func chooseWorryForOwner(_ sender: UIButton) {
@@ -117,7 +118,10 @@ class WorryDetailViewController: UIViewController {
                     self.showSummaryView()
                 } else {
                     self.endWorryVote.isHidden = true
-                    self.endWorryVote.frame.size.height = 0
+//                    self.endWorryVoteHeightConstraint.constant = 0.0
+                    for constraint in self.endWorryVote.constraints {
+                        constraint.constant = 0.0
+                    }
                     
                     if voted {
                         self.showSummaryView()

@@ -69,8 +69,24 @@ class ChooseWorryNViewController: UIViewController {
                     return
                 }
                 
-                // ui 작업
-                worryDetailViewController.loadWorryDetailData()
+                guard let owner = worryDetailData.owner, let loginUserId = AuthManager.shared.userInfo?.id else {
+                    return
+                }
+                
+                if owner == loginUserId {
+                    // worry close
+                    let url = "\(APIRequest.votePostUrl)/\(postId)/close"
+                    let param: [String: Any] = ["choice_id_list":[selectItemId]]
+                    APIRequest().request(url: url, method: "PATCH", param: param) { success in
+                        guard success else {
+                            return
+                        }
+                        
+                        worryDetailViewController.loadWorryDetailData()
+                    }
+                } else {
+                    worryDetailViewController.loadWorryDetailData()
+                }
             }
         }
         alert.addAction(alertDefaultAction)
