@@ -12,6 +12,8 @@ class APIRequest {
     
     static let authSignInUrl: String = "/auth/social/login"
     
+    static let userPointGetUrl: String = "/user/point"
+    
     static let worryPostUrl: String = "/post"
     
     static let tagListGetUrl: String = "/tag"

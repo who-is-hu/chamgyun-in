@@ -18,6 +18,7 @@ class UserInfoViewController: UIViewController {
     
     // MARK: - IBOutlet
     @IBOutlet weak var pointView: UIView!
+    @IBOutlet weak var worryPointLabel: UILabel!
     @IBOutlet weak var tagListView: TagListView!
     @IBOutlet weak var userEmailView: UILabel!
     @IBOutlet weak var userNameView: UILabel!
@@ -66,6 +67,7 @@ class UserInfoViewController: UIViewController {
         loadMyWorryData()
         loadAnsWorryData()
         loadTagData()
+        loadWorryPointData()
     }
 
     // MARK: - IBAction
@@ -187,6 +189,18 @@ class UserInfoViewController: UIViewController {
                     }
                 }
                 
+            }
+        }
+    }
+    
+    func loadWorryPointData() {
+        APIRequest().request(url: APIRequest.userPointGetUrl, method: "GET", voType: UserPointVO.self) { success, data in
+            guard success, let data = data as? UserPointVO else {
+                return
+            }
+            
+            DispatchQueue.main.async {
+                self.worryPointLabel.text = "\(data.point) P"
             }
         }
     }

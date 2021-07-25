@@ -102,6 +102,9 @@ struct WorryDataVO : Codable {
     }
 }
 
+struct UserPointVO: Codable {
+    let point: Int
+}
 
 struct PageableWorryDataVO: Codable {
     let content: [WorryDataVO]
