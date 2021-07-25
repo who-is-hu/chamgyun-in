@@ -84,6 +84,7 @@ struct WorryDataVO : Codable {
     let title: String?
     let body: String?
     let tags: String?
+    let state: String?
     let voted: Bool?
     
     var splitTags: [String]? {
@@ -98,6 +99,7 @@ struct WorryDataVO : Codable {
         case title
         case body
         case tags = "tag_names"
+        case state
         case voted = "is_voted"
     }
 }
