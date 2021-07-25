@@ -123,6 +123,10 @@ extension HashGroupWorryViewController: UITableViewDataSource {
             cell.ansStateButton.tintColor = UIColor.lightGray
         }
         
+        if let state = dataSource[indexPath.row].state, state == "CLOSE" {
+            cell.endVotedButton.isHidden = false
+        }
+        
         return cell
     }
     
