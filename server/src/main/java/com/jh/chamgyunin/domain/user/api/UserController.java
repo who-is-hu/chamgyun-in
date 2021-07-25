@@ -1,6 +1,7 @@
 package com.jh.chamgyunin.domain.user.api;
 
 import com.jh.chamgyunin.domain.auth.interceptor.IsUserLoggedIn;
+import com.jh.chamgyunin.domain.user.dto.PointDto;
 import com.jh.chamgyunin.domain.user.dto.SignUpRequest;
 import com.jh.chamgyunin.domain.user.dto.SignUpResponse;
 import com.jh.chamgyunin.domain.user.service.UserService;
@@ -32,8 +33,8 @@ public class UserController {
     @ApiOperation(value = "내 포인트 조회")
     @GetMapping("/point")
     @IsUserLoggedIn
-    public ResponseEntity<Integer> getMyPoint(@LoginUserId Long userId) {
-        Integer point = userService.getUserPoint(userId);
-        return new ResponseEntity<>(point, HttpStatus.OK);
+    public ResponseEntity<PointDto> getMyPoint(@LoginUserId Long userId) {
+        PointDto dto = PointDto.of(userService.getUserPoint(userId));
+        return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 }

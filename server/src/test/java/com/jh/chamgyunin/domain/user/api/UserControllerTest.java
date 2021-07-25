@@ -117,7 +117,7 @@ class UserControllerTest extends IntegrationTest {
         //then
         resultActions
                 .andExpect(status().is2xxSuccessful())
-                .andExpect(content().string("100"))
+                .andExpect(jsonPath("$.point").value(100))
                 ;
     }
 }
