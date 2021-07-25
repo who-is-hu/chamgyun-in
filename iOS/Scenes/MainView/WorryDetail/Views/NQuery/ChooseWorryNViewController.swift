@@ -69,8 +69,24 @@ class ChooseWorryNViewController: UIViewController {
                     return
                 }
                 
-                // ui 작업
-                worryDetailViewController.loadWorryDetailData()
+                guard let owner = worryDetailData.owner, let loginUserId = AuthManager.shared.userInfo?.id else {
+                    return
+                }
+                
+                if owner == loginUserId {
+                    // worry close
+                    let url = "\(APIRequest.votePostUrl)/\(postId)/close"
+                    let param: [String: Any] = ["choice_id_list":[selectItemId]]
+                    APIRequest().request(url: url, method: "PATCH", param: param) { success in
+                        guard success else {
+                            return
+                        }
+                        
+                        worryDetailViewController.loadWorryDetailData()
+                    }
+                } else {
+                    worryDetailViewController.loadWorryDetailData()
+                }
             }
         }
         alert.addAction(alertDefaultAction)
@@ -86,10 +102,17 @@ class ChooseWorryNViewController: UIViewController {
 extension ChooseWorryNViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath.row)
-        tableView.deselectRow(at: indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: false)
         
         self.question?.values[indexPath.row].toggle()
-        selectedItem = indexPath.row
+        
+        if !self.question!.values[indexPath.row] {
+            selectedItem = -1
+        } else {
+            selectedItem = indexPath.row
+        }
+        
+        
         updateViewValues(row: indexPath.row)
     }
     

@@ -21,6 +21,8 @@ class WorryChartViewController: UIViewController {
     // MARK: - IBOutlet
     @IBOutlet weak var chartView: PieChartView!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var emptyMsgLabel: UILabel!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +34,6 @@ class WorryChartViewController: UIViewController {
         tableView.estimatedRowHeight = 44
         tableView.delegate = self
         tableView.dataSource = self
-        
     }
     
     

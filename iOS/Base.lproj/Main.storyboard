@@ -178,10 +178,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hvS-JR-KUy">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hvS-JR-KUy">
                                 <rect key="frame" x="0.0" y="56" width="414" height="703"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UqR-Zu-Agq" userLabel="ContainerView">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UqR-Zu-Agq" userLabel="ContainerView">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="820"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="crH-i0-Ovg" userLabel="UserSimpleInfoView">
@@ -259,7 +259,7 @@
                                                     <constraint firstAttribute="trailing" secondItem="OJA-mD-d2M" secondAttribute="trailing" constant="15" id="yGJ-0X-k4S"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Uwz-4x-2ru" userLabel="TagView">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uwz-4x-2ru" userLabel="TagView">
                                                 <rect key="frame" x="15" y="181" width="384" height="100"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="관심 분야" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nnd-Rl-xCL">
@@ -271,7 +271,7 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kac-Zl-0Z6" userLabel="TagListView" customClass="TagListView" customModule="TagListView">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kac-Zl-0Z6" userLabel="TagListView" customClass="TagListView" customModule="TagListView">
                                                         <rect key="frame" x="8" y="46" width="368" height="46"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="34" id="fK0-5U-flG"/>
@@ -344,7 +344,7 @@
                                                     <constraint firstAttribute="trailing" secondItem="Kac-Zl-0Z6" secondAttribute="trailing" constant="8" id="rR2-NW-R4M"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5SN-I1-zGf" userLabel="MyWorryView">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5SN-I1-zGf" userLabel="MyWorryView">
                                                 <rect key="frame" x="15" y="300" width="384" height="38"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="내고민" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="leW-Eb-C09">
@@ -376,7 +376,7 @@
                                                     <constraint firstItem="leW-Eb-C09" firstAttribute="top" secondItem="5SN-I1-zGf" secondAttribute="top" constant="8" id="bXg-ks-aEy"/>
                                                 </constraints>
                                             </view>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="VOJ-OO-v5U" userLabel="MyWorryTableView">
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="VOJ-OO-v5U" userLabel="MyWorryTableView">
                                                 <rect key="frame" x="0.0" y="348" width="414" height="200"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
@@ -384,7 +384,7 @@
                                                 </constraints>
                                                 <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                                             </tableView>
-                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g8s-0u-fQX" userLabel="MyWorryView">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g8s-0u-fQX" userLabel="MyWorryView">
                                                 <rect key="frame" x="15" y="564" width="384" height="38"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="답한 고민" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eGw-JU-ReH">
@@ -417,7 +417,7 @@
                                                     <constraint firstItem="vh7-Jk-Yyv" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="eGw-JU-ReH" secondAttribute="trailing" constant="10" id="qPS-5K-9Xm"/>
                                                 </constraints>
                                             </view>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="KqH-Os-8zX" userLabel="SolveWorryTableView">
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="KqH-Os-8zX" userLabel="SolveWorryTableView">
                                                 <rect key="frame" x="0.0" y="610" width="414" height="200"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
@@ -690,7 +690,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Niz-cx-R6C">
-                                <rect key="frame" x="0.0" y="56" width="414" height="703"/>
+                                <rect key="frame" x="0.0" y="56" width="414" height="648"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LkH-R2-qql" userLabel="ContainerView">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="934.5"/>
@@ -849,7 +849,8 @@
                                             <constraint firstAttribute="trailing" secondItem="Hpx-5n-MSB" secondAttribute="trailing" constant="10" id="c02-2P-OC4"/>
                                             <constraint firstAttribute="trailing" secondItem="rGS-lP-NZV" secondAttribute="trailing" constant="20" symbolic="YES" id="cVp-KD-8Jo"/>
                                             <constraint firstItem="Hpx-5n-MSB" firstAttribute="top" secondItem="elU-RP-M7g" secondAttribute="bottom" constant="10" id="hTj-sf-DsA"/>
-                                            <constraint firstAttribute="bottom" secondItem="pk8-uz-I5t" secondAttribute="bottom" constant="10" id="kLU-iv-tZl"/>
+                                            <constraint firstAttribute="bottom" secondItem="pk8-uz-I5t" secondAttribute="bottom" constant="10" id="heO-t4-o74"/>
+                                            <constraint firstItem="elU-RP-M7g" firstAttribute="top" secondItem="Ugh-bV-Mrr" secondAttribute="bottom" constant="-327" id="rta-yK-vEp"/>
                                             <constraint firstAttribute="trailing" secondItem="Ugh-bV-Mrr" secondAttribute="trailing" constant="20" symbolic="YES" id="xVS-es-GJH"/>
                                             <constraint firstItem="elU-RP-M7g" firstAttribute="leading" secondItem="LkH-R2-qql" secondAttribute="leading" constant="20" symbolic="YES" id="zHs-lC-OSP"/>
                                         </constraints>
@@ -865,13 +866,27 @@
                                 <viewLayoutGuide key="contentLayoutGuide" id="IWb-Nm-NLb"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="YtQ-pG-UcK"/>
                             </scrollView>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VOX-oh-8p6">
+                                <rect key="frame" x="20" y="714" width="374" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="VFU-pd-LzE"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="고민 선택 하기"/>
+                                <connections>
+                                    <action selector="chooseWorryForOwner:" destination="BE8-Jd-gvF" eventType="touchUpInside" id="LIi-lA-E1o"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="lOw-fR-cSY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Niz-cx-R6C" firstAttribute="bottom" secondItem="lOw-fR-cSY" secondAttribute="bottom" id="3a4-LK-aQz"/>
+                            <constraint firstItem="VOX-oh-8p6" firstAttribute="top" secondItem="Niz-cx-R6C" secondAttribute="bottom" constant="10" id="4W2-5g-egW"/>
                             <constraint firstItem="Niz-cx-R6C" firstAttribute="top" secondItem="lOw-fR-cSY" secondAttribute="top" id="AXL-qR-NI3"/>
+                            <constraint firstItem="lOw-fR-cSY" firstAttribute="bottom" secondItem="VOX-oh-8p6" secondAttribute="bottom" constant="15" id="K4A-08-JMr"/>
+                            <constraint firstItem="lOw-fR-cSY" firstAttribute="trailing" secondItem="VOX-oh-8p6" secondAttribute="trailing" constant="20" id="L7n-et-ybt"/>
                             <constraint firstItem="Niz-cx-R6C" firstAttribute="trailing" secondItem="lOw-fR-cSY" secondAttribute="trailing" id="WM0-bx-PPa"/>
+                            <constraint firstItem="VOX-oh-8p6" firstAttribute="leading" secondItem="lOw-fR-cSY" secondAttribute="leading" constant="20" id="f9H-yA-LUe"/>
                             <constraint firstItem="Niz-cx-R6C" firstAttribute="leading" secondItem="lOw-fR-cSY" secondAttribute="leading" id="xez-Ib-9gq"/>
                         </constraints>
                     </view>
@@ -883,6 +898,8 @@
                     <connections>
                         <outlet property="bodyLable" destination="YAi-if-WxZ" id="6gv-Al-hiW"/>
                         <outlet property="chartView" destination="aa2-nU-4fJ" id="ldB-2Q-n2a"/>
+                        <outlet property="endWorryVote" destination="VOX-oh-8p6" id="4gc-We-BQj"/>
+                        <outlet property="endWorryVoteHeightConstraint" destination="VFU-pd-LzE" id="AQv-Bv-TCX"/>
                         <outlet property="interestNavItem" destination="sSV-En-q6u" id="9NZ-HY-uZL"/>
                         <outlet property="questionContentView" destination="Ulz-YT-qdA" id="KuT-6q-azD"/>
                         <outlet property="questionNContentView" destination="24p-Li-rQy" id="PHp-MT-Wy9"/>
@@ -943,7 +960,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h09-Lb-gLE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8041" y="-12"/>
+            <point key="canvasLocation" x="8083" y="-352"/>
         </scene>
         <!--Choose WorryN View Controller-->
         <scene sceneID="ZMA-Bq-xay">
@@ -984,7 +1001,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FIu-ac-NBe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8033" y="200"/>
+            <point key="canvasLocation" x="8084" y="-94"/>
         </scene>
         <!--고민생성-->
         <scene sceneID="Ia9-oH-Lsj">
@@ -1028,6 +1045,9 @@
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <textInputTraits key="textInputTraits"/>
+                                                <connections>
+                                                    <action selector="csjjxj:" destination="IAN-cH-knE" eventType="editingDidEnd" id="ySM-Vq-0gK"/>
+                                                </connections>
                                             </textField>
                                             <containerView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="394" placeholderIntrinsicHeight="300" translatesAutoresizingMaskIntoConstraints="NO" id="5dV-YE-X8Z">
                                                 <rect key="frame" x="10" y="470" width="394" height="300"/>
@@ -1195,6 +1215,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GoH-fn-DpN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="IAN-cH-knE" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="5128.985507246377" y="-633.48214285714278"/>
         </scene>
@@ -1330,50 +1351,65 @@
             <objects>
                 <viewController id="jdF-PD-dbn" customClass="WorryChartViewController" customModule="iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lbU-6u-uo6">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="450"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="500"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="394" placeholderIntrinsicHeight="270" translatesAutoresizingMaskIntoConstraints="NO" id="wfk-zx-UJA" customClass="PieChartView" customModule="Charts">
                                 <rect key="frame" x="10" y="10" width="394" height="270"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="270" id="z26-aD-MXD"/>
+                                    <constraint firstAttribute="height" constant="270" id="z26-aD-MXD"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6tQ-hh-soe">
-                                <rect key="frame" x="10" y="290" width="394" height="150"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="394" placeholderIntrinsicHeight="150" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6tQ-hh-soe">
+                                <rect key="frame" x="10" y="290" width="394" height="200"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="150" id="cPZ-a7-CQf"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="120" id="hJR-mn-Gax"/>
                                 </constraints>
                             </tableView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="요약할 데이터가 존재하지 않습니다." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Lc-Bs-biC">
+                                <rect key="frame" x="88" y="261.5" width="238.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="sXf-i7-Oe7"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="6tQ-hh-soe" secondAttribute="bottom" constant="10" id="4pR-X3-5Tg"/>
+                            <constraint firstItem="sXf-i7-Oe7" firstAttribute="bottom" secondItem="6tQ-hh-soe" secondAttribute="bottom" constant="10" id="0XQ-k0-pSg"/>
                             <constraint firstItem="6tQ-hh-soe" firstAttribute="top" secondItem="wfk-zx-UJA" secondAttribute="bottom" constant="10" id="C6X-TO-NRL"/>
                             <constraint firstItem="wfk-zx-UJA" firstAttribute="leading" secondItem="lbU-6u-uo6" secondAttribute="leading" constant="10" id="Mx2-ZS-eJg"/>
                             <constraint firstAttribute="trailing" secondItem="6tQ-hh-soe" secondAttribute="trailing" constant="10" id="OYw-ST-Zql"/>
                             <constraint firstItem="6tQ-hh-soe" firstAttribute="leading" secondItem="lbU-6u-uo6" secondAttribute="leading" constant="10" id="R07-g4-hAN"/>
                             <constraint firstAttribute="trailing" secondItem="wfk-zx-UJA" secondAttribute="trailing" constant="10" id="gee-7T-1kg"/>
                             <constraint firstItem="wfk-zx-UJA" firstAttribute="top" secondItem="lbU-6u-uo6" secondAttribute="top" constant="10" id="joe-RW-H22"/>
+                            <constraint firstItem="5Lc-Bs-biC" firstAttribute="centerX" secondItem="sXf-i7-Oe7" secondAttribute="centerX" id="x6O-Ah-Qb0"/>
+                            <constraint firstItem="5Lc-Bs-biC" firstAttribute="centerY" secondItem="sXf-i7-Oe7" secondAttribute="centerY" id="y6E-G2-jW6"/>
                         </constraints>
                     </view>
-                    <size key="freeformSize" width="414" height="450"/>
+                    <size key="freeformSize" width="414" height="500"/>
                     <connections>
                         <outlet property="chartView" destination="wfk-zx-UJA" id="Kuu-6j-ToO"/>
+                        <outlet property="emptyMsgLabel" destination="5Lc-Bs-biC" id="fNT-3u-Rbr"/>
                         <outlet property="tableView" destination="6tQ-hh-soe" id="Df2-pd-XbL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e9B-Yw-zXS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8041" y="-331"/>
+            <point key="canvasLocation" x="8083" y="278"/>
         </scene>
     </scenes>
     <designables>
+        <designable name="Kac-Zl-0Z6">
+            <size key="intrinsicContentSize" width="368" height="32"/>
+        </designable>
         <designable name="NwE-J6-KS7">
             <size key="intrinsicContentSize" width="394" height="55"/>
+        </designable>
+        <designable name="dQz-DA-vaB">
+            <size key="intrinsicContentSize" width="378" height="32"/>
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
