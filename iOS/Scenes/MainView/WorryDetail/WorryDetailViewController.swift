@@ -28,7 +28,7 @@ class WorryDetailViewController: UIViewController {
     @IBOutlet weak var tagListView: TagListView!
     @IBOutlet weak var reportLabel: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
-    
+    @IBOutlet weak var endWorryVote: UIButton!
     
     // MARK: - LifeCycle
     override func viewDidLoad() {
@@ -85,100 +85,132 @@ class WorryDetailViewController: UIViewController {
                 return
             }
             
-            if let data = data as? WorryDataDetailVO {
-                self.data = data
+            guard let data = data as? WorryDataDetailVO, let voted = data.voted else {
+                return
+            }
+            
+            self.data = data
+            
+            guard let owner = data.owner, let userId = AuthManager.shared.userInfo?.id, let boardState = data.state else {
+                return
+            }
+            
+            DispatchQueue.main.async {
                 
-                DispatchQueue.main.async {
-                    
-                    self.titleLable.text = data.title
-                    self.bodyLable.text = data.body
-                    self.loadTagsData(tags: data.splitTags)
-                    
-                    if let voted = data.voted {
-                        
-                        if voted {
-                            self.reportLabel.text = "요약"
-                            self.chartView.isHidden = false
-                            
-                            // get voted item
-                            APIRequest().request(url: "\(APIRequest.votePostUrl)/\(postId)/my-choices", method: "GET", voType: [WorryChooseItem].self) { success, data in
-                                guard success, let data = data as? [WorryChooseItem] else {
-                                    print("ERROR : load voted item")
-                                    return
-                                }
-                                
-                                if let choices = self.data?.choices {
-                                    for worryItem in data {
-                                        for (index, choice) in choices.enumerated() {
-                                            if choice.id! == worryItem.id {
-                                                print("voted index = \(index)")
-                                                self.worryChartViewController?.votedQuestionIndex = index
-                                                DispatchQueue.main.async {
-                                                    self.worryChartViewController?.tableView.reloadData()
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                            
-                            
-                            if let choices = self.data?.choices  {
-                                print(choices)
-                                
-                                let totalVoteNumber = choices.reduce(0) { res, next in
-                                    return res + next.votedNumber!
-                                }
-                                
-                                var voteLabels: [String] = []
-                                var voteValues: [Double] = []
-                                var voteQuestions: [String] = []
-                                
-                                for choice in choices {
-                                    if let number = choice.votedNumber, let question = choice.name {
-                                        print(Double(number) / Double(totalVoteNumber) * 100.0)
-                                        let percent = Double(number) / Double(totalVoteNumber) * 100.0
-                                        voteLabels.append(String(format: "%.2f%%", percent))
-                                        voteValues.append(Double(number))
-                                        voteQuestions.append("참여수 : \(number) - \(question)")
-                                    }
-                                }
-                                
-                                self.worryChartViewController?.customizeChart(dataPoints: voteLabels, values: voteValues, questions: voteQuestions)
-                            }
-                            
-                            self.questionContentView.isHidden = true
-                            self.questionNContentView.isHidden = true
-                        } else {
-                            self.reportLabel.text = "질문"
-                            self.chartView.isHidden = true
-                            
-                            if data.worryType! == WorryViewType.OX.rawValue {
-                               self.loadQuestionTypeView(type: .OX)
-                           } else {
-                               self.loadQuestionTypeView(type: .N)
-                               
-                               if let choices = data.choices {
-                                   let queries: [String] = choices.map({ $0.name! })
-                                   print(queries)
-                                   self.setUpNData(queries: queries)
-                               }
-                           }
-                        }
-                        
-                        
-                        
+                self.titleLable.text = data.title
+                self.bodyLable.text = data.body
+                self.loadTagsData(tags: data.splitTags)
+                
+                if owner == userId && boardState == "IN_PROGRESS" {
+                    self.showSummaryView()
+                } else {
+                    if voted {
+                        self.showSummaryView()
+                    } else {
+                        self.showQuestionView(worryType: data.worryType, choices: data.choices)
                     }
-                    
-                    if self.refreshControl.isRefreshing {
-                        self.refreshControl.endRefreshing()
+                }
+                
+                if self.refreshControl.isRefreshing {
+                    self.refreshControl.endRefreshing()
+                }
+            }
+               
+        }
+    }
+    
+    func showSummaryView() {
+        self.reportLabel.text = "요약"
+        self.chartView.isHidden = false
+        
+        if let postId = self.postId {
+            self.loadMyChoicesItem(postId)
+        }
+        
+        if let choices = self.data?.choices  {
+            let votedNumberList: [Int] = choices.map( { $0.votedNumber ?? 0 } )
+            let totalVotedNumber = votedNumberList.reduce(0, { $0 + $1 })
+            
+            if totalVotedNumber == 0 {
+                self.worryChartViewController?.chartView.isHidden = true
+                self.worryChartViewController?.tableView.isHidden = true
+                self.worryChartViewController?.emptyMsgLabel.isHidden = false
+            } else {
+                self.worryChartViewController?.chartView.isHidden = false
+                self.worryChartViewController?.tableView.isHidden = false
+                self.worryChartViewController?.emptyMsgLabel.isHidden = true
+                
+                self.setUpChoicesItem(choices)
+            }
+        }
+        
+        self.questionContentView.isHidden = true
+        self.questionNContentView.isHidden = true
+    }
+    
+    func showQuestionView(worryType: String?, choices: [WorryChooseItem]?) {
+        self.reportLabel.text = "질문"
+        self.chartView.isHidden = true
+        
+        if let worryType = worryType, worryType == WorryViewType.OX.rawValue {
+           self.loadQuestionTypeView(type: .OX)
+       } else {
+           self.loadQuestionTypeView(type: .N)
+           
+           if let choices = choices {
+               let queries: [String] = choices.map({ $0.name! })
+               print(queries)
+               self.setUpNData(queries: queries)
+           }
+       }
+    }
+    
+    
+    func setUpChoicesItem(_ choices: [WorryChooseItem]) {
+        let totalVoteNumber = choices.reduce(0) { res, next in
+            return res + next.votedNumber!
+        }
+        
+        var voteLabels: [String] = []
+        var voteValues: [Double] = []
+        var voteQuestions: [String] = []
+        
+        for choice in choices {
+            if let number = choice.votedNumber, let question = choice.name {
+                print(Double(number) / Double(totalVoteNumber) * 100.0)
+                let percent = Double(number) / Double(totalVoteNumber) * 100.0
+                voteLabels.append(String(format: "%.2f%%", percent))
+                voteValues.append(Double(number))
+                voteQuestions.append("참여수 : \(number) - \(question)")
+            }
+        }
+        
+        self.worryChartViewController?.customizeChart(dataPoints: voteLabels, values: voteValues, questions: voteQuestions)
+    }
+    
+    func loadMyChoicesItem(_ postId: Int) {
+        APIRequest().request(url: "\(APIRequest.votePostUrl)/\(postId)/my-choices", method: "GET", voType: [WorryChooseItem].self) { success, data in
+            guard success, let data = data as? [WorryChooseItem] else {
+                print("ERROR : load voted item")
+                return
+            }
+            
+            if let choices = self.data?.choices {
+                for worryItem in data {
+                    for (index, choice) in choices.enumerated() {
+                        if choice.id! == worryItem.id {
+                            print("voted index = \(index)")
+                            self.worryChartViewController?.votedQuestionIndex = index
+                            DispatchQueue.main.async {
+                                self.worryChartViewController?.tableView.reloadData()
+                            }
+                        }
                     }
                 }
             }
-            
-            
         }
     }
+
     
     func loadTagsData(tags: [String]?) {
         self.tagListView.removeAllTags()
