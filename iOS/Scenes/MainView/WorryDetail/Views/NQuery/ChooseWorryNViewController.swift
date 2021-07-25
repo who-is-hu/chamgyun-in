@@ -86,10 +86,17 @@ class ChooseWorryNViewController: UIViewController {
 extension ChooseWorryNViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath.row)
-        tableView.deselectRow(at: indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: false)
         
         self.question?.values[indexPath.row].toggle()
-        selectedItem = indexPath.row
+        
+        if !self.question!.values[indexPath.row] {
+            selectedItem = -1
+        } else {
+            selectedItem = indexPath.row
+        }
+        
+        
         updateViewValues(row: indexPath.row)
     }
     
