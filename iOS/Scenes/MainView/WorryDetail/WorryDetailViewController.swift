@@ -30,6 +30,17 @@ class WorryDetailViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var endWorryVote: UIButton!
     
+    // MARK: - IBAction
+    @IBAction func chooseWorryForOwner(_ sender: UIButton) {
+        guard let data = self.data else {
+            return
+        }
+        
+//        let alert = UIAlertController(title: "확인", message: "", preferredStyle: <#T##UIAlertController.Style#>)
+        self.endWorryVote.isHidden = true
+        showQuestionView(worryType: data.worryType, choices: data.choices)
+    }
+    
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,8 +113,12 @@ class WorryDetailViewController: UIViewController {
                 self.loadTagsData(tags: data.splitTags)
                 
                 if owner == userId && boardState == "IN_PROGRESS" {
+                    self.endWorryVote.isHidden = false
                     self.showSummaryView()
                 } else {
+                    self.endWorryVote.isHidden = true
+                    self.endWorryVote.frame.size.height = 0
+                    
                     if voted {
                         self.showSummaryView()
                     } else {
@@ -159,7 +174,6 @@ class WorryDetailViewController: UIViewController {
            
            if let choices = choices {
                let queries: [String] = choices.map({ $0.name! })
-               print(queries)
                self.setUpNData(queries: queries)
            }
        }
