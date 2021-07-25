@@ -2,6 +2,7 @@ package com.jh.chamgyunin.domain.post.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.jh.chamgyunin.domain.post.model.Post;
+import com.jh.chamgyunin.domain.vote.model.WorryState;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -27,6 +28,8 @@ public class SimplePostDto {
     @JsonProperty(value = "is_voted")
     private boolean isVoted;
 
+    private WorryState state;
+
     public static SimplePostDto of(Post post, boolean isVoted) {
         return SimplePostDto.builder()
                 .id(post.getId())
@@ -35,6 +38,7 @@ public class SimplePostDto {
                 .isVoted(isVoted)
                 .tags(post.getTags())
                 .owner(post.getOwner().getId())
+                .state(post.getState())
                 .build();
     }
 }
