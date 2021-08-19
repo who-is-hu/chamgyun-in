@@ -96,6 +96,10 @@ extension SearchBoardViewController: UITableViewDataSource {
             cell.ansStateButton.tintColor = UIColor.lightGray
         }
         
+        if let state = dataSource[indexPath.row].state, state == "CLOSE" {
+            cell.endVotedButton.isHidden = false
+        }
+        
         cell.tagListView.delegate = self
         cell.tagListView.textFont = UIFont.boldSystemFont(ofSize: 13)
         

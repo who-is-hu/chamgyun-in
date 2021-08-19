@@ -80,7 +80,7 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="O7V-9K-1TQ">
-                        <rect key="frame" x="325.5" y="112.5" width="68.5" height="18.5"/>
+                        <rect key="frame" x="247" y="112.5" width="147" height="18.5"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tFc-mM-Rhv">
                                 <rect key="frame" x="0.0" y="0.0" width="68.5" height="18.5"/>
@@ -90,12 +90,12 @@
                                     <color key="titleColor" systemColor="systemRedColor"/>
                                 </state>
                             </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A67-Ho-Adf">
-                                <rect key="frame" x="68.5" y="0.0" width="0.0" height="18.5"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A67-Ho-Adf">
+                                <rect key="frame" x="78.5" y="0.0" width="68.5" height="18.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="tintColor" systemColor="systemIndigoColor"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="해결완료" image="checkmark.square.fill" catalog="system">
-                                    <color key="titleColor" systemColor="systemIndigoColor"/>
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                             </button>
                         </subviews>
@@ -127,19 +127,11 @@
             <point key="canvasLocation" x="137.68115942028987" y="82.700892857142847"/>
         </tableViewCell>
     </objects>
-    <designables>
-        <designable name="c5S-rL-BY1">
-            <size key="intrinsicContentSize" width="374" height="32"/>
-        </designable>
-    </designables>
     <resources>
         <image name="checkmark.square.fill" catalog="system" width="128" height="114"/>
         <image name="square" catalog="system" width="128" height="114"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemIndigoColor">
-            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

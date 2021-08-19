@@ -156,6 +156,10 @@ extension InterestListViewController: UITableViewDataSource {
             cell.ansStateButton.tintColor = UIColor.lightGray
         }
         
+        if let state = dataSource[indexPath.row].state {
+            cell.endVotedButton.isHidden = (state == "IN_PROGRESS")
+        }
+        
         return cell
     }
 }
