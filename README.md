@@ -13,11 +13,11 @@
 - 유연한 설계
 - 테스트 코드 작성
 - 정확하게 학습한 기술을 사용하기 
+[wiki](https://github.com/who-is-hu/chamgyun-in/wiki)에서 고민의 흔적이나 과정을 볼 수 있습니다.
+
 
 ## 기술 스택
 <p align="center">
   <img src="https://user-images.githubusercontent.com/6914465/135376011-582d3260-5e7d-4518-9647-b9090c986237.png" />
  </p>
 
-## 문서
-[wiki](https://github.com/who-is-hu/chamgyun-in/wiki)에서 고민의 흔적이나 과정을 볼 수 있습니다.
